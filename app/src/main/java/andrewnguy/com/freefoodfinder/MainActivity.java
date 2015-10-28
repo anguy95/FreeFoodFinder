@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Map","List"};
-    int Numboftabs =2;
+    int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +26,8 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
-
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -57,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+
     }
 
     @Override

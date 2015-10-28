@@ -12,4 +12,15 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <android.support.design.widget.FloatingActionButton android:id="@+id/list_fab"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="31dp"/>
+
 </RelativeLayout>
