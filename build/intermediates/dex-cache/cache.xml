@@ -2,214 +2,214 @@
 <items version="2" >
 
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-19eb0670ca8db021945de1dd74f19094f8ea4eaf.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="17449c47df35c754b257532052f1270c444f7993">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-20b248bf613c3df96a71dffdf9a3814ec7becdf0.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-85ffd6f097ca527cc1c6245451e870887a579089.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-da7bd0782c18667055f8e79a9a28e0975a7d879c.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-505666055ad3d21679e65c68e8c8165ffd6fb663.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-2883d5c9876591d2e4d99457152091644bc7e153.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-f3622adccceaf838c39114e8701aa7245fcb2909.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-758b93a521ce071ece7035d74a5216ffbfe53a30.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-a1578553a3773c0d4f46bf99459a770b40679b11.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-e1cb95ab2f8314e5dc2a8770a28222898e41e28a.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-49866bd5fea544c814cd04b08581166327f7a8d2.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-db54735770802fb563f5234d963ca715f3d63c11.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-ad8afc096872aada932c75e58cd9795d86878afd.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-66641b5cf133ccd50bd801f230cc61d9bdac53a9.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-2d59c58d5577ad5bf81fb4c8e84e639748dfc493.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-a3dfc348c0070f31a1dc765e427f439564a8a31f.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c333a10d357fbf7d5db70b6d317e7ee1b8959a2d.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-15b65410d1a693171b35a192d104fba35c847cdf.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-6f09611d5a5499a1499ea5cf7121583ecae844eb.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3178362320bcf51228835b60ff978efadfd1f783">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-fe2e0f543c5cab3d4fe43d97dc5ce72d621df58f.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-6d5b36022c4a373c963045b326bd09335c01da57.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-42466f888c46fa43db86669cf901e17796e66973.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-38c0b8319c083c92d25815eb160cdd2509759945.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-cbafacae01c731fe09d5f62d13e6c53bccd98d18.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-14a44965f958214b5d310e773b8e189ce30f7b05.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-61e6b4d9d07d2df487edbfbf976c2bf64e4df893.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-23cd525413a0226638aa0d1dc8e98ba61e0745cc.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-a810669a977b803ad67100f7ebd3e45b5a58f6db.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="482de223655d06253cc6a4955d653f8994169500">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-bc1fbd967c7a6d7d04479da984c427e481eea2cf.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-4e7334588b3d6baae2601a282405824c5cba22f8.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c8207acdd70fa6039b1ba2ddc03bc159e04e6974.jar" />
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-9a09987b27657bdfde284bb28e7f90637c903dee.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-b6256a27d4dc2e2f3803bd9a25e4db268d115e22.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-7d6a86776e6a40877e1188ffcfa37d90f6afde10.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-df3f8ab705094719fcaa876ba9300fea5c4228f7.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-61aab47dada3a40a6e251af53e86999b78fc41ad.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c5b55a905ef1e3606cca439a3e66ce0789d75ae3.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-1c258c8f492d356df1566765524d438fa23df56e.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-f4a7024b56ded14f797aec5be943fc0c5f5869e3.jar" />
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-3646a916e5b10b630f7d5c62db8942a45ee9f03a.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-fb6eac9e162a959b8dd436795b493201c1d7831b.jar" />
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-ac71590fcfba3705ad62e689002e9b5ed669df87.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-005c7a0b32e5e2ae986e08b8efa06b493685cfcc.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-c42785e449d473da063545f7198ffd220cd78480.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-0ff27b7c13f3ab687a85d24d016edddf0c6dcb1e.jar" />
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c7909d24b95049d923f2233ca8036dde00e4eeac.jar" />
     </item>
     <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="95758a2905669affbffc5ddd262921d375674fad">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-be5016089683803163d994494bb964585124161d.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-0415c98516ac771cedd7bf40bf1af9723738cc92.jar" />
-    </item>
-    <item
-        jar="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="997773777cf3904c11d6764fe3b7668538220e49">
-        <dex dex="/Users/Mac/AndroidStudioProjects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-2c3630f6618c51a84fb9bc365bc35c271082b5ae.jar" />
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-b804e10a9c8a5bae2200e52b88db089435a31143.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-9c65260821c4f13a8e9d96604a749568c547ee55.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-e93a3f8ea690cb6acbed1663c5cecd08a24534b2.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c429601daa9908a944af272562f9b8c796897d1e.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-bb8182452c4f0655c384007b4bf0393d9c8fb004.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-e143585d25c523d831d8240d01916fe85bd782ec.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-f036b23741faf223ca196f3cb4b71a5bc0c69ac8.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-21c10950239f7b2b9b42795e8d98ac45983faff3.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-22cc46d012981a387e822ee42c56268e7f23d836.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-c565b9f95aaa410c67162eb910f27260dbd650ce.jar" />
+    </item>
+    <item
+        jar="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="/Users/anguy95/Dropbox/Development/Android/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-299bb3e26612f3872b4e9d2411a0dfbe3fe0c04c.jar" />
     </item>
 
 </items>
