@@ -23,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -53,9 +54,15 @@ public class MapTab extends Fragment {
         mapView.onCreate(savedInstanceState);
 
         map = mapView.getMap();
-        // to center the map on yourself
+        // able to center the map on yourself
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setMyLocationEnabled(true);
+
+        // center map on UCSD
+        double lat = 32.8805071;
+        double lng = -117.2365000;
+        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), (float) 14.9);
+        map.moveCamera(cu);
 
         /* set up marker dragging */
         map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
@@ -122,5 +129,11 @@ public class MapTab extends Fragment {
     public void onPause(){
         super.onPause();
         mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }
