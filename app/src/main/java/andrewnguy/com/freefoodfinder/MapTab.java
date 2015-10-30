@@ -79,6 +79,8 @@ public class MapTab extends Fragment implements View.OnClickListener {
         markerss.add(50.0000000);
         markerss.add(32.8805000);
         markerss.add(-117.2367000);
+        markerss.add(32.8801000);
+        markerss.add(-117.2365000);
         int j = 0;
         while(j < markerss.size()){
             Log.d(TAG, "heyyyyy");
