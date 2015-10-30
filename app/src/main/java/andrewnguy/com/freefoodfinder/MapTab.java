@@ -4,6 +4,7 @@ package andrewnguy.com.freefoodfinder;
  * Created by anguy95 on 10/27/15.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -66,6 +67,8 @@ public class MapTab extends Fragment {
                 LatLng tmpLL = map.getCameraPosition().target;
                 map.addMarker(new MarkerOptions().position(tmpLL));
 
+                Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
+                startActivity(intent);
             }
         });
 
