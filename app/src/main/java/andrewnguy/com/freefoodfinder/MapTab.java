@@ -6,13 +6,13 @@ package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location; 
+import android.location.Location;
 import android.location.LocationListener;
- import android.location.LocationManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar; 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +31,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.Parse;
- import com.parse.ParseObject;
+import com.parse.ParseObject;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapTab extends Fragment {
@@ -53,7 +53,7 @@ public class MapTab extends Fragment {
         addPin= (RelativeLayout) v.findViewById(R.id.add_pin);
 
         //Added FloatingActionButton for database code
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
+        fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,20 +115,20 @@ public class MapTab extends Fragment {
         map.moveCamera(cu);
 
 
-        /*         Adding existing markers */ 
-        markerss.add(32.8800000); 
-        markerss.add(-117.2365000); 
-        markerss.add(50.0000000); 
-        markerss.add(50.0000000); 
-        markerss.add(32.8805000); 
-        markerss.add(-117.2367000); 
-        int j = 0; 
-        while(j < markerss.size()){ 
-            Log.d(TAG, "heyyyyy"); 
+        /*        Adding existing markers */
+        markerss.add(32.8800000);
+        markerss.add(-117.2365000);
+        markerss.add(50.0000000);
+        markerss.add(50.0000000);
+        markerss.add(32.8805000);
+        markerss.add(-117.2367000);
+        int j = 0;
+        while(j < markerss.size()){
+            Log.d(TAG, "heyyyyy");
             map.addMarker(new MarkerOptions().position(new LatLng(markerss.get(j),
-                    markerss.get(j + 1))).title("Melbourne") 
-                    .snippet("Population: 4,137,400").draggable(false)); 
-            j = j+2; 
+                    markerss.get(j + 1))).title("Melbourne")
+                    .snippet("Population: 4,137,400").draggable(false));
+            j = j+2;
         }
 
         /* set up marker dragging */
@@ -176,21 +176,21 @@ public class MapTab extends Fragment {
                 //View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
                 View v =
                         getLayoutInflater(savedInstanceState)
-                                .inflate(R.layout.event_view, null); 
+                                .inflate(R.layout.event_view, null);
 
                 //TextView dispText = (TextView) v.findViewById(R.id.event_info);
 
-                TextView dispText = (TextView) v.findViewById(R.id.event_info); 
+                TextView dispText = (TextView) v.findViewById(R.id.event_info);
                 dispText.setText("Free Food Here!");
 
                 //dispText.setText("Free Food Here!");
 
-                ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");  
-                currentMarker.put("LocationLat", marker.getPosition().latitude); 
-                currentMarker.put("LocationLong", marker.getPosition().longitude);  
-                currentMarker.saveInBackground();  
-                markerss.add(marker.getPosition().latitude); 
-                markerss.add(marker.getPosition().longitude);  
+                ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
+                currentMarker.put("LocationLat", marker.getPosition().latitude);
+                currentMarker.put("LocationLong", marker.getPosition().longitude);
+                currentMarker.saveInBackground();
+                markerss.add(marker.getPosition().latitude);
+                markerss.add(marker.getPosition().longitude);
                 marker.setDraggable(false); // Sets draggable to false
 
                 return v;
