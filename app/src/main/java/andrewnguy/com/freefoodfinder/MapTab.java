@@ -5,12 +5,12 @@ package andrewnguy.com.freefoodfinder;
  */
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,10 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.Parse;
+import com.parse.ParseObject;
+
+import java.util.ArrayList;
 
 public class MapTab extends Fragment implements View.OnClickListener {
 
@@ -33,6 +37,9 @@ public class MapTab extends Fragment implements View.OnClickListener {
     private FloatingActionButton fab;
     private RelativeLayout addPin;
     private Button cancel, confirm;
+
+    private ArrayList<Double> markerss = new ArrayList<>();
+    private static final String TAG = "MyActivity";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -48,9 +55,6 @@ public class MapTab extends Fragment implements View.OnClickListener {
         fab.setOnClickListener(this);
         cancel.setOnClickListener(this);
         confirm.setOnClickListener(this);
-
-
-
 
         /** start up the map **/
         mapView = (MapView) v.findViewById(R.id.mapview);
@@ -68,7 +72,7 @@ public class MapTab extends Fragment implements View.OnClickListener {
         map.moveCamera(cu);
 
 
-        /*        Adding existing markers */
+        /* Adding existing markers */
         markerss.add(32.8800000);
         markerss.add(-117.2365000);
         markerss.add(50.0000000);
@@ -102,15 +106,6 @@ public class MapTab extends Fragment implements View.OnClickListener {
             }
         });
 
-        /* set up marker click listeners */
-        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                return true;
-            }
-        });*/
-
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -127,8 +122,7 @@ public class MapTab extends Fragment implements View.OnClickListener {
                     return null;
                 //else
                 //View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
-                View v =
-                        getLayoutInflater(savedInstanceState)
+                View v = getLayoutInflater(savedInstanceState)
                                 .inflate(R.layout.event_view, null);
 
                 //TextView dispText = (TextView) v.findViewById(R.id.event_info);
@@ -211,13 +205,13 @@ public class MapTab extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         mapView.onResume();
         super.onResume();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         mapView.onPause();
     }

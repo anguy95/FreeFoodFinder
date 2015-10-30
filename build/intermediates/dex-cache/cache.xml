@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/Users/Mac/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.1/44780c2cf98f6a3cf4e77f1234d644758b329201/bolts-android-1.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="44780c2cf98f6a3cf4e77f1234d644758b329201">
+        <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.1-9de3ad6d18ddddeb763c4452fc6f9b06fd093479.jar" />
+    </item>
+    <item
         jar="/Users/Mac/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -142,18 +149,18 @@
         <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-df04da8cf353fac5df3992f3a64aa62049c39953.jar" />
     </item>
     <item
-        jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-e00daaf7e601c39015eef997f08ae294e934e8de.jar" />
-    </item>
-    <item
         jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
         <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-1e0c325c2a35700fd5f2020463ec660fe11d69c7.jar" />
+    </item>
+    <item
+        jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-e00daaf7e601c39015eef997f08ae294e934e8de.jar" />
     </item>
     <item
         jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
@@ -205,11 +212,25 @@
         <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-e2aa30c05f66466e57e42303ebd1e3fdba4f5a11.jar" />
     </item>
     <item
+        jar="/Users/Mac/.gradle/caches/modules-2/files-2.1/com.parse/parse-android/1.10.3/36366e460af2c0f224bb8f70b64e3302f638b138/parse-android-1.10.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="36366e460af2c0f224bb8f70b64e3302f638b138">
+        <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/parse-android-1.10.3-0e8812535cedb5eccc0de2194ed54f1aae0086a1.jar" />
+    </item>
+    <item
         jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="3aed37c38c56679602255dd72ef356da5d327cda">
         <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/classes-6b967aa9dc5c36bebc8b4925df2edc5445b61cdb.jar" />
+    </item>
+    <item
+        jar="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/libs/Parse-1.10.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dfef23b83f8434c6e881096e1ac6d54dc3e52041">
+        <dex dex="/Users/Mac/Dropbox/Android Projects/FreeFoodFinder/app/build/intermediates/pre-dexed/debug/Parse-1.10.3-1a5b16557adb43ef8824ba25d86e246acdd3e55d.jar" />
     </item>
 
 </items>
