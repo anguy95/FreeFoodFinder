@@ -5,6 +5,7 @@ package andrewnguy.com.freefoodfinder;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -66,6 +67,50 @@ public class MapTab extends Fragment implements View.OnClickListener {
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), (float) 14.9);
         map.moveCamera(cu);
 
+
+        /*        Adding existing markers */
+        markerss.add(32.8800000);
+        markerss.add(-117.2365000);
+        markerss.add(50.0000000);
+        markerss.add(50.0000000);
+        markerss.add(32.8805000);
+        markerss.add(-117.2367000);
+        int j = 0;
+        while(j < markerss.size()){
+            Log.d(TAG, "heyyyyy");
+            map.addMarker(new MarkerOptions().position(new LatLng(markerss.get(j),
+                    markerss.get(j + 1))).title("Melbourne")
+                    .snippet("Population: 4,137,400").draggable(false));
+            j = j+2;
+        }
+
+        /* set up marker dragging */
+        map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+
+            @Override
+            public void onMarkerDragStart(Marker marker) {/* do nothing */}
+
+            @Override
+            public void onMarkerDrag(Marker marker) {/* do nothing */}
+
+
+            /* when done dragging, let's get the information going */
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                marker.setDraggable(false); // once you drop it; it isn't going anywhere (anti trolling?)
+                // expanded tabs? or just solid window
+            }
+        });
+
+        /* set up marker click listeners */
+        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return true;
+            }
+        });*/
+
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -78,14 +123,28 @@ public class MapTab extends Fragment implements View.OnClickListener {
             // the contents/information
             @Override
             public View getInfoContents(Marker marker) {
-                if (marker.isDraggable())
+                if (!marker.isDraggable())
                     return null;
                 //else
-                View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
+                //View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
+                View v =
+                        getLayoutInflater(savedInstanceState)
+                                .inflate(R.layout.event_view, null);
+
+                //TextView dispText = (TextView) v.findViewById(R.id.event_info);
 
                 TextView dispText = (TextView) v.findViewById(R.id.event_info);
-
                 dispText.setText("Free Food Here!");
+
+                //dispText.setText("Free Food Here!");
+
+                ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
+                currentMarker.put("LocationLat", marker.getPosition().latitude);
+                currentMarker.put("LocationLong", marker.getPosition().longitude);
+                currentMarker.saveInBackground();
+                markerss.add(marker.getPosition().latitude);
+                markerss.add(marker.getPosition().longitude);
+                marker.setDraggable(false); // Sets draggable to false
 
                 return v;
             }

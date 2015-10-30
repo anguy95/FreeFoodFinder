@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.Parse;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Map","List"};
     int Numboftabs = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "mX3zY148IWfdhd3QgDjIETqjG8yMM8D9vgZM5VVN", "mm63b6oFNYRyYdyppHjwkX1hinyXePB97FwlfrCw");
     }
 
     @Override
