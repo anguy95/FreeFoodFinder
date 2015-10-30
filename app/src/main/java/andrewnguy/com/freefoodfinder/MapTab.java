@@ -4,6 +4,7 @@ package andrewnguy.com.freefoodfinder;
  * Created by anguy95 on 10/27/15.
  */
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,99 +25,46 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapTab extends Fragment {
+public class MapTab extends Fragment implements View.OnClickListener {
 
     private MapView mapView;
     private GoogleMap map;
     private FloatingActionButton fab;
     private RelativeLayout addPin;
+    private Button cancel, confirm;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.maps_tab,container,false);
-        addPin= (RelativeLayout) v.findViewById(R.id.add_pin);
+        addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
 
+        /* BUTTONS */
         fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addPin.setVisibility(View.VISIBLE);
-                fab.setVisibility(View.GONE);
-            }
-        });
+        cancel = (Button) v.findViewById(R.id.buttonCancel);
+        confirm = (Button) v.findViewById(R.id.buttonConfirm);
 
-
-        Button cancel = (Button) v.findViewById(R.id.buttonCancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addPin.setVisibility(View.GONE);
-                fab.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        Button confirm = (Button) v.findViewById(R.id.buttonConfirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addPin.setVisibility(View.GONE);
-                fab.setVisibility(View.VISIBLE);
-
-                LatLng tmpLL = map.getCameraPosition().target;
-                map.addMarker(new MarkerOptions().position(tmpLL));
-
-                Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
-                startActivity(intent);
-            }
-        });
+        fab.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+        confirm.setOnClickListener(this);
 
 
 
 
-
-        // start up the map
+        /** start up the map **/
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
 
         map = mapView.getMap();
-        // able to center the map on yourself
+        // be able to center the map on yourself
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setMyLocationEnabled(true);
 
-        // center map on UCSD
+        /** center map on UCSD **/
         double lat = 32.8805071;
         double lng = -117.2365000;
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), (float) 14.9);
         map.moveCamera(cu);
-
-        /* set up marker dragging */
-        map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-
-            @Override
-            public void onMarkerDragStart(Marker marker) {/* do nothing */}
-
-            @Override
-            public void onMarkerDrag(Marker marker) {/* do nothing */}
-
-
-            /* when done dragging, let's get the information going */
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                marker.setDraggable(false); // once you drop it; it isn't going anywhere (anti trolling?)
-                // expanded tabs? or just solid window
-            }
-        });
-
-        /* set up marker click listeners */
-        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                return true;
-            }
-        });*/
 
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -144,6 +92,63 @@ public class MapTab extends Fragment {
         });
 
         return v;
+    }
+
+    /**
+     * Check click events
+     * @param v View that triggered onClick
+     */
+    @Override
+    public void onClick(View v)
+    {
+        int id = v.getId(); // get the view id
+
+        if (id == R.id.maps_fab) { // if fab was hit
+            addPin.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.GONE);
+        }
+        else if (id == R.id.buttonCancel) { // if cancel button
+            addPin.setVisibility(View.GONE);
+            fab.setVisibility(View.VISIBLE);
+        }
+        else { // if confirm button
+            Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
+            startActivityForResult(intent, 1);
+        }
+    }
+
+    /**
+     * Get a return result (most likely from the post dialog)
+     * @param requestCode code of request
+     * @param resultCode Activity.RESULT_OK == 1 and Activity.RESULT_CANCEL == 0
+     * @param data intent that the result came from
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle bundle = data.getExtras();
+        if (bundle == null) // check for sender
+            return;
+
+        String sender = data.getExtras().getString("SENDER"); //sender string
+
+        if (sender.equals("ConfirmEventActivity"))
+        {   // if intent comes from ConfirmEventActivity
+            // check the resultCode
+            if (resultCode == Activity.RESULT_OK) { // OK
+                LatLng tmpLL = map.getCameraPosition().target;
+                map.addMarker(new MarkerOptions().position(tmpLL));
+            }
+
+            /* do this stuff if cancelled as well (or after adding the marker) */
+
+            // remove graphic
+            addPin.setVisibility(View.GONE);
+
+            // bring back the fab
+            fab.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +26,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v)
     {
-        if (v.getId() == R.id.buttonCancelPost) { // cancel the add
+        Intent returnIntent = new Intent(); // the return intent
+        returnIntent.putExtra("SENDER", this.getClass().getSimpleName()); // store sender of intent in here
+        if (v.getId() == R.id.buttonCancelPost) { // cancel the post
+            setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
         }
         else { // finish the add
+            setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
         }
     }

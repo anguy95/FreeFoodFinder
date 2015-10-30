@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 /**
  * Created by anguy95 on 10/27/15.
  */
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -20,25 +21,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ListTab extends Fragment {
+public class ListTab extends Fragment implements View.OnClickListener {
 
-    ArrayList<String> animalsNameList;
-
+    private ArrayList<String> animalsNameList;
+    private FloatingActionButton fab;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_tab, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
+        fab.setOnClickListener(this);
 
 
         ListView animalList = (ListView) v.findViewById(R.id.listView);
@@ -97,5 +91,16 @@ public class ListTab extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        int id = v.getId(); // get view id
+
+        if (id == R.id.list_fab) { // if fab was pressed
+            Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
+            startActivityForResult(intent, 1);
+        }
     }
 }
