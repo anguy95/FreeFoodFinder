@@ -17,4 +17,12 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="31dp"/>
 
+
+    <include layout="@layout/add_event_pin"
+        android:id="@+id/add_pin"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>

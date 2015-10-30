@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="170dp"
+    android:layout_height="150dp"
+    android:weightSum="1"
+   >
+
+
+    <ImageView
+        android:layout_width="194dp"
+        android:layout_height="149dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/add_event_pin"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="48dp" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:text="Confirm"
+        android:background="#37FF43"
+        android:id="@+id/buttonConfirm"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:text="Cancel"
+        android:background="#FF2E30"
+        android:id="@+id/buttonCancel"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_marginEnd="40dp" />
+
+</RelativeLayout>

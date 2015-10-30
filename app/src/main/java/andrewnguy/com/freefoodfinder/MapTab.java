@@ -3,27 +3,22 @@ package andrewnguy.com.freefoodfinder;
 /**
  * Created by anguy95 on 10/27/15.
  */
-import android.content.Context;
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -32,22 +27,51 @@ public class MapTab extends Fragment {
 
     private MapView mapView;
     private GoogleMap map;
-
+    private FloatingActionButton fab;
+    private RelativeLayout addPin;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.maps_tab,container,false);
+        addPin= (RelativeLayout) v.findViewById(R.id.add_pin);
 
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
+        fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LatLng tempLL = map.getCameraPosition().target;
-                map.addMarker(new MarkerOptions()
-                        .position(tempLL)
-                        .draggable(true));
+                addPin.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.GONE);
             }
         });
+
+
+        Button cancel = (Button) v.findViewById(R.id.buttonCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPin.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
+        Button confirm = (Button) v.findViewById(R.id.buttonConfirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPin.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
+
+                LatLng tmpLL = map.getCameraPosition().target;
+                map.addMarker(new MarkerOptions().position(tmpLL));
+
+            }
+        });
+
+
+
+
 
         // start up the map
         mapView = (MapView) v.findViewById(R.id.mapview);
