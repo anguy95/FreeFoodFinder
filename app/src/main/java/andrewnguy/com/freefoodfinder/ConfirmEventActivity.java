@@ -27,7 +27,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     public void onClick(View v)
     {
         Intent returnIntent = new Intent(); // the return intent
-        returnIntent.putExtra("SENDER", this.getClass().getSimpleName()); // store sender of intent in here
         if (v.getId() == R.id.buttonCancelPost) { // cancel the post
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
