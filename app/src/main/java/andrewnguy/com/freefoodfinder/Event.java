@@ -1,10 +1,13 @@
 package andrewnguy.com.freefoodfinder;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by anguy95 on 10/31/15.
  */
 public class Event {
 
+    private String eventId;
     private String eventTitle;
     private String eventWeekDay;
     private String eventMonth;
@@ -12,6 +15,7 @@ public class Event {
     private int eventYear;
     private String locationDescription;
     private String eventDescription;
+    private LatLng latLng;
     public String dist = "22";
 
 
@@ -26,6 +30,14 @@ public class Event {
     public Event(String title, String description) {
         this.eventTitle = title;
         this.eventDescription = description;
+    }
+
+    public Event(String id, String title, String description, double lat, double lng)
+    {
+        this.eventId = id;
+        this.eventTitle = title;
+        this.eventDescription = description;
+        this.latLng = new LatLng(lat, lng);
     }
 
 

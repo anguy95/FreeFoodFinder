@@ -43,7 +43,7 @@ public class EventArray {
                         String evdesc = currEvent.getString(DESC_EV_COL);
                         String evloc = currEvent.getString(DESC_LOC_COL);
 
-                        Event evobj = new Event(evid, lat, lng, evtit, evdesc, evloc);
+                        Event evobj = new Event(evid, evtit, evdesc, lat, lng);
                         eventsArray.add(evobj);
                     }
                 } else {
