@@ -91,13 +91,19 @@ public class MapTab extends Fragment implements View.OnClickListener
         latitudeQuery.selectKeys(Arrays.asList("LocationLat"));
 
         latitudeQuery.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> locations,
-                             ParseException e) {
+            public void done(List<ParseObject> locations, ParseException e)
+            {
                 // Log.d("score", locations.get(0).longitude());
                 if (e == null) {
 
                     for (ParseObject temp : locations) {
-                        tempLat.add(temp.getDouble("LocationLat"));
+
+                        try { // try to get some objects
+                            tempLat.add(temp.getDouble("LocationLat"));
+                        } catch (Exception ex) { // break out if failure
+                            Log.d("score", "Error: " + ex.getMessage());
+                            return; // return for now
+                        }
 
                     }
                 } else {
@@ -117,13 +123,17 @@ public class MapTab extends Fragment implements View.OnClickListener
                 if (e == null) {
 
                     for (ParseObject temp : locations) {
-                        tempLong.add(temp.getDouble("LocationLong"));
-
+                        try {
+                            tempLat.add(temp.getDouble("LocationLong"));
+                        } catch (Exception ex) { // break out if failure
+                            Log.d("score", "Error: " + ex.getMessage());
+                            break; // get out!!!
+                        }           // an exception means we cannot add any markers
                     }
 
                     // After getting the longitude, proceeds to add markers, resolves the query background null Parse error
                     int j = 0;
-                    while(j < tempLat.size()){
+                    while(j < tempLat.size() && j < tempLong.size()) { // need to make sure everything is the same size
                         Log.d("Location", "Retrieved " + locations.size());
                         Log.d("Location", "Here" + tempLat.get(j));
                         map.addMarker(new MarkerOptions().position(new LatLng(tempLat.get(j), tempLong.get(j))));
