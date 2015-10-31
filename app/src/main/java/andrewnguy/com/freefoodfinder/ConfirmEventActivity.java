@@ -51,7 +51,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     public void onClick(View v)
     {
         Intent returnIntent = new Intent(); // the return intent
-        returnIntent.putExtra("SENDER", this.getClass().getSimpleName()); // store sender of intent in here
         if (v.getId() == R.id.buttonCancelPost) { // cancel the post
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
@@ -83,10 +82,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 newEvent.put("test", 214213);
                 newEvent.saveInBackground();
 
-            } catch(Exception e) {
-
-
-            }
+            } catch(Exception e) { }
 
             /*
             returnIntent.putExtra("title", titleStr);
@@ -95,9 +91,10 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             returnIntent.putExtra("date", dateStr);
             returnIntent.putExtra("start", startStr);
             returnIntent.putExtra("end", endStr);
+            */
+
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
-            */
         }
     }
 }
