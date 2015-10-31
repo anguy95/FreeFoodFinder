@@ -1,16 +1,13 @@
 package andrewnguy.com.freefoodfinder;
-//hi
-import android.content.Context;
-import android.location.LocationManager;
+
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.parse.Parse;
+import com.parse.ParseCrashReporting;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,8 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
+        /*
+        ParseCrashReporting.enable(this); // parse crash reporting
+        Parse.enableLocalDatastore(this); // enable before initialize
+        Parse.initialize(this, "mX3zY148IWfdhd3QgDjIETqjG8yMM8D9vgZM5VVN", "mm63b6oFNYRyYdyppHjwkX1hinyXePB97FwlfrCw");
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -44,12 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public int getIndicatorColor(int position) {
                 return getResources().getColor(R.color.tabsScrollColor);
+
+
             }
         });
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
     }
 
     @Override
