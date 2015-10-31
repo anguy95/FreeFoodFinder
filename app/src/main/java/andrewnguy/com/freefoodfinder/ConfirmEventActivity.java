@@ -7,11 +7,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.Parse;
+import com.parse.ParseCrashReporting;
+import com.parse.ParseObject;
+
+import java.text.ParseException;
+
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     Button confirm, cancel;
     EditText title, eventDesc, locDesc, date, start, end;
     String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
+
+    // should move this to MainActivity so that MapTab and ListTab can use this too
+    private static final String DB_NAME = "currentFreeFoodsDB";
+    private static final String LAT_COL = "LocationLat";
+    private static final String LNG_COL = "LocationLong";
+    private static final String DESC_LOC_COL = "DescriptionLocation";
+    private static final String DESC_EV_COL= "DescriptionEvent";
 
 
     @Override
@@ -37,31 +50,60 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v)
     {
-        titleStr = title.getText().toString();
-        eventDescStr = eventDesc.getText().toString();
-        locDescStr = locDesc.getText().toString();
-        dateStr = date.getText().toString();
-        startStr = start.getText().toString();
-        endStr = end.getText().toString();
+
 
         Intent returnIntent = new Intent(); // the return intent
         returnIntent.putExtra("SENDER", this.getClass().getSimpleName()); // store sender of intent in here
 
-        // still have to check for empty fields
-        returnIntent.putExtra("title", titleStr);
-        returnIntent.putExtra("eventDesc", titleStr);
-        returnIntent.putExtra("locDesc", locDescStr);
-        returnIntent.putExtra("date", dateStr);
-        returnIntent.putExtra("start", startStr);
-        returnIntent.putExtra("end", endStr);
+
+
 
         if (v.getId() == R.id.buttonCancelPost) { // cancel the post
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
         }
         else { // finish the add
+            // have to check empty fields
+            titleStr = title.getText().toString();
+            eventDescStr = eventDesc.getText().toString();
+            locDescStr = locDesc.getText().toString();
+            dateStr = date.getText().toString();
+            startStr = start.getText().toString();
+            endStr = end.getText().toString();
+
+            double lat = 0;
+            double lng = 0;
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                lat = extras.getDouble("latitude");
+                lng = extras.getDouble("longitude");
+            }
+
+
+            ParseObject newEvent = new ParseObject(DB_NAME);
+            try {
+                newEvent.put(LAT_COL, lat);
+                newEvent.put(LNG_COL, lng);
+                newEvent.put(DESC_LOC_COL, locDescStr);
+                newEvent.put(DESC_EV_COL, eventDescStr);
+                newEvent.put("test", 214213);
+                newEvent.saveInBackground();
+
+            } catch(Exception e) {
+
+
+            }
+
+            /*
+            returnIntent.putExtra("title", titleStr);
+            returnIntent.putExtra("eventDesc", titleStr);
+            returnIntent.putExtra("locDesc", locDescStr);
+            returnIntent.putExtra("date", dateStr);
+            returnIntent.putExtra("start", startStr);
+            returnIntent.putExtra("end", endStr);
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
+            */
         }
     }
 }

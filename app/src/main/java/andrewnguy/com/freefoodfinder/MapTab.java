@@ -134,13 +134,22 @@ public class MapTab extends Fragment implements View.OnClickListener {
 
                 //dispText.setText("Free Food Here!");
 
+
+
                 ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
                 currentMarker.put("LocationLat", marker.getPosition().latitude);
                 currentMarker.put("LocationLong", marker.getPosition().longitude);
+                currentMarker.put("DescriptionLocation", "current");
                 currentMarker.saveInBackground();
                 markerss.add(marker.getPosition().latitude);
                 markerss.add(marker.getPosition().longitude);
                 marker.setDraggable(false); // Sets draggable to false
+
+                ParseObject test = new ParseObject("currentFreeFoodsDB");
+                test.put("LocationLat", 100);
+                test.put("LocationLong", 50);
+                test.put("DescriptionLocation", test);
+                test.saveInBackground();
 
                 return v;
             }
@@ -167,7 +176,12 @@ public class MapTab extends Fragment implements View.OnClickListener {
             fab.setVisibility(View.VISIBLE);
         }
         else { // if confirm button
+            LatLng eventLoc = map.getCameraPosition().target;
+            double lat = eventLoc.latitude;
+            double lng = eventLoc.longitude;
             Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
+            intent.putExtra("latitude", lat);
+            intent.putExtra("longitude", lng);
             startActivityForResult(intent, 1);
         }
     }
