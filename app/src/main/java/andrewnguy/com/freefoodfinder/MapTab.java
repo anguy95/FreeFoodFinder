@@ -182,6 +182,9 @@ public class MapTab extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) // any data?
+            return;
+
         Bundle bundle = data.getExtras();
         if (bundle == null) // check for sender
             return;
@@ -208,8 +211,8 @@ public class MapTab extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
-        mapView.onResume();
         super.onResume();
+        mapView.onResume();
     }
 
     @Override
