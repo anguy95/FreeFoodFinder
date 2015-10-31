@@ -8,4 +8,15 @@
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>
     <string name="edit_event_date">Select Date of Event</string>
+
+
+    <!-- DATABASE STUFF -->
+    <string name="DB">Free Foods DB</string>
+    <string name="LAT">Location Latitude</string>
+    <string name="LNG">Location Longitude</string>
+    <string name="LOC">Event Location</string>
+    <string name="DES">Event Description</string>
+    <string name="TIT">Event Title</string>
+
+
 </resources>

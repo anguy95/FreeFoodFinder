@@ -1,5 +1,6 @@
 package andrewnguy.com.freefoodfinder;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.parse.FindCallback;
@@ -17,18 +18,19 @@ import java.util.ListIterator;
 public class EventArray {
 
     // i violated dry guys.. i copy pasta'd this from confirmeventactivity..
-    private static final String DB_NAME = "currentFreeFoodsDB";
-    private static final String LAT_COL = "LocationLat";
-    private static final String LNG_COL = "LocationLong";
-    private static final String DESC_LOC_COL = "DescriptionLocation";
-    private static final String DESC_EV_COL= "DescriptionEvent";
-    private static final String LATLNGLOCATION = "Location";
-    private static final String TITLE_COL = "EventTitle";
 
     private ArrayList<Event> eventsArray;
 
-    public EventArray() {
-        ParseQuery<ParseObject> evQuery = ParseQuery.getQuery(DB_NAME);
+    /**
+     * Make sure to include a context when constructing
+     * Most likely needs to be EventArray(getContext()) or something
+     * @param context
+     */
+    public EventArray(Context context) {
+
+        final Context C = context;
+
+        ParseQuery<ParseObject> evQuery = ParseQuery.getQuery(C.getString(R.string.DB));
         evQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
@@ -37,11 +39,11 @@ public class EventArray {
                         ListIterator<ParseObject> it = list.listIterator();
                         ParseObject currEvent = it.next();
                         String evid = currEvent.getObjectId();
-                        double lat = currEvent.getDouble(LAT_COL);
-                        double lng = currEvent.getDouble(LNG_COL);
-                        String evtit = currEvent.getString(TITLE_COL);
-                        String evdesc = currEvent.getString(DESC_EV_COL);
-                        String evloc = currEvent.getString(DESC_LOC_COL);
+                        double lat = currEvent.getDouble(C.getString(R.string.LAT));
+                        double lng = currEvent.getDouble(C.getString(R.string.LNG));
+                        String evtit = currEvent.getString(C.getString(R.string.TIT));
+                        String evdesc = currEvent.getString(C.getString(R.string.DES));
+                        String evloc = currEvent.getString(C.getString(R.string.LOC));
 
                         Event evobj = new Event(evid, evtit, evdesc, lat, lng);
                         eventsArray.add(evobj);

@@ -21,13 +21,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     EditText title, eventDesc, locDesc, date, start, end;
     String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
 
-    // should move this to MainActivity so that MapTab and ListTab can use this too
-    private static final String DB_NAME = "currentFreeFoodsDB";
-    private static final String LAT_COL = "LocationLat";
-    private static final String LNG_COL = "LocationLong";
-    private static final String DESC_LOC_COL = "DescriptionLocation";
-    private static final String DESC_EV_COL= "DescriptionEvent";
-    private static final String LATLNGLOCATION = "Location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,14 +68,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             }
 
 
-            ParseObject newEvent = new ParseObject(DB_NAME);
+            ParseObject newEvent = new ParseObject(getString(R.string.DB));
             ParseGeoPoint latlngPoint = new ParseGeoPoint (lat,lng);
             try {
-                newEvent.put(LAT_COL, lat);
-                newEvent.put(LNG_COL, lng);
-                newEvent.put(LATLNGLOCATION, latlngPoint);
-                newEvent.put(DESC_LOC_COL, locDescStr);
-                newEvent.put(DESC_EV_COL, eventDescStr);
+                newEvent.put(getString(R.string.LAT), lat);
+                newEvent.put(getString(R.string.LNG), lng);
+                //newEvent.put(getString(R.string.LOC), latlngPoint); // we can build a latlng with just the latlng
+                //newEvent.put(DESC_LOC_COL, locDescStr);
+                newEvent.put(getString(R.string.DES), eventDescStr);
                 newEvent.put("test", 214213);
                 newEvent.saveInBackground();
 

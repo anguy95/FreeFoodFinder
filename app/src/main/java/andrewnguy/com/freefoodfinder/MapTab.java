@@ -49,8 +49,8 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     /** parse **/
     private final ArrayList<Double> markers = new ArrayList<>();
-    private final ArrayList<Double> tempLat = new ArrayList<Double>();
-    private final ArrayList<Double> tempLong = new ArrayList<Double>();
+    private final ArrayList<Double> tempLat = new ArrayList<>();
+    private final ArrayList<Double> tempLong = new ArrayList<>();
 
     private static final String TAG = "MyActivity";
 
