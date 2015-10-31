@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ListTab extends Fragment implements View.OnClickListener {
 
@@ -39,11 +36,11 @@ public class ListTab extends Fragment implements View.OnClickListener {
 
 
 
-        animalsNameList = new ArrayList<String>();
+        animalsNameList = new ArrayList<>();
         getAnimalNames();
         // Create The Adapter with passing ArrayList as 3rd parameter
         ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.mytextview, animalsNameList);
+                new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.mytextview, animalsNameList);
         // Set The Adapter
         animalList.setAdapter(arrayAdapter);
 
@@ -88,9 +85,6 @@ public class ListTab extends Fragment implements View.OnClickListener {
         animalsNameList.add("DONKEY");
         animalsNameList.add("LAMB");
         animalsNameList.add("GOAT");
-
-
-
     }
 
     @Override

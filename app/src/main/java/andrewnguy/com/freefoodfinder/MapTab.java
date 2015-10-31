@@ -208,8 +208,8 @@ public class MapTab extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
-        mapView.onResume();
         super.onResume();
+        mapView.onResume();
     }
 
     @Override
