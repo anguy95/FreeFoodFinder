@@ -20,7 +20,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     EditText title, eventDesc, locDesc, date, start, end;
     String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
 
-    // should move this to MainActivity so that MapTab and ListTab can use this too
+    // should move this to MainActivity so that MapTab and ListTab can use this too?
     private static final String DB_NAME = "currentFreeFoodsDB";
     private static final String LAT_COL = "LocationLat";
     private static final String LNG_COL = "LocationLong";
@@ -65,8 +65,8 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             startStr = start.getText().toString();
             endStr = end.getText().toString();
 
-            double lat = 0;
-            double lng = 0;
+            double lat = -1;
+            double lng = -1;
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 lat = extras.getDouble("latitude");
