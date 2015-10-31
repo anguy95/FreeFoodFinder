@@ -26,9 +26,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MapTab extends Fragment implements View.OnClickListener
 {
@@ -42,7 +49,10 @@ public class MapTab extends Fragment implements View.OnClickListener
     private Button cancel, confirm;   // add event buttons
 
     /** parse **/
-    private ArrayList<Double> markers = new ArrayList<>();
+    private final ArrayList<Double> markers = new ArrayList<>();
+    private final ArrayList<Double> tempLat = new ArrayList<Double>();
+    private final ArrayList<Double> tempLong = new ArrayList<Double>();
+
     private static final String TAG = "MyActivity";
 
     @Override
@@ -76,22 +86,57 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-        markers.add(32.8800000);
-        markers.add(-117.2365000);
-        markers.add(50.0000000);
-        markers.add(50.0000000);
-        markers.add(32.8805000);
-        markers.add(-117.2367000);
-        markers.add(32.8801000);
-        markers.add(-117.2365000);
-        int j = 0;
-        while(j < markers.size()) {
-            Log.d(TAG, "heyyyyy");
-            map.addMarker(new MarkerOptions().position(new LatLng(markers.get(j),
-                    markers.get(j + 1))).title("Melbourne")
-                    .snippet("Population: 4,137,400"));
-            j = j+2;
-        }
+
+        // Queries the latitudes and stores it into an Arraylist
+        ParseQuery<ParseObject> latitudeQuery = ParseQuery.getQuery("currentFreeFoodsDB");
+        latitudeQuery.selectKeys(Arrays.asList("LocationLat"));
+
+        latitudeQuery.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> locations,
+                             ParseException e) {
+                // Log.d("score", locations.get(0).longitude());
+                if (e == null) {
+
+                    for (ParseObject temp : locations) {
+                        tempLat.add(temp.getDouble("LocationLat"));
+
+                    }
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+        // Queries longitudes and stores it into an array list
+        ParseQuery<ParseObject> longitudeQuery = ParseQuery.getQuery("currentFreeFoodsDB");
+        longitudeQuery.selectKeys(Arrays.asList("LocationLong"));
+
+        longitudeQuery.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> locations,
+                             ParseException e) {
+                // Log.d("score", locations.get(0).longitude());
+                if (e == null) {
+
+                    for (ParseObject temp : locations) {
+                        tempLong.add(temp.getDouble("LocationLong"));
+
+                    }
+
+                    // After getting the longitude, proceeds to add markers, resolves the query background null Parse error
+                    int j = 0;
+                    while(j < tempLat.size()){
+                        Log.d("Location", "Retrieved " + locations.size());
+                        Log.d("Location", "Here" + tempLat.get(j));
+                        map.addMarker(new MarkerOptions().position(new LatLng(tempLat.get(j), tempLong.get(j))));
+                        j++;
+                    }
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
 
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -104,14 +149,18 @@ public class MapTab extends Fragment implements View.OnClickListener
 
             // the contents/information
             @Override
-            public View getInfoContents(Marker marker)
-            {
+            public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
 
                 ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
+
+
                 currentMarker.put("LocationLat", marker.getPosition().latitude);
                 currentMarker.put("LocationLong", marker.getPosition().longitude);
+
                 currentMarker.put("DescriptionLocation", "current");
+
+
                 currentMarker.saveInBackground();
                 markers.add(marker.getPosition().latitude);
                 markers.add(marker.getPosition().longitude);

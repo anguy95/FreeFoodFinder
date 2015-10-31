@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 import java.text.ParseException;
@@ -25,7 +26,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     private static final String LNG_COL = "LocationLong";
     private static final String DESC_LOC_COL = "DescriptionLocation";
     private static final String DESC_EV_COL= "DescriptionEvent";
-
+    private static final String LATLNGLOCATION = "Location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -74,9 +75,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
 
             ParseObject newEvent = new ParseObject(DB_NAME);
+            ParseGeoPoint latlngPoint = new ParseGeoPoint (lat,lng);
             try {
                 newEvent.put(LAT_COL, lat);
                 newEvent.put(LNG_COL, lng);
+                newEvent.put(LATLNGLOCATION, latlngPoint);
                 newEvent.put(DESC_LOC_COL, locDescStr);
                 newEvent.put(DESC_EV_COL, eventDescStr);
                 newEvent.put("test", 214213);
