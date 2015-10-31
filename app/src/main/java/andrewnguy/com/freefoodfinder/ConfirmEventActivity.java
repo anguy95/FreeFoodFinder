@@ -66,9 +66,8 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             startStr = start.getText().toString();
             endStr = end.getText().toString();
 
-
-            double lat = 0;
-            double lng = 0;
+            double lat = -1;
+            double lng = -1;
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 lat = extras.getDouble("latitude");
