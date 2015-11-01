@@ -15,9 +15,8 @@ import java.util.ListIterator;
 /**
  * Created by Ivan on 10/31/2015.
  */
-public class EventArray {
-
-    // i violated dry guys.. i copy pasta'd this from confirmeventactivity..
+public class EventArray
+{
 
     private ArrayList<Event> eventsArray;
 
@@ -29,6 +28,7 @@ public class EventArray {
     public EventArray(Context context) {
 
         final Context C = context;
+        eventsArray = new ArrayList<>();
 
         ParseQuery<ParseObject> evQuery = ParseQuery.getQuery(C.getString(R.string.DB));
         evQuery.findInBackground(new FindCallback<ParseObject>() {

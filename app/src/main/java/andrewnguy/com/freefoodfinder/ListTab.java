@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         // Custom adapter that
         EventListAdapter eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
 
-
         // Set The Adapter + item listenerA
         listView.setAdapter(eventAdapter);
         listView.setOnItemClickListener(this);
@@ -57,7 +57,6 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         Event one = new Event("h1","w1");
         Event two = new Event("h2","w2");
         Event three = new Event("h3","w3");
-
 
         events.add(one);
         events.add(two);
@@ -82,6 +81,34 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     }
 
     /**
+     * Respond to a list click event
+     * @param parent the adapterview click originated from
+     * @param view that it came from
+     * @param position of where the item was located
+     * @param id of the item that was clicked
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        // display detailed event view
+
+        // send intent to the event view class
+        Intent intent = new Intent(getActivity().getApplicationContext(), EventViewActivity.class);
+        startActivity(intent); // I don't think we need a result
+
+        /*  NEEDS:
+            event title
+            date
+            time
+            location
+            description
+            tags
+            upvote/downvote
+            COMMENTS
+         */
+    }
+
+    /**
      * Get a result from an activity
      * @param requestCode code of request:
      *                    LIST_CREATE_EVENT
@@ -100,25 +127,5 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
             }
             // else do nothing
         }
-    }
-
-    /**
-     * Respond to a list click event
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        // display detailed event view
-        /*  NEEDS:
-            event title
-            date
-            time
-            location
-            description
-            tags
-            upvote/downvote
-            COMMENTS
-         */
-
     }
 }

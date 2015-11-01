@@ -7,13 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.Parse;
-import com.parse.ParseCrashReporting;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
-
-import java.text.ParseException;
-import java.util.ArrayList;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 

@@ -25,7 +25,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         //The View that gets the list_row_view layout
         View row = convertView;

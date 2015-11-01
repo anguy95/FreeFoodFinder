@@ -25,10 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -227,7 +225,7 @@ public class MapTab extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
             intent.putExtra("latitude", lat);
             intent.putExtra("longitude", lng);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, MAP_CREATE_EVENT);
         }
     }
 

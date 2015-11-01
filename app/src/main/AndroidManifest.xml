@@ -44,7 +44,9 @@
 
         <activity
             android:name=".ConfirmEventActivity"
-           android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
+        </activity>
+        <activity android:name=".EventViewActivity" >
         </activity>
     </application>
 
