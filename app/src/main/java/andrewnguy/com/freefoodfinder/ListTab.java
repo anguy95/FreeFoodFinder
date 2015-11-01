@@ -82,6 +82,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     /**
      * Respond to a list click event
+     * Used to view an event in greater detail
      * @param parent the adapterview click originated from
      * @param view that it came from
      * @param position of where the item was located
@@ -97,6 +98,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         startActivity(intent); // I don't think we need a result
 
         /*  NEEDS:
+            BACK BUTTON?
             event title
             date
             time
