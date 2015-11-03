@@ -21,6 +21,9 @@ public class Event {
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
     //clickable time selector as well as date selector
+    public Event(){
+
+    }
 
     /**
      *
@@ -31,6 +34,7 @@ public class Event {
         this.eventTitle = title;
         this.eventDescription = description;
     }
+
 
     public Event(String id, String title, String description, double lat, double lng)
     {

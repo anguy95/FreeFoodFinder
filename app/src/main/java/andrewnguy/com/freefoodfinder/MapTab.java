@@ -157,6 +157,7 @@ public class MapTab extends Fragment implements View.OnClickListener
             // the contents/information
             @Override
             public View getInfoContents(Marker marker) {
+
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
 
                 ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
