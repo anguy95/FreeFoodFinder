@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -46,9 +47,8 @@ public class MapTab extends Fragment implements View.OnClickListener
     private Button cancel, confirm;   // add event buttons
 
     /** parse **/
-    private final ArrayList<Double> markers = new ArrayList<>();
-    private final ArrayList<Double> tempLat = new ArrayList<>();
-    private final ArrayList<Double> tempLong = new ArrayList<>();
+    private final ArrayList<Event> mapViewEventMarkers = new ArrayList<>();
+
 
     private static final String TAG = "MyActivity";
 
@@ -83,60 +83,36 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-
-        // Queries the latitudes and stores it into an Arraylist
-        ParseQuery<ParseObject> latitudeQuery = ParseQuery.getQuery("currentFreeFoodsDB");
-        latitudeQuery.selectKeys(Arrays.asList("LocationLat"));
-
-        latitudeQuery.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> locations, ParseException e)
-            {
-                // Log.d("score", locations.get(0).longitude());
-                if (e == null) {
-
-                    for (ParseObject temp : locations) {
-
-                        try { // try to get some objects
-                            tempLat.add(temp.getDouble("LocationLat"));
-                        } catch (Exception ex) { // break out if failure
-                            Log.d("score", "Error: " + ex.getMessage());
-                            return; // return for now
-                        }
-
-                    }
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
-
         // Queries longitudes and stores it into an array list
-        ParseQuery<ParseObject> longitudeQuery = ParseQuery.getQuery("currentFreeFoodsDB");
-        longitudeQuery.selectKeys(Arrays.asList("LocationLong"));
+        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery("currentFreeFoodsDB");
 
-        longitudeQuery.findInBackground(new FindCallback<ParseObject>() {
+        eventQuery.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> locations,
                              ParseException e) {
-                // Log.d("score", locations.get(0).longitude());
                 if (e == null) {
 
+                    //Iterates through locations and sets up the events
                     for (ParseObject temp : locations) {
-                        try {
-                            tempLat.add(temp.getDouble("LocationLong"));
-                        } catch (Exception ex) { // break out if failure
-                            Log.d("score", "Error: " + ex.getMessage());
-                            break; // get out!!!
-                        }           // an exception means we cannot add any markers
+                        //ParseObject temp = tempQuery;
+                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
+
+                        // Creates event, need to update as more params come through
+                        Event workingEvent = new Event(temp.getObjectId(), temp.getString("EventTitle"), temp.getString("DescriptionEvent"), temp.getDouble("LocationLat"), temp.getDouble("LocationLong"));
+
+                        //Adds to maps view arraylist
+                        mapViewEventMarkers.add(workingEvent);
+
+                        //Adds marker to map
+                        map.addMarker(new MarkerOptions().position(workingEvent.getLatLng()));
                     }
 
-                    // After getting the longitude, proceeds to add markers, resolves the query background null Parse error
-                    int j = 0;
-                    while(j < tempLat.size() && j < tempLong.size()) { // need to make sure everything is the same size
-                        Log.d("Location", "Retrieved " + locations.size());
-                        Log.d("Location", "Here" + tempLat.get(j));
-                        map.addMarker(new MarkerOptions().position(new LatLng(tempLat.get(j), tempLong.get(j))));
-                        j++;
-                    }
+                    /* DEBUG: This is when array is fully populated  and parse has fully parsed
+
+                    Log.d("eventMarkers", " size:" + eventMarkers.size());
+                    Event printCheck = eventMarkers.get(1);
+                    Log.d("eventMarkers", " kGTD581oRB Description:" + printCheck.getEventDescription());
+                    */
+
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -159,18 +135,6 @@ public class MapTab extends Fragment implements View.OnClickListener
             public View getInfoContents(Marker marker) {
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
 
-                ParseObject currentMarker = new ParseObject("currentFreeFoodsDB");
-
-
-                currentMarker.put("LocationLat", marker.getPosition().latitude);
-                currentMarker.put("LocationLong", marker.getPosition().longitude);
-
-                currentMarker.put("DescriptionLocation", "current");
-
-
-                currentMarker.saveInBackground();
-                markers.add(marker.getPosition().latitude);
-                markers.add(marker.getPosition().longitude);
 
                 return v;
             }
