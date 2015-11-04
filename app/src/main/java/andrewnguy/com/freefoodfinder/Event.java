@@ -175,6 +175,14 @@ public class Event {
         return date;
     }
 
+    /**
+     *
+     * @return
+     */
+    public LatLng getLatLng(){
+        return latLng;
+    }
+
 
 
 
