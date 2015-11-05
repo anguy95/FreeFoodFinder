@@ -65,8 +65,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 lng = extras.getDouble("longitude");
             }
 
+            Event newEvent;
+            if (eventDescStr == null && eventDescStr.isEmpty()) {
+                newEvent = new Event(titleStr, 2015, 11, 3, 3, 30, lat, lng);
+            }
+            else {
+                newEvent = new Event(titleStr, 2015, 11, 3, 3, 30, lat, lng, eventDescStr);
+            }
 
-            Event newEvent = new Event("Title", 2015, 11, 3, 3, 30, lat, lng);
             ea.add(newEvent);
 
 

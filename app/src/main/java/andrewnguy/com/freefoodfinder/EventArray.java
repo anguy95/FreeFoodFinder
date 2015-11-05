@@ -62,8 +62,7 @@ public class EventArray
             }
         });
 
-        //update(); // repull? or
-        eventsMap.put(newEvent.getObjectId(), e); // update local as well
+        update(); // re-fetch data
     }
 
     /**
@@ -80,9 +79,9 @@ public class EventArray
     public ArrayList<Event> getEventArray() { return new ArrayList<>(eventsMap.values()); }
 
     /**
-     * Update the local db
+     * Helper method to update the local db
      */
-    public void update()
+    private void update()
     {
         List<ParseObject> temp;
         try {
