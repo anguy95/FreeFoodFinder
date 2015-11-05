@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -27,12 +28,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MapTab extends Fragment implements View.OnClickListener
@@ -44,7 +43,7 @@ public class MapTab extends Fragment implements View.OnClickListener
     private MapView mapView;
     private FloatingActionButton fab; // FAB to bring up the addPin
     private RelativeLayout addPin;    // the add-an-event-pin
-    private Button cancel, confirm;   // add event buttons
+    private Button cancel, confirm, seeMore;   // add event buttons
 
     /** parse **/
     private final ArrayList<Event> mapViewEventMarkers = new ArrayList<>();
@@ -57,6 +56,7 @@ public class MapTab extends Fragment implements View.OnClickListener
     {
         View v = inflater.inflate(R.layout.maps_tab,container,false);
         addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
+
 
         /* BUTTONS */
         fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
@@ -119,8 +119,6 @@ public class MapTab extends Fragment implements View.OnClickListener
             }
         });
 
-
-
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -133,15 +131,23 @@ public class MapTab extends Fragment implements View.OnClickListener
             // the contents/information
             @Override
             public View getInfoContents(Marker marker) {
-
-                View v = getLayoutInflater(savedInstanceState).inflate(R.layout.event_view, null);
-
-
+                View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_bubble, null);
                 return v;
+            }
+
+        });
+
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), EventViewActivity.class);
+                startActivity(intent);
             }
         });
 
+
         return v;
+
     }
 
     @Override
@@ -194,6 +200,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         }
     }
 
+
     /**
      * Get a result from an activity
      * @param requestCode code of request:
@@ -225,3 +232,6 @@ public class MapTab extends Fragment implements View.OnClickListener
         }
     }
 }
+
+
+
