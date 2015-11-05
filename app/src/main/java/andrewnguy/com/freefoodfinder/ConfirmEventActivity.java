@@ -87,11 +87,12 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 emptyFields = true;
             }
 
+            /*
             if (emptyFields) {
                 msg.append(".");
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
-            }
+            }*/
 
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
