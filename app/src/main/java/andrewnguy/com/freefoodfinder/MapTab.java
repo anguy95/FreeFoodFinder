@@ -86,11 +86,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-        events = ea.getEventArray();
-        for (int i = 0; i < events.size(); i++) {
-            Event temp = events.get(i);
-            map.addMarker(new MarkerOptions().position(temp.getLocation()));
-        }
+        update();
 
 
         /* set up marker info viewing */
@@ -203,6 +199,17 @@ public class MapTab extends Fragment implements View.OnClickListener
 
             // bring back the fab
             fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * uupdate the map view on add or launch or request
+     */
+    public void update() {
+        events = ea.getEventArray();
+        for (int i = 0; i < events.size(); i++) {
+            Event temp = events.get(i);
+            map.addMarker(new MarkerOptions().position(temp.getLocation()));
         }
     }
 }

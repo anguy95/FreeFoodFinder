@@ -52,6 +52,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         else { // finish the add
             StringBuffer msg = new StringBuffer("Please enter a value for:");
             boolean emptyFields = false;
+            boolean emptyDesc = true;
             if (isEmpty(title)) {
                 msg.append(" Title");
                 emptyFields = true;
@@ -60,7 +61,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 if (emptyFields)
                     msg.append(",");
                 msg.append(" Event Description");
-                emptyFields = true;
+                emptyDesc = false;
             }
             if (isEmpty(locDesc)) {
                 if (emptyFields)
@@ -92,7 +93,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 msg.append(".");
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
-            }*/
+            }
+            else if (!emptyDesc) {
+                // maybe ask if they want to have an empty description field
+            }
+            */
 
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
