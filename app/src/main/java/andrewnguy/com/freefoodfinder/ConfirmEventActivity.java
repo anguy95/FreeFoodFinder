@@ -15,6 +15,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     Button confirm, cancel;
     EditText title, eventDesc, locDesc, date, start, end;
     String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
+    EventArray ea;
 
 
     @Override
@@ -22,6 +23,8 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_event);
+
+        ea = new EventArray(this, getString(R.string.DB)); // for the parse database
 
         confirm = (Button) findViewById(R.id.buttonConfirmPost); // confirm post button
         cancel = (Button) findViewById(R.id.buttonCancelPost);   // cancel post button
@@ -63,18 +66,21 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             }
 
 
-            ParseObject newEvent = new ParseObject(getString(R.string.DB));
-            ParseGeoPoint latlngPoint = new ParseGeoPoint (lat,lng);
-            try {
-                newEvent.put(getString(R.string.LAT), lat);
-                newEvent.put(getString(R.string.LNG), lng);
-                //newEvent.put(getString(R.string.LOC), latlngPoint); // we can build a latlng with just the latlng
-                //newEvent.put(DESC_LOC_COL, locDescStr);
-                newEvent.put(getString(R.string.DES), eventDescStr);
-                newEvent.put("test", 214213);
-                newEvent.saveInBackground();
+            Event newEvent = new Event("Title", 2015, 11, 3, 3, 30, lat, lng);
+            ea.add(newEvent);
 
-            } catch(Exception e) { }
+//            ParseObject newEvent = new ParseObject(getString(R.string.DB));
+//            ParseGeoPoint latlngPoint = new ParseGeoPoint (lat,lng);
+//            try {
+//                newEvent.put(getString(R.string.LAT), lat);
+//                newEvent.put(getString(R.string.LNG), lng);
+//                newEvent.put(getString(R.string.LOC), latlngPoint); // we can build a latlng with just the latlng
+//                newEvent.put(DESC_LOC_COL, locDescStr);
+//                newEvent.put(getString(R.string.DES), eventDescStr);
+//                newEvent.put("test", 214213);
+//                newEvent.saveInBackground();
+//
+//            } catch(Exception e) { }
 
             /*
             returnIntent.putExtra("title", titleStr);

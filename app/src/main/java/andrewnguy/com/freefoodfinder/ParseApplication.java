@@ -13,14 +13,8 @@ public class ParseApplication extends Application
     @Override
     public void onCreate() {
         super.onCreate();
-
-
         ParseCrashReporting.enable(this); // parse crash reporting
         Parse.enableLocalDatastore(this); // enable before initialize
         Parse.initialize(this, "mX3zY148IWfdhd3QgDjIETqjG8yMM8D9vgZM5VVN", "mm63b6oFNYRyYdyppHjwkX1hinyXePB97FwlfrCw");
-
-
     }
-
-
 }

@@ -8,16 +8,21 @@
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>
     <string name="edit_event_date">Select Date of Event</string>
+    <string name="title_activity_event_view">EventViewActivity</string>
 
 
     <!-- DATABASE STUFF -->
-    <string name="DB">Free Foods DB</string>
-    <string name="LAT">Location Latitude</string>
-    <string name="LNG">Location Longitude</string>
-    <string name="LOC">Event Location</string>
-    <string name="DES">Event Description</string>
-    <string name="TIT">Event Title</string>
-    <string name="title_activity_event_view">EventViewActivity</string>
+    <string name="DB">currentFreeFoodsDB</string>
+    <string name="LAT">Latitude</string>
+    <string name="LNG">Longitude</string>
+    <string name="DES">Description</string>
+    <string name="TIT">Title</string>
+    <string name="DAT">Date</string>
+    <string name="LOC">Location</string>
+
+
+
+    
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

@@ -84,7 +84,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
         /* Adding existing markers */
         // Queries longitudes and stores it into an array list
-        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery("currentFreeFoodsDB");
+        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
 
         eventQuery.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> locations,
@@ -97,13 +97,13 @@ public class MapTab extends Fragment implements View.OnClickListener
                         //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
 
                         // Creates event, need to update as more params come through
-                        Event workingEvent = new Event(temp.getObjectId(), temp.getString("EventTitle"), temp.getString("DescriptionEvent"), temp.getDouble("LocationLat"), temp.getDouble("LocationLong"));
+                        //Event workingEvent = new Event(temp.getObjectId(), temp.getString("EventTitle"), temp.getString("DescriptionEvent"), temp.getDouble("LocationLat"), temp.getDouble("LocationLong"));
 
                         //Adds to maps view arraylist
-                        mapViewEventMarkers.add(workingEvent);
+                        //mapViewEventMarkers.add(workingEvent);
 
                         //Adds marker to map
-                        map.addMarker(new MarkerOptions().position(workingEvent.getLatLng()));
+                        //map.addMarker(new MarkerOptions().position(workingEvent.getLatLng()));
                     }
 
                     /* DEBUG: This is when array is fully populated  and parse has fully parsed

@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,46 +19,45 @@ import java.util.ListIterator;
  */
 public class EventArray
 {
-
-    private ArrayList<Event> eventsArray;
+    private ArrayList<Event> eventsArray; //event array
+    private ParseQuery<ParseObject> eq;   //event query
+    private String db;                    //the database
+    private Context context;
 
     /**
-     * Make sure to include a context when constructing
-     * Most likely needs to be EventArray(getContext()) or something
-     * @param context
+     * Construct new event array class
+     * @param db the name of the database
      */
-    public EventArray(Context context) {
-
-        final Context C = context;
+    public EventArray(Context context, String db)
+    {
         eventsArray = new ArrayList<>();
-
-        ParseQuery<ParseObject> evQuery = ParseQuery.getQuery(C.getString(R.string.DB));
-        evQuery.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if (e == null) {
-                    while (!list.isEmpty()) {
-                        ListIterator<ParseObject> it = list.listIterator();
-                        ParseObject currEvent = it.next();
-                        String evid = currEvent.getObjectId();
-                        double lat = currEvent.getDouble(C.getString(R.string.LAT));
-                        double lng = currEvent.getDouble(C.getString(R.string.LNG));
-                        String evtit = currEvent.getString(C.getString(R.string.TIT));
-                        String evdesc = currEvent.getString(C.getString(R.string.DES));
-                        String evloc = currEvent.getString(C.getString(R.string.LOC));
-
-                        Event evobj = new Event(evid, evtit, evdesc, lat, lng);
-                        eventsArray.add(evobj);
-                    }
-                } else {
-                    Log.d("EventArray", e.getMessage());
-                }
-            }
-        });
+        this.context = context;
+        this.db = db;
+        eq = ParseQuery.getQuery(db);
     }
 
-    public ListIterator<Event> getEventsIterator() {
-        return eventsArray.listIterator();
+    /**
+     * Add an event to the parse
+     * @param e
+     */
+    public void add(Event e)
+    {
+        ParseObject newEvent = new ParseObject(db);
+        ParseGeoPoint pgp = new ParseGeoPoint(e.getLocation().latitude, e.getLocation().longitude);
+
+        newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
+        newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
+        newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
+        newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
+        newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+        // save the event to parse
+        newEvent.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null)
+                    Log.d("parse", e.getMessage());
+            }
+        });
     }
 
 }

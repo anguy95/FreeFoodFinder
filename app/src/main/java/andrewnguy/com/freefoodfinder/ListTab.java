@@ -54,13 +54,13 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     void getEvents() //fetch
     {
         //We would like to have it so that these events are created when ConfirmEventActivity terminates
-        Event one = new Event("h1","w1");
-        Event two = new Event("h2","w2");
-        Event three = new Event("h3","w3");
-
-        events.add(one);
-        events.add(two);
-        events.add(three);
+//        Event one = new Event("h1","w1");
+//        Event two = new Event("h2","w2");
+//        Event three = new Event("h3","w3");
+//
+//        events.add(one);
+//        events.add(two);
+//        events.add(three);
     }
 
     /**

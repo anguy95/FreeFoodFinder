@@ -2,189 +2,91 @@ package andrewnguy.com.freefoodfinder;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Date;
+
 /**
  * Created by anguy95 on 10/31/15.
  */
 public class Event {
 
-    private String eventId;
-    private String eventTitle;
-    private String eventWeekDay;
-    private String eventMonth;
-    private int eventDay;
-    private int eventYear;
-    private String locationDescription;
-    private String eventDescription;
-    private LatLng latLng;
-    public String dist = "22";
+    private int eventId;        // id # of an event
+    private String eventTitle;  // title of an event
+    private String eventDesc;   // description of an event
+    private Date eventDate;     // date of an event (int year, int month, int day, int hour, int minute)
+    private LatLng latLng;      // location of an event
 
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
     //clickable time selector as well as date selector
-    public Event(){
+    public Event(Event event)
+    {
 
     }
 
     /**
-     *
+     * Constructor w/o event description
      * @param title
-     * @param description
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     * @param lat
+     * @param lng
      */
-    public Event(String title, String description) {
-        this.eventTitle = title;
-        this.eventDescription = description;
-    }
-
-
-    public Event(String id, String title, String description, double lat, double lng)
+    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng)
     {
-        this.eventId = id;
         this.eventTitle = title;
-        this.eventDescription = description;
+        this.eventDate = new Date(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
     }
 
+    /**
+     * Constructor w/ event descriptions
+     * @param title
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param minute
+     * @param lat
+     * @param lng
+     * @param description
+     */
+    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
+                 String description)
+    {
+        this.eventTitle = title;
+        this.eventDesc  = description;
+        this.eventDate = new Date(year, month, day, hour, minute);
+        this.latLng = new LatLng(lat, lng);
+    }
+
+
+    /* ----------  GETTERS ---------- */
 
     /**
      * Gets the title of the Event
      * @return a String of the Event title
      */
-    public String getEventTitle() {
-        return eventTitle;
-    }
+    public String getTitle() { return eventTitle; }
 
     /**
-     * Sets the title of the Event
-     * @param eventTitle the title of the Event you want to add
+     * Get the description of the event
+     * @return a String of the event description
      */
-    public void setEventTitle(String eventTitle) {
-        this.eventTitle = eventTitle;
-    }
+    public String getDescription() { return eventDesc; }
 
     /**
-     * Gets the day of the week the Event is in. Eg. Mon, Tue, Wed, ....
-     * @return a String of the day of the week
+     * Get date of the event
+     * @return a Date object of the event
      */
-    public String getEventWeekDay() {
-        return eventWeekDay;
-    }
+    public Date getDate() { return eventDate; }
 
     /**
-     *
-     * @param eventWeekDay
+     * Get the location of the event
+     * @return a LatLng object of the event
      */
-    public void setEventWeekDay(String eventWeekDay) {
-        this.eventWeekDay = eventWeekDay;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public String getEventMonth() {
-        return eventMonth;
-    }
-
-    /**
-     *
-     * @param eventMonth
-     */
-    public void setEventMonth(String eventMonth) {
-        this.eventMonth = eventMonth;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public int getEventDay() {
-        return eventDay;
-    }
-
-
-    /**
-     *
-     * @param eventDay
-     */
-    public void setEventDay(int eventDay) {
-        this.eventDay = eventDay;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public int getEventYear() {
-        return eventYear;
-    }
-
-
-    /**
-     *
-     * @param eventYear
-     */
-    public void setEventYear(int eventYear) {
-        this.eventYear = eventYear;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public String getLocationDescription() {
-        return locationDescription;
-    }
-
-
-    /**
-     *
-     * @param locationDescription
-     */
-    public void setLocationDescription(String locationDescription) {
-        this.locationDescription = locationDescription;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEventDescription() {
-        return eventDescription;
-    }
-
-
-    /**
-     *
-     * @param eventDescription
-     */
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public String getDate(){
-        String date = eventWeekDay + " , " + eventMonth + " " + eventDay + " " + eventYear;
-        return date;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public LatLng getLatLng(){
-        return latLng;
-    }
-
-
-
-
+    public LatLng getLocation() { return latLng; }
 
 }

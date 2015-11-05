@@ -56,9 +56,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         Event event = data.get(position);
 
         //Sets the views text
-        holder.eventTitle.setText(event.getEventTitle());
-        holder.eventDescription.setText(event.getEventDescription());
-        holder.dist.setText(event.dist);
+        holder.eventTitle.setText(event.getTitle());
+        holder.eventDescription.setText(event.getDescription());
+        //holder.dist.setText(event.dist);
 
         return row;
 
