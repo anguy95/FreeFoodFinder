@@ -24,12 +24,15 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     private ArrayList<Event> events = new ArrayList<>();
     private FloatingActionButton fab;
+    private EventArray ea;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.list_tab, container, false);
+
+        ea = MainActivity.ea;
 
         fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
         fab.setOnClickListener(this);
