@@ -31,6 +31,9 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     private static final int LIST_CREATE_EVENT = 11; // give ListTab a requestCode of 11 when trying to make an event
 
     private ArrayList<Event> events;
+    private EventListAdapter eventAdapter;
+    private ListView listView;
+    private View v;
     private FloatingActionButton fab;
     private EventArray ea;
     private int flag = 1;
@@ -39,7 +42,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.list_tab, container, false);
+        v = inflater.inflate(R.layout.list_tab, container, false);
 
         ea = MainActivity.ea;
         events = ea.getEventArray(); // get events array
@@ -47,56 +50,9 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
         fab.setOnClickListener(this);
 
-        //Adds all the events into the events arrayList (this will need to be moved to database on add instead of here)
-        //getEvents();
-
-
-
-        ListView listView = (ListView) v.findViewById(R.id.listView);
-
-
-        // Custom adapter that
-        EventListAdapter eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
-
-        // Set The Adapter + item listenerA
-        listView.setAdapter(eventAdapter);
-        listView.setOnItemClickListener(this);
+        updateView();
 
         return v;
-    }
-
-
-    //TODO THIS SHIT AINT WORKING STILL
-
-
-    void getEvents() //fetch
-    {
-        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
-        eventQuery.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> locations,
-                             ParseException e) {
-                if (e == null) {
-
-                    //Iterates through locations and sets up the events
-                    for (ParseObject temp : locations) {
-                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
-
-                        // Creates event, need to update as more params come through
-                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
-                        //String description)
-                        Date date = temp.getDate("Date");
-                        Event workingEvent = ea.get(temp.getObjectId());
-                        Log.d("Parsing", temp.getObjectId());
-                        //Adds to maps view arraylist
-                        events.add(workingEvent);
-
-                    }
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-
-            }
-        });
     }
 
     /**
@@ -162,8 +118,20 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         {
             if (resultCode == Activity.RESULT_OK) { // OK
                 // manipulate the Intent data to get simple data
+                updateView();
             }
             // else do nothing
         }
+    }
+
+    /**
+     * Helper method to update the list view on add or launch
+     */
+    private void updateView() {
+        events = ea.getEventArray();
+        listView = (ListView) v.findViewById(R.id.listView);
+        eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
+        listView.setAdapter(eventAdapter);
+        listView.setOnItemClickListener(this);
     }
 }

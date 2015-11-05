@@ -62,6 +62,7 @@ public class EventArray
             }
         });
 
+        //update(); // repull? or
         eventsMap.put(newEvent.getObjectId(), e); // update local as well
     }
 
@@ -95,8 +96,5 @@ public class EventArray
         } catch (ParseException e) {
             Log.d("parse", e.getMessage());
         }
-
-        int x = eventsMap.size();
-        Log.d("events", String.valueOf(x));
     }
 }

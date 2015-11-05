@@ -86,53 +86,12 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-
         events = ea.getEventArray();
         for (int i = 0; i < events.size(); i++) {
             Event temp = events.get(i);
             map.addMarker(new MarkerOptions().position(temp.getLocation()));
         }
 
-        // Queries longitudes and stores it into an array list
-//        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
-//
-//        eventQuery.findInBackground(new FindCallback<ParseObject>() {
-//            public void done(List<ParseObject> locations,
-//                             ParseException e) {
-//                if (e == null) {
-//
-//                    //Iterates through locations and sets up the events
-//                    for (ParseObject temp : locations) {
-//                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
-//
-//                        // Creates event, need to update as more params come through
-//                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
-//                        //String description)
-//                        Date date = temp.getDate("Date");
-//                        //Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
-//                        Event workingEvent = ea.get(temp.getObjectId());
-//                        Log.d("Parsing", temp.getObjectId());
-//                        //Adds to maps view arraylist
-//                        events.add(workingEvent);
-//
-//                        //Adds marker to map
-//                        Log.d("Longitude", "Long" + workingEvent.getLocation().longitude);
-//                        map.addMarker(new MarkerOptions().position(workingEvent.getLocation()));
-//                    }
-//
-//
-//                    /* DEBUG: This is when array is fully populated  and parse has fully parsed
-//
-//                    Log.d("eventMarkers", " size:" + eventMarkers.size());
-//                    Event printCheck = eventMarkers.get(1);
-//                    Log.d("eventMarkers", " kGTD581oRB Description:" + printCheck.getEventDescription());
-//                    */
-//
-//                } else {
-//                    Log.d("score", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
 
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
