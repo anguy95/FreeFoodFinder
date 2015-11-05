@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -49,7 +50,49 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             finish();
         }
         else { // finish the add
-            // have to check empty fields
+            StringBuffer msg = new StringBuffer("Please enter a value for:");
+            boolean emptyFields = false;
+            if (isEmpty(title)) {
+                msg.append(" Title");
+                emptyFields = true;
+            }
+            if (isEmpty(eventDesc)) {
+                if (emptyFields)
+                    msg.append(",");
+                msg.append(" Event Description");
+                emptyFields = true;
+            }
+            if (isEmpty(locDesc)) {
+                if (emptyFields)
+                    msg.append(",");
+                msg.append(" Location Description");
+                emptyFields = true;
+            }
+            if (isEmpty(date)) {
+                if (emptyFields)
+                    msg.append(",");
+                msg.append(" Date of Event");
+                emptyFields = true;
+            }
+            if (isEmpty(start)) {
+                if (emptyFields)
+                    msg.append(",");
+                msg.append(" Start Time");
+                emptyFields = true;
+            }
+            if (isEmpty(end)) {
+                if (emptyFields)
+                    msg.append(",");
+                msg.append(" End Time");
+                emptyFields = true;
+            }
+
+            if (emptyFields) {
+                msg.append(".");
+                Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
+                return;
+            }
+
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
             locDescStr = locDesc.getText().toString();
@@ -79,6 +122,13 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
         }
+    }
+
+    private boolean isEmpty(EditText text) {
+        if (text.getText().toString().trim().length() > 0)
+            return false;
+        else
+            return true;
     }
 
 
