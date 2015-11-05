@@ -55,6 +55,20 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         return v;
     }
 
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (listView != null)
+            listView.invalidate();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        updateView();
+    }
     /**
      * Check click events. Responds to:
      * fab button (create event)
