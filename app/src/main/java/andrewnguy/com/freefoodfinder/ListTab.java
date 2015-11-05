@@ -16,7 +16,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 public class ListTab extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
@@ -25,6 +33,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     private ArrayList<Event> events = new ArrayList<>();
     private FloatingActionButton fab;
     private EventArray ea;
+    private int flag = 1;
 
 
     @Override
@@ -40,7 +49,6 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         //Adds all the events into the events arrayList (this will need to be moved to database on add instead of here)
         // getEvents();
 
-        getEvents();
         ListView listView = (ListView) v.findViewById(R.id.listView);
 
 
@@ -54,16 +62,38 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         return v;
     }
 
+
+    //TODO THIS SHIT AINT WORKING STILL
+
+
     void getEvents() //fetch
     {
-        //We would like to have it so that these events are created when ConfirmEventActivity terminates
-//        Event one = new Event("h1","w1");
-//        Event two = new Event("h2","w2");
-//        Event three = new Event("h3","w3");
-//
-//        events.add(one);
-//        events.add(two);
-//        events.add(three);
+        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
+        eventQuery.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> locations,
+                             ParseException e) {
+                if (e == null) {
+
+                    //Iterates through locations and sets up the events
+                    for (ParseObject temp : locations) {
+                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
+
+                        // Creates event, need to update as more params come through
+                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
+                        //String description)
+                        Date date = temp.getDate("Date");
+                        Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
+                        Log.d("Parsing", temp.getObjectId());
+                        //Adds to maps view arraylist
+                        events.add(workingEvent);
+
+                    }
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+
+            }
+        });
     }
 
     /**

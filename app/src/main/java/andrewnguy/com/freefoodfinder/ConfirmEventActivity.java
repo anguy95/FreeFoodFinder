@@ -69,6 +69,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             Event newEvent = new Event("Title", 2015, 11, 3, 3, 30, lat, lng);
             ea.add(newEvent);
 
+
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
         }
