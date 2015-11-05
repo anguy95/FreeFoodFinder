@@ -32,6 +32,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MapTab extends Fragment implements View.OnClickListener
@@ -46,7 +47,7 @@ public class MapTab extends Fragment implements View.OnClickListener
     private Button cancel, confirm, seeMore;   // add event buttons
 
     /** parse **/
-    private final ArrayList<Event> mapViewEventMarkers = new ArrayList<>();
+    public final ArrayList<Event> mapViewEventMarkers = new ArrayList<>();
 
 
     private static final String TAG = "MyActivity";
@@ -93,18 +94,22 @@ public class MapTab extends Fragment implements View.OnClickListener
 
                     //Iterates through locations and sets up the events
                     for (ParseObject temp : locations) {
-                        //ParseObject temp = tempQuery;
                         //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
 
                         // Creates event, need to update as more params come through
-                        //Event workingEvent = new Event(temp.getObjectId(), temp.getString("EventTitle"), temp.getString("DescriptionEvent"), temp.getDouble("LocationLat"), temp.getDouble("LocationLong"));
-
+                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
+                        //String description)
+                        Date date = temp.getDate("Date");
+                        Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
+                        Log.d("Parsing", temp.getObjectId());
                         //Adds to maps view arraylist
-                        //mapViewEventMarkers.add(workingEvent);
+                        mapViewEventMarkers.add(workingEvent);
 
                         //Adds marker to map
-                        //map.addMarker(new MarkerOptions().position(workingEvent.getLatLng()));
+                        Log.d("Longitude", "Long" + workingEvent.getLocation().longitude);
+                        map.addMarker(new MarkerOptions().position(workingEvent.getLocation()));
                     }
+
 
                     /* DEBUG: This is when array is fully populated  and parse has fully parsed
 

@@ -60,4 +60,9 @@ public class EventArray
         });
     }
 
+    public Event get(String objId){
+
+
+    }
+
 }
