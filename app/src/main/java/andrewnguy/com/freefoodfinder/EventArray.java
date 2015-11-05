@@ -53,6 +53,10 @@ public class EventArray
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
         newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+
+        if (e.getDescription() != null && !e.getDescription().isEmpty())
+            newEvent.put(context.getString(R.string.DES), e.getDescription());
+
         // save the event to parse
         newEvent.saveInBackground(new SaveCallback() {
             @Override
