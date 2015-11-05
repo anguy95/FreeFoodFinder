@@ -54,7 +54,7 @@ public class EventArray
         newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
 
-        if (e.getDescription() != null && !e.getDescription().isEmpty())
+        if (e.getDescription() != null && !e.getDescription().isEmpty())         // put description if one exists
             newEvent.put(context.getString(R.string.DES), e.getDescription());
 
         // save the event to parse
@@ -92,8 +92,11 @@ public class EventArray
             temp = eq.find();
             if (temp != null) {
                 for (ParseObject e : temp) {
-                    LatLng tempLL = new LatLng(e.getParseGeoPoint("Location").getLatitude(), e.getParseGeoPoint("Location").getLongitude());
-                    eventsMap.put(e.getObjectId(), new Event(e.getString("Title"), e.getDate("Date"), tempLL));
+                    LatLng tempLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+                    if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty())
+                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL));
+                    else
+                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL, e.getString(context.getString(R.string.DES))));
                 }
             }
         } catch (ParseException e) {

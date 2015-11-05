@@ -21,7 +21,7 @@ public class Event {
 
 
     /**
-     * Reconstructor
+     * Reconstructor w/o event description
      * @param title
      * @param date
      * @param latlng
@@ -31,6 +31,20 @@ public class Event {
         this.eventTitle = title;
         this.eventDate = date;
         this.latLng = latlng;
+    }
+
+    /**
+     * Reconstructor w/ event description
+     * @param title
+     * @param date
+     * @param latlng
+     */
+    public Event(String title, Date date, LatLng latlng, String description)
+    {
+        this.eventTitle = title;
+        this.eventDate = date;
+        this.latLng = latlng;
+        this.eventDesc = description;
     }
 
     /**
