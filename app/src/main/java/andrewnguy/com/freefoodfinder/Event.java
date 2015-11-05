@@ -18,9 +18,19 @@ public class Event {
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
     //clickable time selector as well as date selector
-    public Event(Event event)
-    {
 
+
+    /**
+     * Reconstructor
+     * @param title
+     * @param date
+     * @param latlng
+     */
+    public Event(String title, Date date, LatLng latlng)
+    {
+        this.eventTitle = title;
+        this.eventDate = date;
+        this.latLng = latlng;
     }
 
     /**

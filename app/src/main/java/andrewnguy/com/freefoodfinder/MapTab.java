@@ -45,9 +45,10 @@ public class MapTab extends Fragment implements View.OnClickListener
     private FloatingActionButton fab; // FAB to bring up the addPin
     private RelativeLayout addPin;    // the add-an-event-pin
     private Button cancel, confirm, seeMore;   // add event buttons
+    private EventArray ea;
 
     /** parse **/
-    public final ArrayList<Event> mapViewEventMarkers = new ArrayList<>();
+    public ArrayList<Event> events;
 
 
     private static final String TAG = "MyActivity";
@@ -58,6 +59,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.maps_tab,container,false);
         addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
 
+        ea = MainActivity.ea;
 
         /* BUTTONS */
         fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
@@ -84,45 +86,53 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
+
+        events = ea.getEventArray();
+        for (int i = 0; i < events.size(); i++) {
+            Event temp = events.get(i);
+            map.addMarker(new MarkerOptions().position(temp.getLocation()));
+        }
+
         // Queries longitudes and stores it into an array list
-        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
-
-        eventQuery.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> locations,
-                             ParseException e) {
-                if (e == null) {
-
-                    //Iterates through locations and sets up the events
-                    for (ParseObject temp : locations) {
-                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
-
-                        // Creates event, need to update as more params come through
-                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
-                        //String description)
-                        Date date = temp.getDate("Date");
-                        Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
-                        Log.d("Parsing", temp.getObjectId());
-                        //Adds to maps view arraylist
-                        mapViewEventMarkers.add(workingEvent);
-
-                        //Adds marker to map
-                        Log.d("Longitude", "Long" + workingEvent.getLocation().longitude);
-                        map.addMarker(new MarkerOptions().position(workingEvent.getLocation()));
-                    }
-
-
-                    /* DEBUG: This is when array is fully populated  and parse has fully parsed
-
-                    Log.d("eventMarkers", " size:" + eventMarkers.size());
-                    Event printCheck = eventMarkers.get(1);
-                    Log.d("eventMarkers", " kGTD581oRB Description:" + printCheck.getEventDescription());
-                    */
-
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
+//        ParseQuery<ParseObject> eventQuery = ParseQuery.getQuery(getString(R.string.DB));
+//
+//        eventQuery.findInBackground(new FindCallback<ParseObject>() {
+//            public void done(List<ParseObject> locations,
+//                             ParseException e) {
+//                if (e == null) {
+//
+//                    //Iterates through locations and sets up the events
+//                    for (ParseObject temp : locations) {
+//                        //Log.d("Parsing ", " Current ObjID:" + temp.getObjectId());
+//
+//                        // Creates event, need to update as more params come through
+//                        //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
+//                        //String description)
+//                        Date date = temp.getDate("Date");
+//                        //Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
+//                        Event workingEvent = ea.get(temp.getObjectId());
+//                        Log.d("Parsing", temp.getObjectId());
+//                        //Adds to maps view arraylist
+//                        events.add(workingEvent);
+//
+//                        //Adds marker to map
+//                        Log.d("Longitude", "Long" + workingEvent.getLocation().longitude);
+//                        map.addMarker(new MarkerOptions().position(workingEvent.getLocation()));
+//                    }
+//
+//
+//                    /* DEBUG: This is when array is fully populated  and parse has fully parsed
+//
+//                    Log.d("eventMarkers", " size:" + eventMarkers.size());
+//                    Event printCheck = eventMarkers.get(1);
+//                    Log.d("eventMarkers", " kGTD581oRB Description:" + printCheck.getEventDescription());
+//                    */
+//
+//                } else {
+//                    Log.d("score", "Error: " + e.getMessage());
+//                }
+//            }
+//        });
 
         /* set up marker info viewing */
         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {

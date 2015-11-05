@@ -30,7 +30,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 {
     private static final int LIST_CREATE_EVENT = 11; // give ListTab a requestCode of 11 when trying to make an event
 
-    private ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Event> events;
     private FloatingActionButton fab;
     private EventArray ea;
     private int flag = 1;
@@ -42,12 +42,15 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         View v = inflater.inflate(R.layout.list_tab, container, false);
 
         ea = MainActivity.ea;
+        events = ea.getEventArray(); // get events array
 
         fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
         fab.setOnClickListener(this);
 
         //Adds all the events into the events arrayList (this will need to be moved to database on add instead of here)
-        // getEvents();
+        //getEvents();
+
+
 
         ListView listView = (ListView) v.findViewById(R.id.listView);
 
@@ -82,7 +85,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
                         //Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
                         //String description)
                         Date date = temp.getDate("Date");
-                        Event workingEvent = new Event(temp.getString("Title"), date.getYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), temp.getDouble("Latitude"), temp.getDouble("Longitude"), temp.getString("DescriptionEvent"));
+                        Event workingEvent = ea.get(temp.getObjectId());
                         Log.d("Parsing", temp.getObjectId());
                         //Adds to maps view arraylist
                         events.add(workingEvent);

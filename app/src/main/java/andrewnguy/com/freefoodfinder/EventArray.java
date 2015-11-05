@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -11,6 +12,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -19,7 +21,7 @@ import java.util.ListIterator;
  */
 public class EventArray
 {
-    private ArrayList<Event> eventsArray; //event array
+    private HashMap<String, Event> eventsMap; // event map
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
@@ -30,10 +32,11 @@ public class EventArray
      */
     public EventArray(Context context, String db)
     {
-        eventsArray = new ArrayList<>();
+        eventsMap = new HashMap<>();
         this.context = context;
         this.db = db;
         eq = ParseQuery.getQuery(db);
+        update();
     }
 
     /**
@@ -58,10 +61,42 @@ public class EventArray
                     Log.d("parse", e.getMessage());
             }
         });
+
+        eventsMap.put(newEvent.getObjectId(), e); // update local as well
     }
 
-    public Event get(String eventId)
-    {
+    /**
+     * Get the event with matching ID
+     * @param objectId id of the event
+     * @return return Event object matching that objectId
+     */
+    public Event get(String objectId) { return eventsMap.get(objectId); }
 
+    /**
+     * Get an array list of all the events
+     * @return an ArrayList object of all the events
+     */
+    public ArrayList<Event> getEventArray() { return new ArrayList<>(eventsMap.values()); }
+
+    /**
+     * Update the local db
+     */
+    public void update()
+    {
+        List<ParseObject> temp;
+        try {
+            temp = eq.find();
+            if (temp != null) {
+                for (ParseObject e : temp) {
+                    LatLng tempLL = new LatLng(e.getParseGeoPoint("Location").getLatitude(), e.getParseGeoPoint("Location").getLongitude());
+                    eventsMap.put(e.getObjectId(), new Event(e.getString("Title"), e.getDate("Date"), tempLL));
+                }
+            }
+        } catch (ParseException e) {
+            Log.d("parse", e.getMessage());
+        }
+
+        int x = eventsMap.size();
+        Log.d("events", String.valueOf(x));
     }
 }
