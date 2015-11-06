@@ -6,16 +6,15 @@ package andrewnguy.com.freefoodfinder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -26,14 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 public class MapTab extends Fragment implements View.OnClickListener
 {
@@ -50,8 +43,14 @@ public class MapTab extends Fragment implements View.OnClickListener
     /** parse **/
     public ArrayList<Event> events = new ArrayList<>();
 
-
-    private static final String TAG = "MyActivity";
+    /** my location **/
+    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
+        @Override
+        public void onMyLocationChange(Location location) {
+            //LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+            ea.setMyLoc(location);
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState)
@@ -84,6 +83,8 @@ public class MapTab extends Fragment implements View.OnClickListener
         // be able to center the map on yourself
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setMyLocationEnabled(true);
+        map.setOnMyLocationChangeListener(myLocationChangeListener);
+//        ea.setMyLoc(map.getMyLocation());
 
         /* Adding existing markers */
         update();
@@ -209,6 +210,7 @@ public class MapTab extends Fragment implements View.OnClickListener
      */
     public void update() {
         map.clear();
+        ea.setMyLoc(map.getMyLocation());
 
         events = ea.getEventArray();
         for (int i = 0; i < events.size(); i++) {

@@ -8,8 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
+import java.util.Date;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
@@ -117,14 +116,15 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 currLng = extras.getDouble("currLng");
             }
 
-            /* CHECK EVENT CLASS IF YOU WANT TO KNOW WHAT A DATE IN JAVA IS (check helper method @ bottom) */
+            Date startDate = setDate(2015, 0, 1, 0, 0);
+            Date endDate   = setDate(2015, 0, 2, 0, 0);
 
             Event newEvent;
             if (eventDescStr == null && eventDescStr.isEmpty()) {
-                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng);
+                newEvent = new Event(titleStr, startDate, endDate, lat, lng, currLat, currLng);
             }
             else {
-                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng, eventDescStr);
+                newEvent = new Event(titleStr, startDate, endDate, lat, lng, currLat, currLng, eventDescStr);
             }
 
             ea.add(newEvent);
@@ -142,7 +142,20 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             return true;
     }
 
+    private Date setDate(int year, int month, int day, int hour, int minute)
+    {
+        /*  year - the year plus 1900.                  *
+         *  month - the month between 0-11.             *
+         *  date - the day of the month between 1-31.   *
+         *  hrs - the hours between 0-23.               *
+         *  min - the minutes between 0-59              */
 
+        // need to do conversions
+        int Y = year - 1900;
+        // month in CEA will be be from 0-11
+        // everything else is normal
 
+        return new Date(Y, month, day, hour, minute);
+    }
 
 }
