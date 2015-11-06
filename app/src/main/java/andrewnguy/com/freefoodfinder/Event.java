@@ -61,7 +61,7 @@ public class Event {
     public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng)
     {
         this.eventTitle = title;
-        this.eventDate = new Date(year, month, day, hour, minute);
+        this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
     }
 
@@ -82,7 +82,7 @@ public class Event {
     {
         this.eventTitle = title;
         this.eventDesc  = description;
-        this.eventDate = new Date(year, month, day, hour, minute);
+        this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
     }
 
@@ -113,4 +113,22 @@ public class Event {
      */
     public LatLng getLocation() { return latLng; }
 
+
+    /* ----------  HELPER FUNCTIONS ---------- */
+
+    private Date setDate(int year, int month, int day, int hour, int minute)
+    {
+        /*  year - the year plus 1900.                  *
+         *  month - the month between 0-11.             *
+         *  date - the day of the month between 1-31.   *
+         *  hrs - the hours between 0-23.               *
+         *  min - the minutes between 0-59              */
+
+        // need to do conversions
+        int Y = year - 1900;
+        // month in CEA will be be from 0-11
+        // everything else is normal
+
+        return new Date(Y, month, day, hour, minute);
+    }
 }
