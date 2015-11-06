@@ -6,6 +6,7 @@ package andrewnguy.com.freefoodfinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 /**
  * Created by hp1 on 21-01-2015.

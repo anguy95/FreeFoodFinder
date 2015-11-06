@@ -7,11 +7,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!--This style is for the ConfirmEventActivity, make it have rounded corners-->
+    <style name="ThemeWithCorners" parent="android:Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowBackground">@drawable/layout_bg</item>
+    </style>
 
 </resources>
