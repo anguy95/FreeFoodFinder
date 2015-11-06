@@ -77,10 +77,13 @@ public class EventArray
     public Event get(String objectId) { return eventsMap.get(objectId); }
 
     /**
-     * Get an array list of all the events
+     * Get most recent array list of all the events
      * @return an ArrayList object of all the events
      */
-    public ArrayList<Event> getEventArray() { return new ArrayList<>(eventsMap.values()); }
+    public ArrayList<Event> getEventArray() {
+        this.update();
+        return new ArrayList<>(eventsMap.values());
+    }
 
     /**
      * Helper method to update the local db
@@ -91,11 +94,12 @@ public class EventArray
         try {
             temp = eq.find();
             if (temp != null) {
+                eventsMap.clear(); // clear
                 for (ParseObject e : temp) {
                     LatLng tempLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
-                    if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty())
+                    if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
                         eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL));
-                    else
+                    else   // if event does have a description
                         eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL, e.getString(context.getString(R.string.DES))));
                 }
             }

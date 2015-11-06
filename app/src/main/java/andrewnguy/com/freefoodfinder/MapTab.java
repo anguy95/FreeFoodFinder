@@ -48,7 +48,7 @@ public class MapTab extends Fragment implements View.OnClickListener
     private EventArray ea;
 
     /** parse **/
-    public ArrayList<Event> events;
+    public ArrayList<Event> events = new ArrayList<>();
 
 
     private static final String TAG = "MyActivity";
@@ -74,7 +74,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         /** start up the map -- center map on UCSD **/
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
-        map = mapView.getMap();
+        map = mapView.getMap(); //getMapAsync??
 
         double lat = 32.8805071;
         double lng = -117.2365000;
@@ -86,11 +86,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-        events = ea.getEventArray();
-        for (int i = 0; i < events.size(); i++) {
-            Event temp = events.get(i);
-            map.addMarker(new MarkerOptions().position(temp.getLocation()));
-        }
+        update();
 
 
         /* set up marker info viewing */
@@ -170,6 +166,8 @@ public class MapTab extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
             intent.putExtra("latitude", lat);
             intent.putExtra("longitude", lng);
+            intent.putExtra("currLat", map.getMyLocation().getLatitude());
+            intent.putExtra("currLng", map.getMyLocation().getLongitude());
             startActivityForResult(intent, MAP_CREATE_EVENT);
         }
     }
@@ -203,6 +201,19 @@ public class MapTab extends Fragment implements View.OnClickListener
 
             // bring back the fab
             fab.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * update the map view on add or launch or request
+     */
+    public void update() {
+        map.clear();
+
+        events = ea.getEventArray();
+        for (int i = 0; i < events.size(); i++) {
+            Event temp = events.get(i);
+            map.addMarker(new MarkerOptions().position(temp.getLocation()));
         }
     }
 }

@@ -1,5 +1,7 @@
 package andrewnguy.com.freefoodfinder;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;
@@ -14,6 +16,7 @@ public class Event {
     private String eventDesc;   // description of an event
     private Date eventDate;     // date of an event (int year, int month, int day, int hour, int minute)
     private LatLng latLng;      // location of an event
+    private float[] dist;        // distance from you to event
 
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
@@ -57,12 +60,18 @@ public class Event {
      * @param minute
      * @param lat
      * @param lng
+     * @param currLat
+     * @param currLng
      */
-    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng)
+    public Event(String title, int year, int month, int day, int hour, int minute,
+                 double lat, double lng, double currLat, double currLng)
     {
         this.eventTitle = title;
-        this.eventDate = new Date(year, month, day, hour, minute);
+        this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
+
+        // calc distance from you and the event
+        Location.distanceBetween(lat, lng, currLat, currLng, this.dist);
     }
 
     /**
@@ -75,15 +84,20 @@ public class Event {
      * @param minute
      * @param lat
      * @param lng
+     * @param currLat
+     * @param currLng
      * @param description
      */
-    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
-                 String description)
+    public Event(String title, int year, int month, int day, int hour, int minute,
+                 double lat, double lng, double currLat, double currLng, String description)
     {
         this.eventTitle = title;
         this.eventDesc  = description;
-        this.eventDate = new Date(year, month, day, hour, minute);
+        this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
+
+        // calc distance from you and the event
+        Location.distanceBetween(lat, lng, currLat, currLng, this.dist);
     }
 
 
@@ -113,4 +127,22 @@ public class Event {
      */
     public LatLng getLocation() { return latLng; }
 
+
+    /* ----------  HELPER FUNCTIONS ---------- */
+
+    private Date setDate(int year, int month, int day, int hour, int minute)
+    {
+        /*  year - the year plus 1900.                  *
+         *  month - the month between 0-11.             *
+         *  date - the day of the month between 1-31.   *
+         *  hrs - the hours between 0-23.               *
+         *  min - the minutes between 0-59              */
+
+        // need to do conversions
+        int Y = year - 1900;
+        // month in CEA will be be from 0-11
+        // everything else is normal
+
+        return new Date(Y, month, day, hour, minute);
+    }
 }

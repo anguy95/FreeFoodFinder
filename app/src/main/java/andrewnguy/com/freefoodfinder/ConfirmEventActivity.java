@@ -52,6 +52,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         else { // finish the add
             StringBuffer msg = new StringBuffer("Please enter a value for:");
             boolean emptyFields = false;
+            boolean emptyDesc = true;
             if (isEmpty(title)) {
                 msg.append(" Title");
                 emptyFields = true;
@@ -60,7 +61,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 if (emptyFields)
                     msg.append(",");
                 msg.append(" Event Description");
-                emptyFields = true;
+                emptyDesc = false;
             }
             if (isEmpty(locDesc)) {
                 if (emptyFields)
@@ -92,7 +93,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 msg.append(".");
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
-            }*/
+            }
+            else if (!emptyDesc) {
+                // maybe ask if they want to have an empty description field
+            }
+            */
 
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
@@ -103,18 +108,23 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             double lat = -1;
             double lng = -1;
+            double currLat = 0, currLng = 0;
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 lat = extras.getDouble("latitude");
                 lng = extras.getDouble("longitude");
+                currLat = extras.getDouble("currLat");
+                currLng = extras.getDouble("currLng");
             }
+
+            /* CHECK EVENT CLASS IF YOU WANT TO KNOW WHAT A DATE IN JAVA IS (check helper method @ bottom) */
 
             Event newEvent;
             if (eventDescStr == null && eventDescStr.isEmpty()) {
-                newEvent = new Event(titleStr, 2015, 11, 3, 3, 30, lat, lng);
+                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng);
             }
             else {
-                newEvent = new Event(titleStr, 2015, 11, 3, 3, 30, lat, lng, eventDescStr);
+                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng, eventDescStr);
             }
 
             ea.add(newEvent);
