@@ -1,5 +1,7 @@
 package andrewnguy.com.freefoodfinder;
 
+import android.location.Location;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;
@@ -14,6 +16,7 @@ public class Event {
     private String eventDesc;   // description of an event
     private Date eventDate;     // date of an event (int year, int month, int day, int hour, int minute)
     private LatLng latLng;      // location of an event
+    private float[] dist;        // distance from you to event
 
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
@@ -57,12 +60,18 @@ public class Event {
      * @param minute
      * @param lat
      * @param lng
+     * @param currLat
+     * @param currLng
      */
-    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng)
+    public Event(String title, int year, int month, int day, int hour, int minute,
+                 double lat, double lng, double currLat, double currLng)
     {
         this.eventTitle = title;
         this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
+
+        // calc distance from you and the event
+        Location.distanceBetween(lat, lng, currLat, currLng, this.dist);
     }
 
     /**
@@ -75,15 +84,20 @@ public class Event {
      * @param minute
      * @param lat
      * @param lng
+     * @param currLat
+     * @param currLng
      * @param description
      */
-    public Event(String title, int year, int month, int day, int hour, int minute, double lat, double lng,
-                 String description)
+    public Event(String title, int year, int month, int day, int hour, int minute,
+                 double lat, double lng, double currLat, double currLng, String description)
     {
         this.eventTitle = title;
         this.eventDesc  = description;
         this.eventDate = setDate(year, month, day, hour, minute);
         this.latLng = new LatLng(lat, lng);
+
+        // calc distance from you and the event
+        Location.distanceBetween(lat, lng, currLat, currLng, this.dist);
     }
 
 

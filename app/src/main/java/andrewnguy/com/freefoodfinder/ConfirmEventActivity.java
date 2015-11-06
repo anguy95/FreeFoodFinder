@@ -108,20 +108,23 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             double lat = -1;
             double lng = -1;
+            double currLat = 0, currLng = 0;
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 lat = extras.getDouble("latitude");
                 lng = extras.getDouble("longitude");
+                currLat = extras.getDouble("currLat");
+                currLng = extras.getDouble("currLng");
             }
 
             /* CHECK EVENT CLASS IF YOU WANT TO KNOW WHAT A DATE IN JAVA IS (check helper method @ bottom) */
 
             Event newEvent;
             if (eventDescStr == null && eventDescStr.isEmpty()) {
-                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng);
+                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng);
             }
             else {
-                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, eventDescStr);
+                newEvent = new Event(titleStr, 2015, 1, 1, 1, 1, lat, lng, currLat, currLng, eventDescStr);
             }
 
             ea.add(newEvent);
