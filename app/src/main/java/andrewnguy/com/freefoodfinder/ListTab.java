@@ -30,7 +30,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 {
     private static final int LIST_CREATE_EVENT = 11; // give ListTab a requestCode of 11 when trying to make an event
 
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>(); // initial 0
     private EventListAdapter eventAdapter;
     private ListView listView;
     private View v;
@@ -43,6 +43,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         v = inflater.inflate(R.layout.list_tab, container, false);
+        listView = (ListView) v.findViewById(R.id.listView);
 
         ea = MainActivity.ea;
         events = ea.getEventArray(); // get events array
@@ -143,7 +144,6 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
      */
     public void update() {
         events = ea.getEventArray();
-        listView = (ListView) v.findViewById(R.id.listView);
         eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
         listView.setAdapter(eventAdapter);
         listView.setOnItemClickListener(this);

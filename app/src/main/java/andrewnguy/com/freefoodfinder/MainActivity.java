@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -75,19 +76,21 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { /* nothing */ }
 
     @Override
-    public void onPageSelected(int position) { /* nothing */ }
-
-    /**
-     * Updating map or scroll views
-     * @param state 0 = map, 1 = list
-     */
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        if (state == 0) {
+    public void onPageSelected(int position)
+    {
+        Log.d("state", String.valueOf(position));
+        if (position == 0) {
             adapter.getMapTab().update();
         }
         else {
             adapter.getListTab().update();
         }
     }
+
+    /**
+     * Updating map or scroll views
+     * @param state 0 = map, 1 = list
+     */
+    @Override
+    public void onPageScrollStateChanged(int state) { /* do nothing */ }
 }

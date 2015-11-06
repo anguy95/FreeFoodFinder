@@ -77,10 +77,13 @@ public class EventArray
     public Event get(String objectId) { return eventsMap.get(objectId); }
 
     /**
-     * Get an array list of all the events
+     * Get most recent array list of all the events
      * @return an ArrayList object of all the events
      */
-    public ArrayList<Event> getEventArray() { return new ArrayList<>(eventsMap.values()); }
+    public ArrayList<Event> getEventArray() {
+        this.update();
+        return new ArrayList<>(eventsMap.values());
+    }
 
     /**
      * Helper method to update the local db
