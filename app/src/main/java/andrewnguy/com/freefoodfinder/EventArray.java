@@ -1,11 +1,11 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -15,7 +15,6 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by Ivan on 10/31/2015.
@@ -26,6 +25,7 @@ public class EventArray
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
+    private Location myLoc;
 
     /**
      * Construct new event array class
@@ -52,7 +52,8 @@ public class EventArray
         newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
         newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
-        newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
+        newEvent.put(context.getString(R.string.SDA), e.getStartDate());          // put start date
+        newEvent.put(context.getString(R.string.EDA), e.getEndDate());            // put end date
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
 
         if (e.getDescription() != null && !e.getDescription().isEmpty())         // put description if one exists
@@ -124,6 +125,14 @@ public class EventArray
 
 
     /**
+     * setter for your current location
+     * @param loc
+     */
+    public void setMyLoc(Location loc) {
+        this.myLoc = loc;
+    }
+
+    /**
      * Helper method to update the local db
      */
     private void update()
@@ -134,11 +143,33 @@ public class EventArray
             if (temp != null) {
                 eventsMap.clear(); // clear
                 for (ParseObject e : temp) {
-                    LatLng tempLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+                    LatLng eventLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+                    LatLng currLL;
+                    try {
+                        currLL = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+                    } catch (NullPointerException exception) {
+                        Log.d("current location", exception.getMessage());
+                        currLL = eventLL;
+                    }
+
                     if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
-                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL));
+
+                        eventsMap.put(e.getObjectId(), //store ParseObject objectId
+                                new Event( //make new event to store
+                                        e.getString(context.getString(R.string.TIT)),
+                                        e.getDate(context.getString(R.string.SDA)),
+                                        e.getDate(context.getString(R.string.EDA)),
+                                        eventLL,
+                                        currLL));
                     else   // if event does have a description
-                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL, e.getString(context.getString(R.string.DES))));
+                        eventsMap.put(e.getObjectId(), // store ParseObject objectId
+                                new Event( //make new event to store
+                                        e.getString(context.getString(R.string.TIT)),
+                                        e.getDate(context.getString(R.string.SDA)),
+                                        e.getDate(context.getString(R.string.EDA)),
+                                        e.getString(context.getString(R.string.DES)),
+                                        eventLL,
+                                        currLL));
                 }
             }
         } catch (ParseException e) {

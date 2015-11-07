@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     CharSequence Titles[]={"Map","List"};
     int Numboftabs = 2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

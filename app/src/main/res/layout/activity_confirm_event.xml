@@ -1,100 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="550dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="andrewnguy.com.freefoodfinder.ConfirmEventActivity"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:id="@+id/buttonConfirmPost"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/buttonCancelPost"
-        android:layout_alignTop="@+id/buttonConfirmPost"
-        android:layout_toStartOf="@+id/buttonConfirmPost"
-        android:layout_marginEnd="27dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:id="@+id/editEventDescription"
-        android:layout_above="@+id/buttonCancelPost"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/buttonConfirmPost"
-        android:hint="@string/add_event_description"
-        android:background="#FFF4DD"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/editLocationDescription"
-        android:layout_marginBottom="15dp"
-        android:hint="@string/add_location_description"
-        android:background="#FFF4DD"
-        android:layout_above="@+id/editEventDescription"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editEventDate"
-        android:hint="@string/edit_event_date"
-        android:textAlignment="center"
-        android:background="#FFF4DD"
-        android:layout_below="@+id/editEventTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
-
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/editEventStartTime"
-        android:hint="@string/edit_start_time"
-        android:textAlignment="center"
-        android:background="#FFF4DD"
-        android:layout_above="@+id/editLocationDescription"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="30dp" />
-
-    <EditText
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:id="@+id/editEventEndTime"
-        android:hint="@string/edit_end_time"
-        android:textAlignment="center"
-        android:background="#FFF4DD"
-        android:layout_above="@+id/editLocationDescription"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="30dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:id="@+id/editEventTitle"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/editLocationDescription"
         android:layout_alignParentEnd="true"
         android:hint="@string/add_event_title"
         android:textAlignment="center"
-        android:background="#FFF4DD"/>
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:textColor="#8D8D8D"
+        android:layout_marginTop="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view"
+        android:layout_below="@+id/editEventTitle"
+        android:layout_alignEnd="@+id/buttonConfirmPost"
+        android:layout_marginTop="0dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view2"
+        android:layout_below="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="60dp" />
+
+    <include
+        layout="@layout/event_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/include"
+        android:layout_below="@+id/view2"
+        android:layout_alignParentStart="true"> </include>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view3"
+        android:layout_below="@+id/include"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/editLocationDescription"
+        android:hint="@string/add_location_description"
+        android:background="@drawable/text_box_bg"
+        android:textCursorDrawable="@null"
+        android:textSize="12dp"
+        android:layout_below="@+id/view3"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#8D8D8D" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="210dp"
+        android:id="@+id/editEventDescription"
+        android:hint="@string/add_event_description"
+        android:background="@drawable/text_box_bg"
+        android:textCursorDrawable="@null"
+        android:textSize="12dp"
+        android:padding="15dp"
+        android:layout_below="@+id/editLocationDescription"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@+id/editLocationDescription"
+        android:gravity="top"
+        android:textColor="#8D8D8D" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Confirm"
+        android:background="@drawable/confirm_button"
+        android:id="@+id/buttonConfirmPost"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/editEventDescription"
+        android:layout_alignEnd="@+id/editEventDescription"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Cancel"
+        android:background="@drawable/cancel_button"
+        android:id="@+id/buttonCancelPost"
+        android:layout_alignTop="@+id/buttonConfirmPost"
+        android:layout_toStartOf="@+id/buttonConfirmPost"
+        android:layout_marginEnd="20dp" />
+
 
 </RelativeLayout>

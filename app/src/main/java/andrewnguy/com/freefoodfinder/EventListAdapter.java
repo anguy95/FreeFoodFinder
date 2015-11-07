@@ -58,7 +58,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         //Sets the views text
         holder.eventTitle.setText(event.getTitle());
         holder.eventDescription.setText(event.getDescription());
-        //holder.dist.setText(event.dist);
+        holder.dist.setText(String.format("%.2f mi", event.getDist()));
 
         return row;
 
