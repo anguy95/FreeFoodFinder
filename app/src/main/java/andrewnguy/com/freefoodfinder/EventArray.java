@@ -2,6 +2,7 @@ package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
@@ -84,6 +85,43 @@ public class EventArray
         this.update();
         return new ArrayList<>(eventsMap.values());
     }
+
+    public ArrayList<Event> getEventArrayWithFilter(String tag) {
+        this.updateWithFilter(tag);
+        return new ArrayList<>(eventsMap.values());
+    }
+
+
+    public void updateWithFilter(String tag) {
+        eventsMap.clear();
+        updatWithFilterHelper("Tag1", tag);
+        updatWithFilterHelper("Tag2", tag);
+        updatWithFilterHelper("Tag3", tag);
+        updatWithFilterHelper("Tag4", tag);
+    }
+
+    private void updatWithFilterHelper(String dbCol, String tag)
+    {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(db);
+        query.whereEqualTo(dbCol, tag);
+        List<ParseObject> temp;
+        try {
+            temp = query.find();
+            if (temp != null) {
+                //eventsMap.clear(); // clear
+                for (ParseObject e : temp) {
+                    LatLng tempLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+                    if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
+                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL));
+                    else   // if event does have a description
+                        eventsMap.put(e.getObjectId(), new Event(e.getString(context.getString(R.string.TIT)), e.getDate(context.getString(R.string.DAT)), tempLL, e.getString(context.getString(R.string.DES))));
+                }
+            }
+        } catch (ParseException e) {
+            Log.d("parse", e.getMessage());
+        }
+    }
+
 
     /**
      * Helper method to update the local db

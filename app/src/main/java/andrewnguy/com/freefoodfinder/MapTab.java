@@ -86,7 +86,10 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setMyLocationEnabled(true);
 
         /* Adding existing markers */
-        update();
+        //update();
+
+        /* Add markers who have the approprite tags */
+        updateWithFilter("kbbq");
 
 
         /* set up marker info viewing */
@@ -213,6 +216,16 @@ public class MapTab extends Fragment implements View.OnClickListener
             Event temp = events.get(i);
             map.addMarker(new MarkerOptions().position(temp.getLocation()));
         }
+    }
+
+    public void updateWithFilter(String tag) {
+        map.clear();
+        events = ea.getEventArrayWithFilter(tag);
+        for (int i = 0; i < events.size(); i++) {
+            Event temp = events.get(i);
+            map.addMarker(new MarkerOptions().position(temp.getLocation()));
+        }
+
     }
 }
 
