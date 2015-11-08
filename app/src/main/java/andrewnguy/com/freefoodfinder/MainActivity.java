@@ -1,6 +1,7 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,12 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
+
+    private final int DELAY = 15000; // 15 seconds (15,000 milliseconds)
 
     static EventArray ea; // the event array; for parse
     private ViewPager pager;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private SlidingTabLayout tabs;
     private CharSequence Titles[]={"Map","List"};
     private int Numboftabs = 2;
+    private Handler h;
 
 
     @Override
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        tabs.setOnPageChangeListener(this); // listener to page changes
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
@@ -52,8 +54,33 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         });
 
+        /* Handler to update every 15 seconds */
+        h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ea.update(EMPTY, 2);
+                h.postDelayed(this, DELAY);
+            }
+        }, DELAY);
+
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -77,20 +104,4 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { /* nothing */ }
-
-    /**
-     * Updating map or scroll views
-     * @param position 0 = map, 1 = list
-     */
-    @Override
-    public void onPageSelected(int position)
-    {
-        ea.update(EMPTY, position); // update
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) { /* do nothing */ }
 }
