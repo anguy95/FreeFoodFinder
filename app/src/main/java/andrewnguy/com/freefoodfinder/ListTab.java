@@ -43,7 +43,9 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
         fab.setOnClickListener(this);
 
-        update();
+        update(MainActivity.EMPTY);
+
+        listView.setOnItemClickListener(this);
 
         return v;
     }
@@ -60,7 +62,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     public void onResume()
     {
         super.onResume();
-        update();
+        update(MainActivity.EMPTY);
     }
     /**
      * Check click events. Responds to:
@@ -125,7 +127,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         {
             if (resultCode == Activity.RESULT_OK) { // OK
                 // manipulate the Intent data to get simple data
-                update();
+                update(MainActivity.EMPTY);
             }
             // else do nothing
         }
@@ -133,11 +135,11 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     /**
      * update the list view on add or launch or request
+     * @param filter out some reults
      */
-    public void update() {
-        events = ea.getEventArray(MainActivity.EMPTY);
+    public void update(ArrayList<String> filter) {
+        events = ea.getEventArray(filter);
         eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
         listView.setAdapter(eventAdapter);
-        listView.setOnItemClickListener(this);
     }
 }

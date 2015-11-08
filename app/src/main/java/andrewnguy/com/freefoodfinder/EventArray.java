@@ -5,6 +5,7 @@ import android.location.Location;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -36,7 +37,7 @@ public class EventArray
         this.context = context;
         this.db = db;
         eq = ParseQuery.getQuery(db);
-        update(MainActivity.EMPTY);
+        update(MainActivity.EMPTY, 2);
     }
 
     /**
@@ -67,7 +68,7 @@ public class EventArray
             }
         });
 
-        update(MainActivity.EMPTY); // re-fetch data
+        update(MainActivity.EMPTY, 2); // re-fetch data
     }
 
     /**
@@ -82,10 +83,7 @@ public class EventArray
      * @param filter if looking for something specific
      * @return an ArrayList object of all the events
      */
-    public ArrayList<Event> getEventArray(ArrayList<String> filter) {
-        this.update(filter);
-        return new ArrayList<>(eventsMap.values());
-    }
+    public ArrayList<Event> getEventArray(ArrayList<String> filter) { return new ArrayList<>(eventsMap.values()); }
 
 
     /**
@@ -99,51 +97,73 @@ public class EventArray
     /**
      * Helper method to update the local db
      * @param filter find correct events
+     * @param position map or list
      */
-    private void update(ArrayList<String> filter)
+    public void update(ArrayList<String> filter, final int position)
     {
-        List<ParseObject> temp;
-        try {
+        //List<ParseObject> temp = new ArrayList<>();
 
-            // TAG IMPLEMENTATION
-            //if (!filter.isEmpty())
-            //    eq.whereEqualTo(context.getString(R.string.TAG), )
+        eq.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> temp, ParseException exception) {
+                if (exception == null) {
+                    if (temp != null) {
+                        eventsMap.clear(); // clear
 
-            temp = eq.find();
-            if (temp != null) {
-                eventsMap.clear(); // clear
-                for (ParseObject e : temp) {
-                    LatLng eventLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(), e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
-                    LatLng currLL;
-                    try {
-                        currLL = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-                    } catch (NullPointerException exception) {
-                        Log.d("current location", exception.getMessage());
-                        currLL = eventLL;
+                        LatLng currLL = null;
+                        try {
+                            currLL = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+                        } catch (NullPointerException nullexception) {
+                            Log.d("current location", nullexception.getMessage());
+                        }
+
+                        for (ParseObject e : temp) {
+                            LatLng eventLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(),
+                                                        e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+
+                            if (currLL == null)
+                                currLL = eventLL;
+
+                            if (e.getString(context.getString(R.string.DES)) == null ||
+                                e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
+
+                                eventsMap.put(e.getObjectId(), //store ParseObject objectId
+                                        new Event( //make new event to store
+                                                e.getString(context.getString(R.string.TIT)),
+                                                e.getDate(context.getString(R.string.SDA)),
+                                                e.getDate(context.getString(R.string.EDA)),
+                                                eventLL,
+                                                currLL
+                                        )
+                                );
+                            else   // if event does have a description
+                                eventsMap.put(e.getObjectId(), // store ParseObject objectId
+                                        new Event( //make new event to store
+                                                e.getString(context.getString(R.string.TIT)),
+                                                e.getDate(context.getString(R.string.SDA)),
+                                                e.getDate(context.getString(R.string.EDA)),
+                                                e.getString(context.getString(R.string.DES)),
+                                                eventLL,
+                                                currLL
+                                        )
+                                );
+                        }
+                    } else {
+                        Log.d("update", exception.getMessage());
                     }
+                }
 
-                    if (e.getString(context.getString(R.string.DES)) == null || e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
-
-                        eventsMap.put(e.getObjectId(), //store ParseObject objectId
-                                new Event( //make new event to store
-                                        e.getString(context.getString(R.string.TIT)),
-                                        e.getDate(context.getString(R.string.SDA)),
-                                        e.getDate(context.getString(R.string.EDA)),
-                                        eventLL,
-                                        currLL));
-                    else   // if event does have a description
-                        eventsMap.put(e.getObjectId(), // store ParseObject objectId
-                                new Event( //make new event to store
-                                        e.getString(context.getString(R.string.TIT)),
-                                        e.getDate(context.getString(R.string.SDA)),
-                                        e.getDate(context.getString(R.string.EDA)),
-                                        e.getString(context.getString(R.string.DES)),
-                                        eventLL,
-                                        currLL));
+                if (position == 0) { // maps tab
+                    MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
+                }
+                else if (position == 1) { // list tab
+                    MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                }
+                else {
+                    MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
+                    MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
                 }
             }
-        } catch (ParseException e) {
-            Log.d("parse", e.getMessage());
-        }
+        });
     }
 }

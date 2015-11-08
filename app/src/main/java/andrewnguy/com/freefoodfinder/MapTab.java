@@ -87,7 +87,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 //        ea.setMyLoc(map.getMyLocation());
 
         /* Adding existing markers */
-        update();
+        update(MainActivity.EMPTY);
 
 
         /* set up marker info viewing */
@@ -207,12 +207,13 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     /**
      * update the map view on add or launch or request
+     * @param filter out some results
      */
-    public void update() {
-        map.clear();
-        ea.setMyLoc(map.getMyLocation());
+    public void update(ArrayList<String> filter) {
+        map.clear(); // clear the map
+        ea.setMyLoc(map.getMyLocation()); // set up current location for distance calculations
 
-        events = ea.getEventArray(MainActivity.EMPTY);
+        events = ea.getEventArray(filter); // get some filtered results
         for (int i = 0; i < events.size(); i++) {
             Event temp = events.get(i);
             map.addMarker(new MarkerOptions().position(temp.getLocation()));
