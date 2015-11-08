@@ -11,11 +11,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,8 +28,16 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MapTab extends Fragment implements View.OnClickListener
@@ -42,6 +54,9 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     /** parse **/
     public ArrayList<Event> events = new ArrayList<>();
+    public HashMap<Marker, String> eventidMarkerMap = new HashMap<>();
+    public HashMap<String, Event> eventIdMap = new HashMap<>();
+    ParseQuery<ParseObject> eq;
 
     /** my location **/
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
@@ -59,6 +74,10 @@ public class MapTab extends Fragment implements View.OnClickListener
         addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
 
         ea = MainActivity.ea;
+        eventidMarkerMap = ea.getEventMarkersMap();
+        eventIdMap = ea.getObjectIdEventsMap();
+
+
 
         /* BUTTONS */
         fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
@@ -102,7 +121,36 @@ public class MapTab extends Fragment implements View.OnClickListener
             // the contents/information
             @Override
             public View getInfoContents(Marker marker) {
+
+                // ObjectID to get event
+                String markerObjectID = eventidMarkerMap.get(marker);
+
+                // Gets the event from objID,events hash
+                Event toDisplay = eventIdMap.get(markerObjectID);
+
+                // Date format for bubble
+                DateFormat df = new SimpleDateFormat("dd");
+                SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+
+
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_bubble, null);
+
+                //Sets up Date string
+                String dateOfEvent = "Thu January " + df.format(toDisplay.getStartDate());
+
+                // Sets up Time string
+                String timeOfEvent = tf.format(toDisplay.getStartDate()) + " - " + tf.format(toDisplay.getEndDate());
+
+                // Sets up the view fields for bubble
+                TextView eventTitle = (TextView) v.findViewById(R.id.small_event_title);
+                eventTitle.setText(toDisplay.getTitle());
+
+                TextView eventDate = (TextView) v.findViewById(R.id.small_event_date);
+                eventDate.setText(dateOfEvent);
+
+                TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
+                eventTime.setText(timeOfEvent);
+
                 return v;
             }
 
@@ -191,8 +239,8 @@ public class MapTab extends Fragment implements View.OnClickListener
         {
             // check the resultCode
             if (resultCode == Activity.RESULT_OK) { // OK
-                LatLng tmpLL = map.getCameraPosition().target;
-                map.addMarker(new MarkerOptions().position(tmpLL));
+                Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
+                update(MainActivity.EMPTY);
             }
 
             /* do this stuff if cancelled as well (or after adding the marker) */
@@ -216,7 +264,10 @@ public class MapTab extends Fragment implements View.OnClickListener
         events = ea.getEventArray(filter); // get some filtered results
         for (int i = 0; i < events.size(); i++) {
             Event temp = events.get(i);
-            map.addMarker(new MarkerOptions().position(temp.getLocation()));
+            MarkerOptions markerToAdd = new MarkerOptions().position(temp.getLocation());
+            Log.d("Pushing", " to hash: " + temp.getEventIDforMarker());
+            eventidMarkerMap.put( map.addMarker(markerToAdd),temp.getEventIDforMarker());
+
         }
     }
 }

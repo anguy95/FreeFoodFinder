@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -127,6 +128,8 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         {
             if (resultCode == Activity.RESULT_OK) { // OK
                 // manipulate the Intent data to get simple data
+                Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
+
                 update(MainActivity.EMPTY);
             }
             // else do nothing

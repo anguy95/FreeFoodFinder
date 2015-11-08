@@ -6,7 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by anguy95 on 10/31/15.
@@ -45,6 +49,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
             holder.eventTitle = (TextView) row.findViewById(R.id.event_title_row);
             holder.dist = (TextView) row.findViewById(R.id.event_distance_row);
             holder.eventDescription = (TextView) row.findViewById(R.id.event_description_row);
+            holder.dateDay = (TextView) row.findViewById(R.id.event_date_row);
+            holder.dateTime = (TextView) row.findViewById(R.id.event_time_row);
 
             row.setTag(holder);
         }
@@ -54,6 +60,26 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
         //Gets Event object in the ArrayList<Event> at that current position
         Event event = data.get(position);
+
+        // To check if display across two days
+        Date tempStartDate = event.getStartDate();
+        Date tempEndDate = event.getEndDate();
+        String timeOfEvent;
+
+        // Formats for Date and time
+        DateFormat df = new SimpleDateFormat("dd");
+        SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+
+        String dateToDisplay = "Thu January " + df.format(tempEndDate);
+        //Sets up string
+        timeOfEvent = tf.format(tempStartDate) + " - " + tf.format(tempEndDate);
+
+        holder.dateDay.setText(dateToDisplay);
+        holder.dateTime.setText(timeOfEvent);
+
+
+
+
 
         //Sets the views text
         holder.eventTitle.setText(event.getTitle());
@@ -74,6 +100,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView eventTitle;
         TextView eventDescription;
         TextView dist;
+        TextView dateDay;
+        TextView dateTime;
 
     }
 

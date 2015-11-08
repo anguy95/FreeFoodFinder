@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
@@ -25,6 +26,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         setContentView(R.layout.activity_confirm_event);
 
         ea = MainActivity.ea;
+
 
         confirm = (Button) findViewById(R.id.buttonConfirmPost); // confirm post button
         cancel = (Button) findViewById(R.id.buttonCancelPost);   // cancel post button

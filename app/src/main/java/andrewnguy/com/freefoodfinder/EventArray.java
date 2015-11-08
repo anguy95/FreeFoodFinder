@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
+import com.google.android.gms.maps.model.Marker;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -22,6 +23,7 @@ import java.util.List;
 public class EventArray
 {
     private HashMap<String, Event> eventsMap; // event map
+    private HashMap<Marker, String> eventsMapMarkers; // objectId and marker
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
@@ -34,6 +36,7 @@ public class EventArray
     public EventArray(Context context, String db)
     {
         eventsMap = new HashMap<>();
+        eventsMapMarkers = new HashMap<>();
         this.context = context;
         this.db = db;
         eq = ParseQuery.getQuery(db);
@@ -68,6 +71,7 @@ public class EventArray
             }
         });
 
+        
         update(MainActivity.EMPTY, 2); // re-fetch data
     }
 
@@ -84,6 +88,13 @@ public class EventArray
      * @return an ArrayList object of all the events
      */
     public ArrayList<Event> getEventArray(ArrayList<String> filter) { return new ArrayList<>(eventsMap.values()); }
+
+    public HashMap<String, Event> getObjectIdEventsMap() {return eventsMap;}
+
+
+    public HashMap<Marker, String> getEventMarkersMap() {
+        return eventsMapMarkers;
+    }
 
 
     /**
@@ -119,16 +130,17 @@ public class EventArray
 
                         for (ParseObject e : temp) {
                             LatLng eventLL = new LatLng(e.getParseGeoPoint(context.getString(R.string.LOC)).getLatitude(),
-                                                        e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
+                                    e.getParseGeoPoint(context.getString(R.string.LOC)).getLongitude());
 
                             if (currLL == null)
                                 currLL = eventLL;
 
                             if (e.getString(context.getString(R.string.DES)) == null ||
-                                e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
+                                    e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
 
                                 eventsMap.put(e.getObjectId(), //store ParseObject objectId
                                         new Event( //make new event to store
+                                                e.getObjectId(),
                                                 e.getString(context.getString(R.string.TIT)),
                                                 e.getDate(context.getString(R.string.SDA)),
                                                 e.getDate(context.getString(R.string.EDA)),
@@ -139,6 +151,7 @@ public class EventArray
                             else   // if event does have a description
                                 eventsMap.put(e.getObjectId(), // store ParseObject objectId
                                         new Event( //make new event to store
+                                                e.getObjectId(),
                                                 e.getString(context.getString(R.string.TIT)),
                                                 e.getDate(context.getString(R.string.SDA)),
                                                 e.getDate(context.getString(R.string.EDA)),

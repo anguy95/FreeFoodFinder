@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Event {
 
-    private int eventId;        // id # of an event
+    private String eventId;        // id # of an event
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
     private Date startDate;     // start date of the event
@@ -30,8 +30,9 @@ public class Event {
      * @param endDate
      * @param latlng
      */
-    public Event(String title, Date startDate, Date endDate, LatLng latlng, LatLng currLL)
+    public Event(String id, String title, Date startDate, Date endDate, LatLng latlng, LatLng currLL)
     {
+        this.eventId = id;
         this.eventTitle = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -51,8 +52,9 @@ public class Event {
      * @param description
      * @param latlng
      */
-    public Event(String title, Date startDate, Date endDate, String description, LatLng latlng, LatLng currLL)
+    public Event(String id, String title, Date startDate, Date endDate, String description, LatLng latlng, LatLng currLL)
     {
+        this.eventId = id;
         this.eventTitle = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -129,7 +131,7 @@ public class Event {
      */
     public String getDescription() { return eventDesc; }
 
-    /**
+    /**6192528859
      * Get start date of the event
      * @return a Date object of the event
      */
@@ -152,4 +154,17 @@ public class Event {
      * @return
      */
     public double getDist() { return dist; }
+
+    /**
+     * get the eventID of the event
+     * @return
+     */
+    public String getEventIDforMarker() { return eventId; }
+
+    /* ----------  SETTERS ---------- */
+
+    public void setEventID(String objectID){
+        this.eventId = objectID;
+    }
+
 }
