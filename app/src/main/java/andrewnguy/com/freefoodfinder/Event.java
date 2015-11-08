@@ -13,8 +13,8 @@ public class Event {
     private String eventId;        // id # of an event
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
-    private Date startDate;     // start date of the event
-    private Date endDate;       // end date of the event
+    private String dateOfEvent;     // start date of the event
+    private String timeOfEvent;
     private LatLng latLng;      // location of an event
     private double dist;        // distance from you to event
 
@@ -30,12 +30,12 @@ public class Event {
      * @param endDate
      * @param latlng
      */
-    public Event(String id, String title, Date startDate, Date endDate, LatLng latlng, LatLng currLL)
+    public Event(String id, String title, String date, String time, LatLng latlng, LatLng currLL)
     {
         this.eventId = id;
         this.eventTitle = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.dateOfEvent = date;
+        this.timeOfEvent = time;
         this.latLng = latlng;
 
         // calc distance from you and the event
@@ -52,12 +52,12 @@ public class Event {
      * @param description
      * @param latlng
      */
-    public Event(String id, String title, Date startDate, Date endDate, String description, LatLng latlng, LatLng currLL)
+    public Event(String id, String title, String date, String time, String description, LatLng latlng, LatLng currLL)
     {
         this.eventId = id;
         this.eventTitle = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.dateOfEvent = date;
+        this.timeOfEvent = time;
         this.latLng = latlng;
         this.eventDesc = description;
 
@@ -71,17 +71,16 @@ public class Event {
      * Constructor w/o event description
      * @param title
      * @param startDate
-     * @param endDate
      * @param lng
      * @param currLat
      * @param currLng
      */
-    public Event(String title, Date startDate, Date endDate,
+    public Event(String title, String date, String time,
                  double lat, double lng, double currLat, double currLng)
     {
         this.eventTitle = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.dateOfEvent = date;
+        this.timeOfEvent = time;
         this.latLng = new LatLng(lat, lng);
 
         // calc distance from you and the event
@@ -100,13 +99,13 @@ public class Event {
      * @param currLng
      * @param description
      */
-    public Event(String title, Date startDate, Date endDate,
+    public Event(String title, String date, String time,
                  double lat, double lng, double currLat, double currLng, String description)
     {
         this.eventTitle = title;
         this.eventDesc  = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.dateOfEvent = date;
+        this.timeOfEvent = time;
         this.latLng = new LatLng(lat, lng);
 
         // calc distance from you and the event
@@ -131,18 +130,19 @@ public class Event {
      */
     public String getDescription() { return eventDesc; }
 
-    /**6192528859
-     * Get start date of the event
-     * @return a Date object of the event
-     */
-    public Date getStartDate() { return startDate; }
+
 
     /**
      * Get end date of the event
      * @return a Date object of the event
      */
-    public Date getEndDate() { return endDate; }
+    public String getDate() { return dateOfEvent; }
 
+    /**
+     * Get end date of the event
+     * @return a Date object of the event
+     */
+    public String getTime() { return timeOfEvent; }
     /**
      * Get the location of the event
      * @return a LatLng object of the event

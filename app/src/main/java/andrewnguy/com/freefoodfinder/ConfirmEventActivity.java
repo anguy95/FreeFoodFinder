@@ -120,15 +120,15 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 currLng = extras.getDouble("currLng");
             }
 
-            Date startDate = setDate(2015, 0, 1, 0, 0);
-            Date endDate   = setDate(2015, 0, 2, 0, 0);
+            startStr = "aa";
+            endStr = "bb";
 
             Event newEvent;
             if (eventDescStr == null && eventDescStr.isEmpty()) {
-                newEvent = new Event(titleStr, startDate, endDate, lat, lng, currLat, currLng);
+                newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr), lat, lng, currLat, currLng);
             }
             else {
-                newEvent = new Event(titleStr, startDate, endDate, lat, lng, currLat, currLng, eventDescStr);
+                newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr), lat, lng, currLat, currLng, eventDescStr);
             }
 
             ea.add(newEvent);

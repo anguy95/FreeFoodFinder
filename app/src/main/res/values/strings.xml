@@ -17,8 +17,8 @@
     <string name="LNG">Longitude</string>
     <string name="DES">Description</string>
     <string name="TIT">Title</string>
-    <string name="SDA">DateStart</string>
-    <string name="EDA">DateEnd</string>
+    <string name="DAT">Date</string>
+    <string name="TIM">Time</string>
     <string name="LOC">Location</string>
     <string name="TAG">Tags</string>
 

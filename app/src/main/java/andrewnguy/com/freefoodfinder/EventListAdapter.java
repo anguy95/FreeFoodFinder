@@ -62,17 +62,12 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         Event event = data.get(position);
 
         // To check if display across two days
-        Date tempStartDate = event.getStartDate();
-        Date tempEndDate = event.getEndDate();
+
         String timeOfEvent;
 
-        // Formats for Date and time
-        DateFormat df = new SimpleDateFormat("dd");
-        SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
-
-        String dateToDisplay = "Thu January " + df.format(tempEndDate);
+        String dateToDisplay = event.getDate();
         //Sets up string
-        timeOfEvent = tf.format(tempStartDate) + " - " + tf.format(tempEndDate);
+        timeOfEvent = event.getTime();
 
         holder.dateDay.setText(dateToDisplay);
         holder.dateTime.setText(timeOfEvent);

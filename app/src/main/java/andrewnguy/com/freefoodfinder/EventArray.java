@@ -55,8 +55,7 @@ public class EventArray
         newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
         newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
-        newEvent.put(context.getString(R.string.SDA), e.getStartDate());          // put start date
-        newEvent.put(context.getString(R.string.EDA), e.getEndDate());            // put end date
+        newEvent.put(context.getString(R.string.DAT), e.getDate());          // put start date
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
 
         if (e.getDescription() != null && !e.getDescription().isEmpty())         // put description if one exists
@@ -142,8 +141,8 @@ public class EventArray
                                         new Event( //make new event to store
                                                 e.getObjectId(),
                                                 e.getString(context.getString(R.string.TIT)),
-                                                e.getDate(context.getString(R.string.SDA)),
-                                                e.getDate(context.getString(R.string.EDA)),
+                                                e.getString(context.getString(R.string.DAT)),
+                                                e.getString(context.getString(R.string.TIM)),
                                                 eventLL,
                                                 currLL
                                         )
@@ -153,8 +152,8 @@ public class EventArray
                                         new Event( //make new event to store
                                                 e.getObjectId(),
                                                 e.getString(context.getString(R.string.TIT)),
-                                                e.getDate(context.getString(R.string.SDA)),
-                                                e.getDate(context.getString(R.string.EDA)),
+                                                e.getString(context.getString(R.string.DAT)),
+                                                e.getString(context.getString(R.string.TIM)),
                                                 e.getString(context.getString(R.string.DES)),
                                                 eventLL,
                                                 currLL

@@ -136,10 +136,10 @@ public class MapTab extends Fragment implements View.OnClickListener
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_bubble, null);
 
                 //Sets up Date string
-                String dateOfEvent = "Thu January " + df.format(toDisplay.getStartDate());
+                String dateOfEvent = toDisplay.getDate();
 
                 // Sets up Time string
-                String timeOfEvent = tf.format(toDisplay.getStartDate()) + " - " + tf.format(toDisplay.getEndDate());
+                //String timeOfEvent = tf.format(toDisplay.getStartDate()) + " - " + tf.format(toDisplay.getEndDate());
 
                 // Sets up the view fields for bubble
                 TextView eventTitle = (TextView) v.findViewById(R.id.small_event_title);
@@ -149,7 +149,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 eventDate.setText(dateOfEvent);
 
                 TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
-                eventTime.setText(timeOfEvent);
+                eventTime.setText("hard");
 
                 return v;
             }
