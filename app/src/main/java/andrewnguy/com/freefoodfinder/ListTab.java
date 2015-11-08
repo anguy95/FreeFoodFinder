@@ -38,7 +38,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         listView = (ListView) v.findViewById(R.id.listView);
 
         ea = MainActivity.ea;
-        events = ea.getEventArray(); // get events array
+        events = ea.getEventArray(MainActivity.EMPTY); // get events array
 
         fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
         fab.setOnClickListener(this);
@@ -135,7 +135,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
      * update the list view on add or launch or request
      */
     public void update() {
-        events = ea.getEventArray();
+        events = ea.getEventArray(MainActivity.EMPTY);
         eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
         listView.setAdapter(eventAdapter);
         listView.setOnItemClickListener(this);

@@ -20,6 +20,7 @@
     <string name="SDA">DateStart</string>
     <string name="EDA">DateEnd</string>
     <string name="LOC">Location</string>
+    <string name="TAG">Tags</string>
 
 
 

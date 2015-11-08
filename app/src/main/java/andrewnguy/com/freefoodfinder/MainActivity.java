@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+
+    public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
     static EventArray ea; // the event array; for parse
     ViewPager pager;
