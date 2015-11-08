@@ -22,8 +22,8 @@ import java.util.List;
  */
 public class EventArray
 {
-    private HashMap<String, Event> eventsMap; // event map
-    private HashMap<Marker, String> eventsMapMarkers; // objectId and marker
+    private HashMap<String, Event> eventsMap; // objectId and event map
+    private HashMap<Marker, String> eventsMapMarkers; // marker and objectId map
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
@@ -31,6 +31,7 @@ public class EventArray
 
     /**
      * Construct new event array class
+     * @param context of the app
      * @param db the name of the database
      */
     public EventArray(Context context, String db)
@@ -45,7 +46,7 @@ public class EventArray
 
     /**
      * Add an event to the parse
-     * @param e
+     * @param e event to add
      */
     public void add(Event e)
     {
@@ -88,30 +89,37 @@ public class EventArray
      */
     public ArrayList<Event> getEventArray(ArrayList<String> filter) { return new ArrayList<>(eventsMap.values()); }
 
-    public HashMap<String, Event> getObjectIdEventsMap() {return eventsMap;}
+    /**
+     * Get the ObjectId/Event Map<K, V>
+     * @return a hashmap of objectid/event pairs
+     */
+    public HashMap<String, Event> getObjectIdEventsMap() { return eventsMap; }
 
-
-    public HashMap<Marker, String> getEventMarkersMap() {
-        return eventsMapMarkers;
-    }
-
+    /**
+     * Get the Marker/ObjectId Map<K, V>
+     * @return a hashmap of marker/objectId pairs
+     */
+    public HashMap<Marker, String> getEventMarkersMap() { return eventsMapMarkers; }
 
     /**
      * setter for your current location
      * @param loc
      */
-    public void setMyLoc(Location loc) {
-        this.myLoc = loc;
-    }
+    public void setMyLoc(Location loc) { this.myLoc = loc; }
 
     /**
      * Helper method to update the local db
      * @param filter find correct events
-     * @param position map or list
+     * @param position 0 = map, 1 = list, 2 = both
      */
     public void update(ArrayList<String> filter, final int position)
     {
-        //List<ParseObject> temp = new ArrayList<>();
+        /* filter check */
+
+        if (!filter.isEmpty()) // if the filter is NOT empty
+        {                      // prep it
+            //TODO filter prep
+        }
 
         eq.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -165,15 +173,18 @@ public class EventArray
                     }
                 }
 
-                if (position == 0) { // maps tab
-                    MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
-                }
-                else if (position == 1) { // list tab
-                    MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
-                }
-                else {
-                    MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
-                    MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                /* update the map or the list or both after successful find */
+                switch (position) {
+                    case 0:
+                        MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
+                        break;
+                    case 1:
+                        MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                        break;
+                    default:
+                        MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
+                        MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                        break;
                 }
             }
         });

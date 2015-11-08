@@ -72,10 +72,6 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         holder.dateDay.setText(dateToDisplay);
         holder.dateTime.setText(timeOfEvent);
 
-
-
-
-
         //Sets the views text
         holder.eventTitle.setText(event.getTitle());
         holder.eventDescription.setText(event.getDescription());
@@ -97,7 +93,6 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView dist;
         TextView dateDay;
         TextView dateTime;
-
     }
 
 }

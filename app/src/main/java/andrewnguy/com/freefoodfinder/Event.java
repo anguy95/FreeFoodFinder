@@ -10,11 +10,11 @@ import java.util.Date;
  */
 public class Event {
 
-    private String eventId;        // id # of an event
+    private String eventId;     // id # of an event
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
-    private String dateOfEvent;     // start date of the event
-    private String timeOfEvent;
+    private String dateOfEvent; // start date of the event
+    private String timeOfEvent; // time of an event
     private LatLng latLng;      // location of an event
     private double dist;        // distance from you to event
 
@@ -25,10 +25,12 @@ public class Event {
 
     /**
      * Reconstructor w/o event description
+     * @param id
      * @param title
-     * @param startDate
-     * @param endDate
+     * @param date
+     * @param time
      * @param latlng
+     * @param currLL
      */
     public Event(String id, String title, String date, String time, LatLng latlng, LatLng currLL)
     {
@@ -46,31 +48,26 @@ public class Event {
 
     /**
      * Reconstructor w/ event description
+     * @param id
      * @param title
-     * @param startDate
-     * @param endDate
+     * @param date
+     * @param time
      * @param description
      * @param latlng
+     * @param currLL
      */
     public Event(String id, String title, String date, String time, String description, LatLng latlng, LatLng currLL)
     {
-        this.eventId = id;
-        this.eventTitle = title;
-        this.dateOfEvent = date;
-        this.timeOfEvent = time;
-        this.latLng = latlng;
+        this(id, title, date, time, latlng, currLL); // call w/o description reconstructor
         this.eventDesc = description;
-
-        // calc distance from you and the event
-        ParseGeoPoint toLocation = new ParseGeoPoint(latlng.latitude,latlng.longitude);
-        ParseGeoPoint fromLocation = new ParseGeoPoint(currLL.latitude, currLL.longitude);
-        this.dist = fromLocation.distanceInMilesTo(toLocation);
     }
 
     /**
      * Constructor w/o event description
      * @param title
-     * @param startDate
+     * @param date
+     * @param time
+     * @param lat
      * @param lng
      * @param currLat
      * @param currLng
@@ -86,13 +83,14 @@ public class Event {
         // calc distance from you and the event
         ParseGeoPoint toLocation = new ParseGeoPoint(lat,lng);
         ParseGeoPoint fromLocation = new ParseGeoPoint(currLat, currLng);
-        this.dist = fromLocation.distanceInMilesTo(toLocation);    }
+        this.dist = fromLocation.distanceInMilesTo(toLocation);
+    }
 
     /**
      * Constructor w/ event descriptions
      * @param title
-     * @param startDate
-     * @param endDate
+     * @param date
+     * @param time
      * @param lat
      * @param lng
      * @param currLat
@@ -102,17 +100,8 @@ public class Event {
     public Event(String title, String date, String time,
                  double lat, double lng, double currLat, double currLng, String description)
     {
-        this.eventTitle = title;
-        this.eventDesc  = description;
-        this.dateOfEvent = date;
-        this.timeOfEvent = time;
-        this.latLng = new LatLng(lat, lng);
-
-        // calc distance from you and the event
-        ParseGeoPoint toLocation = new ParseGeoPoint(lat,lng);
-        ParseGeoPoint fromLocation = new ParseGeoPoint(currLat, currLng);
-        this.dist = fromLocation.distanceInMilesTo(toLocation);
-
+        this(title, date, time, lat, lng, currLat, currLng); // use w/o event description constructor
+        this.eventDesc = description;
     }
 
 
@@ -129,8 +118,6 @@ public class Event {
      * @return a String of the event description
      */
     public String getDescription() { return eventDesc; }
-
-
 
     /**
      * Get end date of the event

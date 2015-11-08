@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
-    private final int DELAY = 15000; // 15 seconds (15,000 milliseconds)
+    private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
 
     static EventArray ea; // the event array; for parse
     private ViewPager pager;
