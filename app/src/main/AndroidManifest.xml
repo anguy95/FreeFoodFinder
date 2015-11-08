@@ -47,7 +47,8 @@
             android:theme="@style/ThemeWithCorners" >
         </activity>
 
-        <activity android:name=".EventViewActivity" >
+
+        <activity android:name=".EventViewActivity">
         </activity>
     </application>
 
