@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -15,11 +16,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
     static EventArray ea; // the event array; for parse
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Map","List"};
-    int Numboftabs = 2;
+    private ViewPager pager;
+    static ViewPagerAdapter adapter;
+    private SlidingTabLayout tabs;
+    private CharSequence Titles[]={"Map","List"};
+    private int Numboftabs = 2;
 
 
     @Override
@@ -80,22 +81,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { /* nothing */ }
 
+    /**
+     * Updating map or scroll views
+     * @param position 0 = map, 1 = list
+     */
     @Override
     public void onPageSelected(int position)
     {
-        Log.d("state", String.valueOf(position));
-        if (position == 0) {
-            adapter.getMapTab().update();
-        }
-        else {
-            adapter.getListTab().update();
-        }
+        ea.update(EMPTY, position); // update
     }
 
-    /**
-     * Updating map or scroll views
-     * @param state 0 = map, 1 = list
-     */
     @Override
     public void onPageScrollStateChanged(int state) { /* do nothing */ }
 }
