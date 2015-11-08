@@ -1,6 +1,7 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     private Button confirm, cancel;
-    private EditText title, eventDesc, locDesc, date, start, end;
+    private EditText title, eventDesc, locDesc, start, end, date;
     private String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
     private EventArray ea; // reference the main EventArray
 
@@ -34,9 +35,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         title = (EditText) findViewById(R.id.editEventTitle);
         eventDesc = (EditText) findViewById(R.id.editEventDescription);
         locDesc = (EditText) findViewById(R.id.editLocationDescription);
-        date = (EditText) findViewById(R.id.editEventDate);
         start = (EditText) findViewById(R.id.editEventStartTime);
         end = (EditText) findViewById(R.id.editEventEndTime);
+
+        date = (EditText) findViewById(R.id.editEventDate);
+        date.setOnClickListener(this);
 
         confirm.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -49,6 +52,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         if (v.getId() == R.id.buttonCancelPost) { // cancel the post
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
+        }
+        else if(v.getId() == R.id.editEventDate){
+            DialogFragment newFragment = new DatePickerFragment();
+            newFragment.show(getFragmentManager(), "datePicker");
+
         }
         else { // finish the add
             StringBuffer msg = new StringBuffer("Please enter a value for:");
@@ -68,12 +76,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 if (emptyFields)
                     msg.append(",");
                 msg.append(" Location Description");
-                emptyFields = true;
-            }
-            if (isEmpty(date)) {
-                if (emptyFields)
-                    msg.append(",");
-                msg.append(" Date of Event");
                 emptyFields = true;
             }
             if (isEmpty(start)) {
@@ -135,6 +137,10 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
         }
+
+
+
+
     }
 
     private boolean isEmpty(EditText text) {

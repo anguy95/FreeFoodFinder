@@ -16,7 +16,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="15dp"
-        android:textColor="#8D8D8D" />
+        android:textColor="#8D8D8D"
+        android:focusableInTouchMode="false"/>
 
     <EditText
         android:layout_width="100dp"
