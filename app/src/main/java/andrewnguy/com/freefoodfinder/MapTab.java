@@ -103,7 +103,6 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setMyLocationEnabled(true);
         map.setOnMyLocationChangeListener(myLocationChangeListener);
-//        ea.setMyLoc(map.getMyLocation());
 
         /* Adding existing markers */
         update(MainActivity.EMPTY);
@@ -128,9 +127,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 // Gets the event from objID,events hash
                 Event toDisplay = eventIdMap.get(markerObjectID);
 
-                // Date format for bubble
-                DateFormat df = new SimpleDateFormat("dd");
-                SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+
 
 
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_bubble, null);
@@ -138,8 +135,6 @@ public class MapTab extends Fragment implements View.OnClickListener
                 //Sets up Date string
                 String dateOfEvent = toDisplay.getDate();
 
-                // Sets up Time string
-                //String timeOfEvent = tf.format(toDisplay.getStartDate()) + " - " + tf.format(toDisplay.getEndDate());
 
                 // Sets up the view fields for bubble
                 TextView eventTitle = (TextView) v.findViewById(R.id.small_event_title);
@@ -148,6 +143,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 TextView eventDate = (TextView) v.findViewById(R.id.small_event_date);
                 eventDate.setText(dateOfEvent);
 
+                //TODO SET TIME UPDATE HARD CODED
                 TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
                 eventTime.setText("hard");
 
@@ -160,10 +156,21 @@ public class MapTab extends Fragment implements View.OnClickListener
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), EventViewActivity.class);
+
+                // ObjectID to get event
+                String markerObjectID = eventidMarkerMap.get(marker);
+
+                // Gets the event from objID,events hash
+                Event toDisplay = eventIdMap.get(markerObjectID);
+
+                intent.putExtra("eventTitle", toDisplay.getTitle());
+                intent.putExtra("eventDesc", toDisplay.getDescription());
+
                 startActivity(intent);
             }
-        });
 
+
+        });
 
         return v;
 

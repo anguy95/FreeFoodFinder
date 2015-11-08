@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Class that allows us the see an event in detail
@@ -32,6 +33,12 @@ public class EventViewActivity extends AppCompatActivity {
         });
 
         intent = getIntent(); // get intent that this came from: needs to know to go back to the Maps or List
+        Bundle extras = getIntent().getExtras();
+
+        TextView viewTitle = (TextView) findViewById(R.id.event_title);
+        viewTitle.setText(extras.getString("eventTitle"));
+        TextView viewDesc = (TextView) findViewById(R.id.event_description);
+        viewDesc.setText(extras.getString("eventDesc"));
 
     }
 

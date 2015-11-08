@@ -10,6 +10,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:weightSum="1">
 
 
@@ -102,7 +103,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, cum hinc adhuc impetus cu. Te quo putent volumus, eos primis omnium numquam et. Eum justo aeterno neglegentur cu. Ex hinc ponderum ius, duo ad minimum molestiae, cu justo praesent duo. Omnis graece aliquando ut ius, id mel causae principes, ancillae tincidunt voluptatibus his ei. Mel dicit expetenda inciderint at.  Ea munere iisque has. Ea pri altera saperet, at dicant oporteat sed. Quem justo ex has. Soluta putant vim an. Timeam molestie postulant ex vim, ut eam nostrum appellantur, usu id atqui novum detraxit."
         android:id="@+id/event_description"
         android:layout_below="@+id/event_description_title"
         android:layout_marginTop="15dp"

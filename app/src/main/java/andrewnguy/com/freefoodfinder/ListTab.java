@@ -97,6 +97,13 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
         // send intent to the event view class
         Intent intent = new Intent(getActivity().getApplicationContext(), EventViewActivity.class);
+
+        // Gets the event from objID,events hash
+        Event toDisplay = events.get(position);
+
+        intent.putExtra("eventTitle", toDisplay.getTitle());
+        intent.putExtra("eventDesc", toDisplay.getDescription());
+
         startActivity(intent); // I don't think we need a result
 
         /*  NEEDS:
