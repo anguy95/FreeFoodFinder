@@ -2,12 +2,11 @@
 CSE110 project to find free food around you. 
 
 
-#### TODO
-* fab should be settings menu
-* some major lag when switching tabs
+#### BUG/TODO
 
-#### BUG
-
-If you time the CEA and the update 15sec, crashes hard
+* If you time the CEA and the update 15sec, crashes hard
 Since update happens every 15, map bubbles get thrown out
- -- fixed i think (randy, blame me if it's not)
+-> fixed i think (randy, blame me if it's not)
+
+* ListView resets when fetching data (go back to the top)
+** Most likely listview doesn't auto update (update on tab switch + user requests) 
