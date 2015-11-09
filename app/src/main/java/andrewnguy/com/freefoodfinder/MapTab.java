@@ -61,20 +61,20 @@ public class MapTab extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.maps_tab,container,false);
-        addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
+        addPin = (RelativeLayout) v.findViewById(R.id.maps_tab_add_pin);
 
         ea = MainActivity.ea;
 
 
 
         /* BUTTONS */
-        fab = (FloatingActionButton) v.findViewById(R.id.maps_fab);
+        fab = (FloatingActionButton) v.findViewById(R.id.maps_tab_fab);
         fab.setOnClickListener(this);
 
-        cancel = (Button) v.findViewById(R.id.buttonCancel);
+        cancel = (Button) v.findViewById(R.id.add_event_pin_cancel_button);
         cancel.setOnClickListener(this);
 
-        confirm = (Button) v.findViewById(R.id.buttonConfirm);
+        confirm = (Button) v.findViewById(R.id.add_event_pin_confirm_button);
         confirm.setOnClickListener(this);
 
         /** start up the map -- center map on UCSD **/
@@ -118,15 +118,15 @@ public class MapTab extends Fragment implements View.OnClickListener
                 String dateOfEvent = toDisplay.getDate();
 
                 // Sets up the view fields for bubble
-                TextView eventTitle = (TextView) v.findViewById(R.id.small_event_title);
+                TextView eventTitle = (TextView) v.findViewById(R.id.marker_info_window_title);
                 eventTitle.setText(toDisplay.getTitle());
 
-                TextView eventDate = (TextView) v.findViewById(R.id.small_event_date);
+                TextView eventDate = (TextView) v.findViewById(R.id.marker_info_window_date);
                 eventDate.setText(dateOfEvent);
 
 
                 //TODO SET TIME UPDATE HARD CODED
-                TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
+                TextView eventTime = (TextView) v.findViewById(R.id.marker_info_window_time);
                 eventTime.setText((String) (toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
 
                 return v;
@@ -194,11 +194,11 @@ public class MapTab extends Fragment implements View.OnClickListener
     {
         int id = v.getId(); // get the view id
 
-        if (id == R.id.maps_fab) { // if fab was hit
+        if (id == R.id.maps_tab_fab) { // if fab was hit
             addPin.setVisibility(View.VISIBLE);
             fab.setVisibility(View.GONE);
         }
-        else if (id == R.id.buttonCancel) { // if cancel button
+        else if (id == R.id.add_event_pin_cancel_button) { // if cancel button
             addPin.setVisibility(View.GONE);
             fab.setVisibility(View.VISIBLE);
         }

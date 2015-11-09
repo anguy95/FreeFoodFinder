@@ -20,7 +20,7 @@ import android.widget.TextView;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.event_view_main);
 
-            toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.tool_bar);
+            toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.event_view_main_tool_bar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,11 +40,11 @@ import android.widget.TextView;
             viewDesc.setText(extras.getString("eventDesc"));
 
 
-            TextView viewStartTime = (TextView) findViewById(R.id.edit_view_startTime);
+            TextView viewStartTime = (TextView) findViewById(R.id.event_date_time_startTime);
             viewStartTime.setText(extras.getString("eventStartTime"));
-            TextView viewEndTime = (TextView) findViewById(R.id.edit_view_endTime);
+            TextView viewEndTime = (TextView) findViewById(R.id.event_date_time_endTime);
             viewEndTime.setText(extras.getString("eventEndTime"));
-            TextView viewDate = (TextView) findViewById(R.id.edit_view_date);
+            TextView viewDate = (TextView) findViewById(R.id.event_date_time_date);
             viewDate.setText(extras.getString("eventDate"));
 
 

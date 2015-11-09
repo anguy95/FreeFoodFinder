@@ -7,30 +7,31 @@
 
 
     <ImageView
+        android:id="@+id/add_event_pin_drawing"
         android:layout_width="194dp"
         android:layout_height="149dp"
-        android:id="@+id/imageView"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="48dp"
         android:src="@drawable/add_event_pin"
         android:layout_centerInParent="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="48dp" />
+        android:contentDescription="@string/add_event_pin_description"/>
 
     <Button
+        android:id="@+id/add_event_pin_confirm_button"
         android:layout_width="75dp"
         android:layout_height="30dp"
-        android:text="Confirm"
+        android:text="@string/confirm_button"
         android:background="#37FF43"
-        android:id="@+id/buttonConfirm"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignBottom="@+id/add_event_pin_drawing"
         android:layout_alignParentEnd="true" />
 
     <Button
+        android:id="@+id/add_event_pin_cancel_button"
         android:layout_width="75dp"
         android:layout_height="30dp"
-        android:text="Cancel"
+        android:layout_marginEnd="40dp"
+        android:text="@string/cancel_button"
         android:background="#FF2E30"
-        android:id="@+id/buttonCancel"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_marginEnd="40dp" />
+        android:layout_alignBottom="@+id/add_event_pin_drawing"/>
 
 </RelativeLayout>

@@ -4,32 +4,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/list_fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@android:drawable/ic_input_add"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/list_tab_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="31dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginEnd="31dp"
         android:tint="@color/colorPrimaryDark"
-        app:backgroundTint="@color/colorPrimary"/>
-
-
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#432345"/>
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="bottom|end"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 
 
     <ListView
+        android:id="@+id/list_tab_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView"
-        android:layout_below="@+id/search"
         android:layout_alignParentStart="true" />
 
 

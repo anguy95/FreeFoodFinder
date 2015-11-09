@@ -5,70 +5,69 @@
 
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_row_view_title"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:id="@+id/event_title_row"
-        android:textColor="#000"
-        android:padding="5sp"
-        android:singleLine="true"
-        android:gravity="left"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:padding="5sp"
         android:textStyle="bold"
-        />
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:singleLine="true"
+        android:gravity="start"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_row_view_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:id="@+id/event_distance_row"
-        android:textColor="#000"
+        android:layout_marginEnd="20dp"
         android:padding="5sp"
+        android:textSize="12sp"
+        android:textColor="#000"
         android:singleLine="true"
         android:gravity="center"
-        android:layout_alignBottom="@+id/event_title_row"
+        android:layout_alignBottom="@+id/list_row_view_title"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
-        android:layout_alignTop="@+id/event_title_row" />
+        android:layout_alignTop="@+id/list_row_view_title" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_row_view_description"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="15dp"
-        android:layout_gravity="left"
-        android:id="@+id/event_description_row"
+        android:layout_marginBottom="10dp"
+        android:textSize="15sp"
         android:textColor="#000"
         android:padding="5sp"
         android:singleLine="true"
-        android:gravity="left"
-        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:layout_gravity="start"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/event_title_row"
-        android:layout_alignEnd="@+id/event_distance_row" />
+        android:layout_alignStart="@+id/list_row_view_title"
+        android:layout_alignEnd="@+id/list_row_view_distance" />
 
     <TextView
+        android:id="@+id/list_row_view_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thu, Oct 69 2015"
-        android:id="@+id/event_date_row"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
         android:textColor="#000000"
-        android:layout_below="@+id/event_title_row"
-        android:layout_alignStart="@+id/event_title_row"
-        android:paddingLeft="5dp" />
+        android:layout_below="@+id/list_row_view_title"
+        android:layout_alignStart="@+id/list_row_view_title"
+        android:layout_centerVertical="true" />
 
     <TextView
+        android:id="@+id/list_row_view_time"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2:30pm-5pm"
-        android:id="@+id/event_time_row"
+        android:textColor="#000000"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/event_date_row"
-        android:layout_marginLeft="20dp"
-        android:textColor="#000000" />
+        android:layout_toEndOf="@+id/list_row_view_date" />
 
 
 </RelativeLayout>

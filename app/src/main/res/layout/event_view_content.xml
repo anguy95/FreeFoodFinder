@@ -1,204 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     tools:context=".EventViewActivity">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:weightSum="1"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
-
-
-    <TextView
-        android:id="@+id/event_view_title"
-        android:layout_width="257dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Title of Event"
-        android:textAlignment="center"
-        android:textSize="25sp"
-        android:textColor="#8D8D8D"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-
-
-    <View
-        android:id="@+id/view"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/event_view_title"
-        android:layout_alignParentStart="true" />
-
-    <HorizontalScrollView
-        android:id="@+id/event_view_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:background="#FFFFFF"
-        android:layout_below="@+id/view"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:fillViewport="false" >
-    </HorizontalScrollView>
-
-
-    <!--The Date and Time -->
-
-    <TextView
-        android:id="@+id/edit_view_date"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/edit_event_date"
-        android:textColor="#8D8D8D"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:focusableInTouchMode="false"
-        android:textAlignment="center"
-        android:textCursorDrawable="@null"
-        android:background="@android:color/transparent"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/view2"
-        android:layout_marginTop="15dp" />
-
-    <TextView
-        android:id="@+id/edit_view_startTime"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:inputType="time"
-        android:ems="10"
-        android:hint="@string/edit_start_time"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        android:textColor="#8D8D8D"
-        android:textCursorDrawable="@null"
-        android:layout_below="@+id/edit_view_date"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:focusableInTouchMode="false"/>
-
-    <TextView
-        android:id="@+id/time_to_text"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to"
-        android:textStyle="bold"
-        android:textSize="12sp"
-        android:textColor="#545454"
-        android:layout_alignBaseline="@+id/edit_view_startTime"
-        android:layout_alignBottom="@+id/edit_view_startTime"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/edit_view_endTime"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="39dp"
-        android:hint="@string/edit_end_time"
-        android:textCursorDrawable="@null"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        android:textColor="#8D8D8D"
-        android:layout_below="@+id/edit_view_date"
-        android:layout_alignParentEnd="true"
-        android:focusableInTouchMode="false"/>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/event_view_tag"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:id="@+id/event_view_locTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Location Description"
-        android:textAlignment="center"
-        android:textColor="#8D8D8D"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/view3"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/event_view_locDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="In York Hall level 2 in room 2000"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:background="@drawable/event_view_text_bg"
-        android:layout_below="@+id/event_view_locTitle"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/darker_gray"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_view_startTime" />
-
-    <TextView
-        android:id="@+id/event_view_descTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Event Description"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#8D8D8D"
-        android:layout_below="@+id/view4"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/event_view_eventDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textColor="#000000"
-        android:background="@drawable/event_view_text_bg"
-        android:textAlignment="center"
-        android:layout_below="@+id/event_view_descTitle"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/event_view_locDesc"
-        android:layout_alignParentStart="true"/>
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/event_view_eventDesc"
-        android:layout_alignParentStart="true"/>
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:weightSum="1">
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/event_view_title"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_event_title"
+            android:textAlignment="center"
+            android:textColor="#8D8D8D"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_title"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray" />
+
+        <HorizontalScrollView
+            android:id="@+id/event_view_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/view"
+            android:background="#FFFFFF"
+            android:fillViewport="false"></HorizontalScrollView>
+
+
+        <!--The Date and Time -->
+
+        <TextView
+            android:id="@+id/event_date_time_date"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/view2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:focusableInTouchMode="false"
+            android:hint="@string/edit_event_date"
+            android:textAlignment="center"
+            android:textColor="#8D8D8D"
+            android:textCursorDrawable="@null"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/event_date_time_startTime"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/event_date_time_date"
+            android:layout_marginEnd="30dp"
+            android:layout_toStartOf="@+id/time_to_text"
+            android:ems="10"
+            android:focusableInTouchMode="false"
+            android:hint="@string/edit_start_time"
+            android:textAlignment="center"
+            android:textColor="#8D8D8D"
+            android:textCursorDrawable="@null"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/time_to_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/event_date_time_startTime"
+            android:layout_alignBottom="@+id/event_date_time_startTime"
+            android:layout_centerHorizontal="true"
+            android:text="to"
+            android:textColor="#545454"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/event_date_time_endTime"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/event_date_time_date"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/time_to_text"
+            android:focusableInTouchMode="false"
+            android:hint="@string/edit_end_time"
+            android:textAlignment="center"
+            android:textColor="#8D8D8D"
+            android:textCursorDrawable="@null"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_tag"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/event_view_locTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/location_description_title"
+            android:textAlignment="center"
+            android:textColor="#8D8D8D"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/view3"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/event_view_locDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/location_temp_holder"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:background="@drawable/event_view_text_bg"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_locTitle" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_date_time_startTime"/>
+
+        <TextView
+            android:id="@+id/event_view_descTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/event_description_title"
+            android:textColor="#8D8D8D"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/view4"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/event_view_eventDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:background="@drawable/event_view_text_bg"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_descTitle" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_locDesc"
+            android:background="@android:color/darker_gray" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_eventDesc"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
 </ScrollView>

@@ -36,12 +36,12 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         v = inflater.inflate(R.layout.list_tab, container, false);
-        listView = (ListView) v.findViewById(R.id.listView);
+        listView = (ListView) v.findViewById(R.id.list_tab_listview);
 
         ea = MainActivity.ea;
         events = ea.getEventArray(MainActivity.EMPTY); // get events array
 
-        fab = (FloatingActionButton) v.findViewById(R.id.list_fab);
+        fab = (FloatingActionButton) v.findViewById(R.id.list_tab_fab);
         fab.setOnClickListener(this);
 
         update(MainActivity.EMPTY);
@@ -76,7 +76,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     {
         int id = v.getId(); // get view id
 
-        if (id == R.id.list_fab) { // if fab was pressed
+        if (id == R.id.list_tab_fab) { // if fab was pressed
             Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
             startActivityForResult(intent, LIST_CREATE_EVENT); //start up event creation
         }

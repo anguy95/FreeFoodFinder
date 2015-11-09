@@ -30,26 +30,26 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         ea = MainActivity.ea;
 
 
-        confirm = (Button) findViewById(R.id.buttonConfirmPost); // confirm post button
-        cancel = (Button) findViewById(R.id.buttonCancelPost);   // cancel post button
+        confirm = (Button) findViewById(R.id.confirm_event_activity_confirm_button); // confirm post button
+        cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);   // cancel post button
 
-        title = (EditText) findViewById(R.id.editEventTitle);
-
-
-
-        eventDesc = (EditText) findViewById(R.id.editEventDescription);
+        title = (EditText) findViewById(R.id.confirm_event_activity_title);
 
 
 
-        locDesc = (EditText) findViewById(R.id.editLocationDescription);
+        eventDesc = (EditText) findViewById(R.id.confirm_event_activity_event_description);
 
-        start = (EditText) findViewById(R.id.edit_view_startTime); // start time
+
+
+        locDesc = (EditText) findViewById(R.id.confirm_event_activity_location_description);
+
+        start = (EditText) findViewById(R.id.event_date_time_startTime); // start time
         start.setOnClickListener(this);
 
-        end = (EditText) findViewById(R.id.edit_view_endTime); // end time
+        end = (EditText) findViewById(R.id.event_date_time_endTime); // end time
         end.setOnClickListener(this);
 
-        date = (EditText) findViewById(R.id.edit_view_date);
+        date = (EditText) findViewById(R.id.event_date_time_date);
         date.setOnClickListener(this);
 
         confirm.setOnClickListener(this);
@@ -60,16 +60,16 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     public void onClick(View v)
     {
         Intent returnIntent = new Intent(); // the return intent
-        if (v.getId() == R.id.buttonCancelPost) { // cancel the post
+        if (v.getId() == R.id.confirm_event_activity_cancel_button) { // cancel the post
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
         }
-        else if(v.getId() == R.id.edit_view_date){
+        else if(v.getId() == R.id.event_date_time_date){
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
 
         }
-        else if(v.getId() == R.id.edit_view_startTime){
+        else if(v.getId() == R.id.event_date_time_startTime){
 
             Bundle b = new Bundle();
             b.putString("startTime", "start");
@@ -77,7 +77,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
-        else if(v.getId() == R.id.edit_view_endTime){
+        else if(v.getId() == R.id.event_date_time_endTime){
 
             Bundle b = new Bundle();
             b.putString("endTime", "end");

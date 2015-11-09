@@ -104,7 +104,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
                 break;
         }
 
-        ((TextView) getActivity().findViewById(R.id.edit_view_date)).setText(dayOfWeek+ ", " + monthOfYear + " " + day);
+        ((TextView) getActivity().findViewById(R.id.event_date_time_date)).setText(dayOfWeek+ ", " + monthOfYear + " " + day);
     }
 
 

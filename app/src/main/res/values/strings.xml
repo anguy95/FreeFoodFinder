@@ -3,12 +3,27 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="add_event_description">Enter a description of the event.</string>
-    <string name="add_location_description">Enter a description of the location.</string>
+    <string name="add_location_description">Enter location of event.</string>
     <string name="add_event_title">Title of Event</string>
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>
     <string name="edit_event_date">Select Date of Event</string>
     <string name="title_activity_event_view">EventViewActivity</string>
+    <string name="location_description_title">Location Description</string>
+    <string name="event_description_title">Event Description</string>
+
+
+    <string name="location_temp_holder">In York Hall level 2 in room 2000</string>
+
+
+    <!-- ADD EVENT PIN STUFF-->
+    <string name="add_event_pin_description">An image of how the marker dropper looks like</string>
+
+    <!-- BUTTON STUFF-->
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
+
+
 
 
     <!-- DATABASE STUFF -->

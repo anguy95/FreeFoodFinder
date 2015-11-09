@@ -7,10 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by anguy95 on 10/31/15.
@@ -46,11 +43,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
             //Assigns the Views to its type of view
             holder = new ViewHolder();
-            holder.eventTitle = (TextView) row.findViewById(R.id.event_title_row);
-            holder.dist = (TextView) row.findViewById(R.id.event_distance_row);
-            holder.eventDescription = (TextView) row.findViewById(R.id.event_description_row);
-            holder.dateDay = (TextView) row.findViewById(R.id.event_date_row);
-            holder.dateTime = (TextView) row.findViewById(R.id.event_time_row);
+            holder.eventTitle = (TextView) row.findViewById(R.id.list_row_view_title);
+            holder.dist = (TextView) row.findViewById(R.id.list_row_view_distance);
+            holder.eventDescription = (TextView) row.findViewById(R.id.list_row_view_description);
+            holder.dateDay = (TextView) row.findViewById(R.id.list_row_view_date);
+            holder.dateTime = (TextView) row.findViewById(R.id.list_row_view_time);
 
             row.setTag(holder);
         }
