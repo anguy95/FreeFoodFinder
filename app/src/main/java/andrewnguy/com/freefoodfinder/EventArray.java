@@ -63,13 +63,18 @@ public class EventArray
             newEvent.put(context.getString(R.string.DES), e.getDescription());
 
         // save the event to parse
-        newEvent.saveInBackground(new SaveCallback() {
+        try {
+            newEvent.save();
+        } catch (ParseException e1) {
+            e1.printStackTrace();
+        }
+        /*newEvent.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e != null)
                     Log.d("parse", e.getMessage());
             }
-        });
+        });*/
 
         
         update(MainActivity.EMPTY, 2); // re-fetch data
@@ -121,6 +126,8 @@ public class EventArray
             //TODO filter prep
         }
 
+        eq.cancel(); // cancel an older request:: MAKE SURE THIS IS GOOD WHEN WE HAVE LOTS OF EVENTS
+                    // needs to be heavily stress tested -> lots of runtime exceptions
         eq.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> temp, ParseException exception) {
