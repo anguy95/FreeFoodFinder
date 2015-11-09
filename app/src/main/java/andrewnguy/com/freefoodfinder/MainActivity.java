@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 if (!stop) { // check if we are stopped
-                    ea.update(EMPTY, 2);
+                    ea.update(EMPTY, 0);
                 }
                 h.postDelayed(this, DELAY);
             }
@@ -114,4 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { /* do nothing */ }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position == 1) { // list view
+            ea.update(EMPTY, position);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) { /* do nothing */ }
 }

@@ -145,7 +145,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     /**
      * update the list view on add or launch or request
-     * @param filter out some reults
+     * @param filter out some results
      */
     public void update(ArrayList<String> filter) {
         events = ea.getEventArray(filter);
