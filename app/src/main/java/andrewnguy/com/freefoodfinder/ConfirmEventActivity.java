@@ -25,7 +25,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirm_event);
+        setContentView(R.layout.confirm_event_activity);
 
         ea = MainActivity.ea;
 
@@ -43,13 +43,13 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
         locDesc = (EditText) findViewById(R.id.editLocationDescription);
 
-        start = (EditText) findViewById(R.id.editEventStartTime); // start time
+        start = (EditText) findViewById(R.id.edit_view_startTime); // start time
         start.setOnClickListener(this);
 
-        end = (EditText) findViewById(R.id.editEventEndTime); // end time
+        end = (EditText) findViewById(R.id.edit_view_endTime); // end time
         end.setOnClickListener(this);
 
-        date = (EditText) findViewById(R.id.editEventDate);
+        date = (EditText) findViewById(R.id.edit_view_date);
         date.setOnClickListener(this);
 
         confirm.setOnClickListener(this);
@@ -64,12 +64,12 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
         }
-        else if(v.getId() == R.id.editEventDate){
+        else if(v.getId() == R.id.edit_view_date){
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
 
         }
-        else if(v.getId() == R.id.editEventStartTime){
+        else if(v.getId() == R.id.edit_view_startTime){
 
             Bundle b = new Bundle();
             b.putString("startTime", "start");
@@ -77,7 +77,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
-        else if(v.getId() == R.id.editEventEndTime){
+        else if(v.getId() == R.id.edit_view_endTime){
 
             Bundle b = new Bundle();
             b.putString("endTime", "end");

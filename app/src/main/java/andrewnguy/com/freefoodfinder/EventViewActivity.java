@@ -3,7 +3,6 @@ package andrewnguy.com.freefoodfinder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +18,7 @@ public class EventViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.event_view);
+        setContentView(R.layout.event_view_main);
 
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -35,9 +34,9 @@ public class EventViewActivity extends AppCompatActivity {
         intent = getIntent(); // get intent that this came from: needs to know to go back to the Maps or List
         Bundle extras = getIntent().getExtras();
 
-        TextView viewTitle = (TextView) findViewById(R.id.event_title);
+        TextView viewTitle = (TextView) findViewById(R.id.event_view_title);
         viewTitle.setText(extras.getString("eventTitle"));
-        TextView viewDesc = (TextView) findViewById(R.id.event_description);
+        TextView viewDesc = (TextView) findViewById(R.id.event_view_eventDesc);
         viewDesc.setText(extras.getString("eventDesc"));
 
     }

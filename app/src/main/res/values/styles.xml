@@ -19,7 +19,7 @@
 
     <!--This style is for the ConfirmEventActivity, make it have rounded corners-->
     <style name="ThemeWithCorners" parent="android:Theme.Holo.Dialog.NoActionBar">
-        <item name="android:windowBackground">@drawable/layout_bg</item>
+        <item name="android:windowBackground">@drawable/confirm_event_activity_bg</item>
     </style>
 
 </resources>

@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,14 +27,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -124,7 +116,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
 
 
-                View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_bubble, null);
+                View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_info_window, null);
 
                 //Sets up Date string
                 String dateOfEvent = toDisplay.getDate();

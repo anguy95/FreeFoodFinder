@@ -4,9 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -113,7 +111,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
                 break;
         }
 
-        ((TextView) getActivity().findViewById(R.id.editEventDate)).setText(dayOfWeek+ ", " + monthOfYear + " " + day);
+        ((TextView) getActivity().findViewById(R.id.edit_view_date)).setText(dayOfWeek+ ", " + monthOfYear + " " + day);
     }
 
 

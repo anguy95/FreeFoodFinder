@@ -48,7 +48,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         Bundle args = getArguments();
 
         if ("start".equals(args.getString("startTime"))) {
-            TextView timeTextView = (TextView) getActivity().findViewById(R.id.editEventStartTime);
+            TextView timeTextView = (TextView) getActivity().findViewById(R.id.edit_view_startTime);
 
             if (minute < 10) {
                 time.append(hourOfDay).append(":").append("0").append(minute).append(" ").append(am_pm);
@@ -58,7 +58,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
                 timeTextView.setText(time);
             }
         } else {
-            TextView timeTextView = (TextView) getActivity().findViewById(R.id.editEventEndTime);
+            TextView timeTextView = (TextView) getActivity().findViewById(R.id.edit_view_endTime);
             if (minute < 10) {
                 time.append(hourOfDay).append(":").append("0").append(minute).append(" ").append(am_pm);
                 timeTextView.setText(time);
