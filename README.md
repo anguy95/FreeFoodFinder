@@ -10,3 +10,4 @@ CSE110 project to find free food around you.
 
 If you time the CEA and the update 15sec, crashes hard
 Since update happens every 15, map bubbles get thrown out
+ -- fixed i think (randy, blame me if it's not)
