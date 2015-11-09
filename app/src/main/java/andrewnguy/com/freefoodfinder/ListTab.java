@@ -137,7 +137,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
                 // manipulate the Intent data to get simple data
                 Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
 
-                update(MainActivity.EMPTY);
+                ea.update(MainActivity.EMPTY, 1); // update the list tab
             }
             // else do nothing
         }

@@ -275,8 +275,8 @@ public class MapTab extends Fragment implements View.OnClickListener
         for (int i = 0; i < oldKeys.length; i++) {
 
             if ( !tempMap.containsKey(oldKeys[i]) ) { // if the current event map has something expired
-                Marker tempMarker = eventMarkers.get(oldKeys[i]);
-                tempMarker.remove();
+                Marker tempMarker = eventMarkers.get(oldKeys[i]); // get the marker reference
+                tempMarker.remove();                              // and remove it from everything
                 eventMarkers.remove(oldKeys[i]);
                 events.remove(tempMarker);
             }

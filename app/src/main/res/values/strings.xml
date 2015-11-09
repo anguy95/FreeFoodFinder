@@ -18,6 +18,7 @@
 
     <string name="DAT">Date</string>
     <string name="TIM">Time</string>
+    <string name="EXP">Expiration</string>
 
     <string name="LAT">Latitude</string>
     <string name="LNG">Longitude</string>

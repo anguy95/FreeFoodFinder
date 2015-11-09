@@ -82,9 +82,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
                 break;
         }
 
-
-
-
         switch (weekDay){
             case 1:
                 dayOfWeek = "Sun";

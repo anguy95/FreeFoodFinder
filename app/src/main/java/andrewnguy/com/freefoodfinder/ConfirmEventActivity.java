@@ -148,7 +148,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                     lng = extras.getDouble("longitude");
                     currLat = extras.getDouble("currLat");
                     currLng = extras.getDouble("currLng");
-                } catch (NullPointerException npe) {
+                } catch (NullPointerException npe) { // if no good, set all to 0
                     Log.d("mylocation", npe.getMessage());
                     lat = 0;
                     lng = 0;
@@ -156,21 +156,16 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                     currLng = 0;
                 }
             }
-
             LatLng eventLoc = new LatLng(lat, lng);
             LatLng currentLoc = new LatLng(currLat, currLng);
 
-            Event newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr),
-                                       eventDescStr, eventLoc, currentLoc);
-            ea.add(newEvent);
+            // add the new event
+            ea.add(new Event(titleStr, dateStr, (startStr + " - " + endStr),
+                             eventDescStr, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
         }
-
-
-
-
     }
 
     private boolean isEmpty(EditText text) {
