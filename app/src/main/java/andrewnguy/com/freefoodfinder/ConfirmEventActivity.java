@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import java.util.Date;
-import java.util.HashMap;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
@@ -35,8 +32,13 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         title = (EditText) findViewById(R.id.editEventTitle);
         eventDesc = (EditText) findViewById(R.id.editEventDescription);
         locDesc = (EditText) findViewById(R.id.editLocationDescription);
+
         start = (EditText) findViewById(R.id.editEventStartTime);
+        start.setOnClickListener(this);
+
+
         end = (EditText) findViewById(R.id.editEventEndTime);
+        end.setOnClickListener(this);
 
         date = (EditText) findViewById(R.id.editEventDate);
         date.setOnClickListener(this);
@@ -57,6 +59,22 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
 
+        }
+        else if(v.getId() == R.id.editEventStartTime){
+
+            Bundle start = new Bundle();
+            start.putString("startTime", "start");
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.setArguments(start);
+            newFragment.show(getFragmentManager(), "timePicker");
+        }
+        else if(v.getId() == R.id.editEventEndTime){
+
+            Bundle start = new Bundle();
+            start.putString("endTime", "end");
+            DialogFragment newFragment = new TimePickerFragment();
+            newFragment.setArguments(start);
+            newFragment.show(getFragmentManager(), "timePicker");
         }
         else { // finish the add
             StringBuffer msg = new StringBuffer("Please enter a value for:");
