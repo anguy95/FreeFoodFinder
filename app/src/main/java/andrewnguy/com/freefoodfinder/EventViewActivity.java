@@ -38,10 +38,14 @@ import android.widget.TextView;
             viewTitle.setText(extras.getString("eventTitle"));
             TextView viewDesc = (TextView) findViewById(R.id.event_view_eventDesc);
             viewDesc.setText(extras.getString("eventDesc"));
+
+
             TextView viewStartTime = (TextView) findViewById(R.id.edit_view_startTime);
             viewStartTime.setText(extras.getString("eventStartTime"));
             TextView viewEndTime = (TextView) findViewById(R.id.edit_view_endTime);
             viewEndTime.setText(extras.getString("eventEndTime"));
+            TextView viewDate = (TextView) findViewById(R.id.edit_view_date);
+            viewDate.setText(extras.getString("eventDate"));
 
 
         }

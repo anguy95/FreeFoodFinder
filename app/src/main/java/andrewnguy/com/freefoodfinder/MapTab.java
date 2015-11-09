@@ -149,6 +149,8 @@ public class MapTab extends Fragment implements View.OnClickListener
                 intent.putExtra("eventStartTime", toDisplay.getStartTime());
                 intent.putExtra("eventEndTime", toDisplay.getEndTime());
                 intent.putExtra("eventDate", toDisplay.getDate());
+
+                intent.putExtra("eventDate", toDisplay.getDate());
                 intent.putExtra("eventLocDesc", toDisplay.getLocation());
 
                 startActivity(intent);

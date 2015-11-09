@@ -103,6 +103,9 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
         intent.putExtra("eventTitle", toDisplay.getTitle());
         intent.putExtra("eventDesc", toDisplay.getDescription());
+        intent.putExtra("eventDate", toDisplay.getDate());
+        intent.putExtra("eventStartTime", toDisplay.getStartTime());
+        intent.putExtra("eventEndTime", toDisplay.getEndTime());
 
         startActivity(intent); // I don't think we need a result
 
