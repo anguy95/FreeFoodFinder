@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -86,48 +87,53 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             newFragment.show(getFragmentManager(), "timePicker");
         }
         else { // finish the add
-            StringBuffer msg = new StringBuffer("Please enter a value for:");
+
+            /** ----- TODO:: FIELD/EVENT VARIABLE CHECKS ----- **/
+
+            StringBuffer msg = new StringBuffer("Please fill out these fields:");
             boolean emptyFields = false;
-            boolean emptyDesc = true;
             if (isEmpty(title)) {
                 msg.append(" Title");
                 emptyFields = true;
             }
-            if (isEmpty(eventDesc)) {
-                if (emptyFields)
-                    msg.append(",");
-                msg.append(" Event Description");
-                emptyDesc = false;
-            }
             if (isEmpty(locDesc)) {
-                if (emptyFields)
+                if (emptyFields) {
                     msg.append(",");
+                }
                 msg.append(" Location Description");
                 emptyFields = true;
             }
-            if (isEmpty(start)) {
-                if (emptyFields)
+            if (isEmpty(date)) {
+                if (emptyFields) {
                     msg.append(",");
+                }
+                msg.append(" Date of Event");
+                emptyFields = true;
+            }
+            if (isEmpty(start)) {
+                if (emptyFields) {
+                    msg.append(",");
+                }
                 msg.append(" Start Time");
                 emptyFields = true;
             }
             if (isEmpty(end)) {
-                if (emptyFields)
+                if (emptyFields) {
                     msg.append(",");
+                }
                 msg.append(" End Time");
                 emptyFields = true;
             }
-
-            /*
             if (emptyFields) {
                 msg.append(".");
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
             }
-            else if (!emptyDesc) {
-                // maybe ask if they want to have an empty description field
+
+            if (isEmpty(eventDesc)) {
+                // maybe warn them? it's okay to have empty event description
             }
-            */
+
 
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
