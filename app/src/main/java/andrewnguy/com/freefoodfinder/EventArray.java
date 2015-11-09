@@ -142,29 +142,15 @@ public class EventArray
                             if (currLL == null)
                                 currLL = eventLL;
 
-                            if (e.getString(context.getString(R.string.DES)) == null ||
-                                    e.getString(context.getString(R.string.DES)).isEmpty()) // if event has no description
-
-                                eventsMap.put(e.getObjectId(), //store ParseObject objectId
-                                        new Event( //make new event to store
-                                                e.getObjectId(),
-                                                e.getString(context.getString(R.string.TIT)),
-                                                e.getString(context.getString(R.string.DAT)),
-                                                e.getString(context.getString(R.string.TIM)),
-                                                eventLL,
-                                                currLL
-                                        )
-                                );
-                            else   // if event does have a description
-                                eventsMap.put(e.getObjectId(), // store ParseObject objectId
-                                        new Event( //make new event to store
-                                                e.getObjectId(),
-                                                e.getString(context.getString(R.string.TIT)),
-                                                e.getString(context.getString(R.string.DAT)),
-                                                e.getString(context.getString(R.string.TIM)),
-                                                e.getString(context.getString(R.string.DES)),
-                                                eventLL,
-                                                currLL
+                            eventsMap.put(e.getObjectId(), //store ParseObject objectId
+                                    new Event( //make new event to store
+                                            e.getObjectId(),
+                                            e.getString(context.getString(R.string.TIT)),
+                                            e.getString(context.getString(R.string.DAT)),
+                                            e.getString(context.getString(R.string.TIM)),
+                                            e.getString(context.getString(R.string.DES)),
+                                            eventLL,
+                                            currLL
                                         )
                                 );
                         }

@@ -22,32 +22,32 @@ public class Event {
     //We need to figure out how to store the times and what not, see if there is a scrollable and
     //clickable time selector as well as date selector
 
-
     /**
-     * Reconstructor w/o event description
-     * @param id
+     * Constructor without objectId
      * @param title
      * @param date
      * @param time
+     * @param description
      * @param latlng
      * @param currLL
      */
-    public Event(String id, String title, String date, String time, LatLng latlng, LatLng currLL)
+    public Event (String title, String date, String time,
+                  String description, LatLng latlng, LatLng currLL)
     {
-        this.eventId = id;
         this.eventTitle = title;
         this.dateOfEvent = date;
         this.timeOfEvent = time;
+        this.eventDesc = description;
         this.latLng = latlng;
 
         // calc distance from you and the event
-        ParseGeoPoint toLocation = new ParseGeoPoint(latlng.latitude,latlng.longitude);
+        ParseGeoPoint toLocation = new ParseGeoPoint(latlng.latitude, latlng.longitude);
         ParseGeoPoint fromLocation = new ParseGeoPoint(currLL.latitude, currLL.longitude);
         this.dist = fromLocation.distanceInMilesTo(toLocation);
     }
 
     /**
-     * Reconstructor w/ event description
+     * Constructor with objectId
      * @param id
      * @param title
      * @param date
@@ -56,52 +56,11 @@ public class Event {
      * @param latlng
      * @param currLL
      */
-    public Event(String id, String title, String date, String time, String description, LatLng latlng, LatLng currLL)
+    public Event(String id, String title, String date, String time,
+                 String description, LatLng latlng, LatLng currLL)
     {
-        this(id, title, date, time, latlng, currLL); // call w/o description reconstructor
-        this.eventDesc = description;
-    }
-
-    /**
-     * Constructor w/o event description
-     * @param title
-     * @param date
-     * @param time
-     * @param lat
-     * @param lng
-     * @param currLat
-     * @param currLng
-     */
-    public Event(String title, String date, String time,
-                 double lat, double lng, double currLat, double currLng)
-    {
-        this.eventTitle = title;
-        this.dateOfEvent = date;
-        this.timeOfEvent = time;
-        this.latLng = new LatLng(lat, lng);
-
-        // calc distance from you and the event
-        ParseGeoPoint toLocation = new ParseGeoPoint(lat,lng);
-        ParseGeoPoint fromLocation = new ParseGeoPoint(currLat, currLng);
-        this.dist = fromLocation.distanceInMilesTo(toLocation);
-    }
-
-    /**
-     * Constructor w/ event descriptions
-     * @param title
-     * @param date
-     * @param time
-     * @param lat
-     * @param lng
-     * @param currLat
-     * @param currLng
-     * @param description
-     */
-    public Event(String title, String date, String time,
-                 double lat, double lng, double currLat, double currLng, String description)
-    {
-        this(title, date, time, lat, lng, currLat, currLng); // use w/o event description constructor
-        this.eventDesc = description;
+        this(title, date, time, description, latlng, currLL);
+        this.eventId = id;
     }
 
 

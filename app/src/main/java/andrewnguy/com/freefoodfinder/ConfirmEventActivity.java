@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
@@ -33,11 +36,10 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         eventDesc = (EditText) findViewById(R.id.editEventDescription);
         locDesc = (EditText) findViewById(R.id.editLocationDescription);
 
-        start = (EditText) findViewById(R.id.editEventStartTime);
+        start = (EditText) findViewById(R.id.editEventStartTime); // start time
         start.setOnClickListener(this);
 
-
-        end = (EditText) findViewById(R.id.editEventEndTime);
+        end = (EditText) findViewById(R.id.editEventEndTime); // end time
         end.setOnClickListener(this);
 
         date = (EditText) findViewById(R.id.editEventDate);
@@ -62,18 +64,18 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         }
         else if(v.getId() == R.id.editEventStartTime){
 
-            Bundle start = new Bundle();
-            start.putString("startTime", "start");
+            Bundle b = new Bundle();
+            b.putString("startTime", "start");
             DialogFragment newFragment = new TimePickerFragment();
-            newFragment.setArguments(start);
+            newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
         else if(v.getId() == R.id.editEventEndTime){
 
-            Bundle start = new Bundle();
-            start.putString("endTime", "end");
+            Bundle b = new Bundle();
+            b.putString("endTime", "end");
             DialogFragment newFragment = new TimePickerFragment();
-            newFragment.setArguments(start);
+            newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
         else { // finish the add
@@ -127,9 +129,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             startStr = start.getText().toString();
             endStr = end.getText().toString();
 
-            double lat = -1;
-            double lng = -1;
+            // create some dummmy coords
+            double lat = 0, lng = 0;
             double currLat = 0, currLng = 0;
+
+            // try to get the coords
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 lat = extras.getDouble("latitude");
@@ -138,19 +142,15 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 currLng = extras.getDouble("currLng");
             }
 
-            startStr = "aa";
-            endStr = "bb";
+            LatLng eventLoc = new LatLng(lat, lng);
+            LatLng currentLoc = new LatLng(currLat, currLng);
 
-            Event newEvent;
-            if (eventDescStr == null && eventDescStr.isEmpty()) {
-                newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr), lat, lng, currLat, currLng);
-            }
-            else {
-                newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr), lat, lng, currLat, currLng, eventDescStr);
-            }
+            startStr = "14";
+            endStr = "17";
 
+            Event newEvent = new Event(titleStr, dateStr, (startStr + " - " + endStr),
+                                       eventDescStr, eventLoc, currentLoc);
             ea.add(newEvent);
-
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();

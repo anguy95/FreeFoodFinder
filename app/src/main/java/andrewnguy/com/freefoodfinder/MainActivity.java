@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private SlidingTabLayout tabs;
     private CharSequence Titles[]={"Map","List"};
     private int Numboftabs = 2;
+
+    /* parse updates */
     private Handler h;
+    private boolean stop;
 
 
     @Override
@@ -55,14 +58,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /* Handler to update every 15 seconds */
-        h = new Handler();
+        stop = false;
+        h = new Handler(); // the loop timer
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ea.update(EMPTY, 2);
+
+                if (!stop) { // check if we are stopped
+                    ea.update(EMPTY, 2);
+                }
                 h.postDelayed(this, DELAY);
             }
-        }, DELAY);
+        }, DELAY); // activate the updater
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
@@ -71,15 +78,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+        stop = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        stop = false;
     }
 
     @Override
     public void onDestroy() {
+        stop = true;
         super.onDestroy();
     }
 
