@@ -52,13 +52,12 @@ public class EventArray
         ParseGeoPoint pgp = new ParseGeoPoint(e.getLocation().latitude, e.getLocation().longitude);
 
         newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
+        newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
+        newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
+        newEvent.put(context.getString(R.string.TIM), e.getTime());               // put time
         newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
-        newEvent.put(context.getString(R.string.DAT), e.getDate());          // put start date
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
-
-        if (e.getDescription() != null && !e.getDescription().isEmpty())         // put description if one exists
-            newEvent.put(context.getString(R.string.DES), e.getDescription());
 
         // save the event to parse
         try {

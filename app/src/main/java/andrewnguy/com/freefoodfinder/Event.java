@@ -79,14 +79,14 @@ public class Event {
     public String getDescription() { return eventDesc; }
 
     /**
-     * Get end date of the event
-     * @return a Date object of the event
+     * Get date of the event
+     * @return a string date of the event
      */
     public String getDate() { return dateOfEvent; }
 
     /**
-     * Get end date of the event
-     * @return a Date object of the event
+     * Get time of the event
+     * @return a string time of the event
      */
     public String getTime() { return timeOfEvent; }
     /**
@@ -105,7 +105,7 @@ public class Event {
      * get the eventID of the event
      * @return
      */
-    public String getEventIDforMarker() { return eventId; }
+    public String getEventId() { return eventId; }
 
     /* ----------  SETTERS ---------- */
 
