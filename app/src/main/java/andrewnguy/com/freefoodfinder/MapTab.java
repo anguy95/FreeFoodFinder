@@ -109,18 +109,13 @@ public class MapTab extends Fragment implements View.OnClickListener
             @Override
             public View getInfoContents(Marker marker) {
 
-
                 // Gets the event from objID,events hash
                 Event toDisplay = events.get(marker);
-
-
-
 
                 View v = getLayoutInflater(savedInstanceState).inflate(R.layout.marker_info_window, null);
 
                 //Sets up Date string
                 String dateOfEvent = toDisplay.getDate();
-
 
                 // Sets up the view fields for bubble
                 TextView eventTitle = (TextView) v.findViewById(R.id.small_event_title);
@@ -128,6 +123,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
                 TextView eventDate = (TextView) v.findViewById(R.id.small_event_date);
                 eventDate.setText(dateOfEvent);
+
 
                 //TODO SET TIME UPDATE HARD CODED
                 TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
@@ -148,6 +144,11 @@ public class MapTab extends Fragment implements View.OnClickListener
 
                 intent.putExtra("eventTitle", toDisplay.getTitle());
                 intent.putExtra("eventDesc", toDisplay.getDescription());
+
+                //TODO ADD THE DATE, START AND END TIME, AS WELL AS LOCATION DESC
+                intent.putExtra("eventTime", toDisplay.getTime());
+                intent.putExtra("eventDate", toDisplay.getDate());
+                intent.putExtra("eventLocDesc", toDisplay.getLocation());
 
                 startActivity(intent);
             }
