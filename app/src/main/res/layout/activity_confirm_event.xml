@@ -21,6 +21,8 @@
         android:textAlignment="center"
         android:textSize="24dp"
         android:textStyle="bold"
+        android:textCursorDrawable="@null"
+        android:gravity="left"
         android:background="@android:color/transparent"
         android:textColor="#8D8D8D"
         android:layout_marginTop="10dp" />

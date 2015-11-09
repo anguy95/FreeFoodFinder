@@ -34,7 +34,13 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         cancel = (Button) findViewById(R.id.buttonCancelPost);   // cancel post button
 
         title = (EditText) findViewById(R.id.editEventTitle);
+
+
+
         eventDesc = (EditText) findViewById(R.id.editEventDescription);
+
+
+
         locDesc = (EditText) findViewById(R.id.editLocationDescription);
 
         start = (EditText) findViewById(R.id.editEventStartTime); // start time
