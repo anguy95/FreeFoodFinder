@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -136,10 +137,18 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             // try to get the coords
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
-                lat = extras.getDouble("latitude");
-                lng = extras.getDouble("longitude");
-                currLat = extras.getDouble("currLat");
-                currLng = extras.getDouble("currLng");
+                try {
+                    lat = extras.getDouble("latitude");
+                    lng = extras.getDouble("longitude");
+                    currLat = extras.getDouble("currLat");
+                    currLng = extras.getDouble("currLng");
+                } catch (NullPointerException npe) {
+                    Log.d("mylocation", npe.getMessage());
+                    lat = 0;
+                    lng = 0;
+                    currLat = 0;
+                    currLng = 0;
+                }
             }
 
             LatLng eventLoc = new LatLng(lat, lng);

@@ -213,8 +213,10 @@ public class MapTab extends Fragment implements View.OnClickListener
             Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmEventActivity.class);
             intent.putExtra("latitude", lat);
             intent.putExtra("longitude", lng);
-            intent.putExtra("currLat", map.getMyLocation().getLatitude());
-            intent.putExtra("currLng", map.getMyLocation().getLongitude());
+            try {
+                intent.putExtra("currLat", map.getMyLocation().getLatitude());
+                intent.putExtra("currLng", map.getMyLocation().getLongitude());
+            } catch(NullPointerException npe) { Log.d("mylocation", npe.getMessage()); }
             startActivityForResult(intent, MAP_CREATE_EVENT);
         }
     }
