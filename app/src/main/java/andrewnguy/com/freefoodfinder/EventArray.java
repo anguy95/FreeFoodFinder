@@ -71,6 +71,12 @@ public class EventArray
         }
         // else do nothing
 
+        /*  year - the year plus 1900.                  *
+         *  month - the month between 0-11.             *
+         *  date - the day of the month between 1-31.   *
+         *  hrs - the hours between 0-23.               *
+         *  min - the minutes between 0-59              */
+
         Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
                              monthToNum(dateArr[1]),              // intMonth
                              Integer.parseInt(dateArr[2]),        // intDay

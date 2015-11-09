@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -43,9 +44,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             hourOfDay = hourOfDay-12;
         }
 
+        // check for 12AM
+        if (hourOfDay == 0 && am_pm.equals("AM"))
+            hourOfDay = 12;
+
         StringBuilder time = new StringBuilder();
 
         Bundle args = getArguments();
+
 
         if ("start".equals(args.getString("startTime"))) {
             TextView timeTextView = (TextView) getActivity().findViewById(R.id.event_date_time_startTime);

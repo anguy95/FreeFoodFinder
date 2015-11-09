@@ -180,21 +180,4 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         else
             return true;
     }
-
-    private Date setDate(int year, int month, int day, int hour, int minute)
-    {
-        /*  year - the year plus 1900.                  *
-         *  month - the month between 0-11.             *
-         *  date - the day of the month between 1-31.   *
-         *  hrs - the hours between 0-23.               *
-         *  min - the minutes between 0-59              */
-
-        // need to do conversions
-        int Y = year - 1900;
-        // month in CEA will be be from 0-11
-        // everything else is normal
-
-        return new Date(Y, month, day, hour, minute);
-    }
-
 }

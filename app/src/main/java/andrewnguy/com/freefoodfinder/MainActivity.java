@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
+    private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth
 
     static EventArray ea; // the event array; for parse
     private ViewPager pager;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             public void run() {
 
                 if (!stop) { // check if we are stopped
-                    ea.update(EMPTY, 0);
+                    ea.update(EMPTY, update);
                 }
                 h.postDelayed(this, DELAY);
             }
@@ -121,7 +122,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         if (position == 1) { // list view
-            ea.update(EMPTY, position);
+            update = 0;
+        }
+        else {
+            update = 2;
         }
     }
 
