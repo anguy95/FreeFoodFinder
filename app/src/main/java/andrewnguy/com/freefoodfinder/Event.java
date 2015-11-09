@@ -14,7 +14,8 @@ public class Event {
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
     private String dateOfEvent; // start date of the event
-    private String timeOfEvent; // time of an event
+    private String startTimeOfEvent; // time of an event
+    private String endTimeOfEvent; // time of an event
     private LatLng latLng;      // location of an event
     private double dist;        // distance from you to event
 
@@ -26,17 +27,19 @@ public class Event {
      * Constructor without objectId
      * @param title
      * @param date
-     * @param time
+     * @param startTime
+     * @param endTime
      * @param description
      * @param latlng
      * @param currLL
      */
-    public Event (String title, String date, String time,
+    public Event (String title, String date, String startTime, String endTime,
                   String description, LatLng latlng, LatLng currLL)
     {
         this.eventTitle = title;
         this.dateOfEvent = date;
-        this.timeOfEvent = time;
+        this.startTimeOfEvent = startTime;
+        this.endTimeOfEvent = endTime;
         this.eventDesc = description;
         this.latLng = latlng;
 
@@ -51,15 +54,16 @@ public class Event {
      * @param id
      * @param title
      * @param date
-     * @param time
+     * @param startTime
+     * @param endTime
      * @param description
      * @param latlng
      * @param currLL
      */
-    public Event(String id, String title, String date, String time,
+    public Event(String id, String title, String date, String startTime, String endTime,
                  String description, LatLng latlng, LatLng currLL)
     {
-        this(title, date, time, description, latlng, currLL);
+        this(title, date, startTime, endTime, description, latlng, currLL);
         this.eventId = id;
     }
 
@@ -85,10 +89,17 @@ public class Event {
     public String getDate() { return dateOfEvent; }
 
     /**
-     * Get time of the event
-     * @return a string time of the event
+     * Get start time of the event
+     * @return a string start time of the event
      */
-    public String getTime() { return timeOfEvent; }
+    public String getStartTime() { return startTimeOfEvent; }
+
+    /**
+     * Get end time of the event
+     * @return a string end time of the event
+     */
+    public String getEndTime() { return endTimeOfEvent; }
+
     /**
      * Get the location of the event
      * @return a LatLng object of the event
@@ -100,6 +111,7 @@ public class Event {
      * @return
      */
     public double getDist() { return dist; }
+
 
     /**
      * get the eventID of the event

@@ -160,7 +160,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             LatLng currentLoc = new LatLng(currLat, currLng);
 
             // add the new event
-            ea.add(new Event(titleStr, dateStr, (startStr + " - " + endStr),
+            ea.add(new Event(titleStr, dateStr, startStr, endStr,
                              eventDescStr, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1

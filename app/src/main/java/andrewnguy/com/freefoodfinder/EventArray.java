@@ -54,7 +54,8 @@ public class EventArray
         newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
         newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
         newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
-        newEvent.put(context.getString(R.string.TIM), e.getTime());               // put time
+        newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
+        newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
         newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
@@ -145,7 +146,8 @@ public class EventArray
                                             e.getObjectId(),
                                             e.getString(context.getString(R.string.TIT)),
                                             e.getString(context.getString(R.string.DAT)),
-                                            e.getString(context.getString(R.string.TIM)),
+                                            e.getString(context.getString(R.string.STIM)),
+                                            e.getString(context.getString(R.string.ETIM)),
                                             e.getString(context.getString(R.string.DES)),
                                             eventLL,
                                             currLL

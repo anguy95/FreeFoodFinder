@@ -37,10 +37,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String dayOfWeek = null;
         String monthOfYear = null;
 
-
-
-
-
         switch(month){
             case 0:
                 monthOfYear = "Jan";

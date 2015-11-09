@@ -67,7 +67,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
         String dateToDisplay = event.getDate();
         //Sets up string
-        timeOfEvent = event.getTime();
+        timeOfEvent = event.getStartTime() + " - " + event.getEndTime();
 
         holder.dateDay.setText(dateToDisplay);
         holder.dateTime.setText(timeOfEvent);

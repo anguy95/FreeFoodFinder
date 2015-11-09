@@ -127,7 +127,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
                 //TODO SET TIME UPDATE HARD CODED
                 TextView eventTime = (TextView) v.findViewById(R.id.small_event_time);
-                eventTime.setText("hard");
+                eventTime.setText((String) (toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
 
                 return v;
             }
@@ -146,7 +146,8 @@ public class MapTab extends Fragment implements View.OnClickListener
                 intent.putExtra("eventDesc", toDisplay.getDescription());
 
                 //TODO ADD THE DATE, START AND END TIME, AS WELL AS LOCATION DESC
-                intent.putExtra("eventTime", toDisplay.getTime());
+                intent.putExtra("eventStartTime", toDisplay.getStartTime());
+                intent.putExtra("eventEndTime", toDisplay.getEndTime());
                 intent.putExtra("eventDate", toDisplay.getDate());
                 intent.putExtra("eventLocDesc", toDisplay.getLocation());
 

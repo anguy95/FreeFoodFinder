@@ -17,7 +17,9 @@
     <string name="DES">Description</string>
 
     <string name="DAT">Date</string>
-    <string name="TIM">Time</string>
+    <string name="STIM">startTime</string>
+    <string name="ETIM">endTime</string>
+
     <string name="EXP">Expiration</string>
 
     <string name="LAT">Latitude</string>
@@ -26,5 +28,7 @@
 
     <string name="TAG">Tags</string>
     <!-- DATABASE STUFF -->
+
+
 
 </resources>
