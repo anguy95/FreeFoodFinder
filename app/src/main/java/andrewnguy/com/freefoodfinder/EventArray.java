@@ -23,7 +23,6 @@ import java.util.List;
 public class EventArray
 {
     private HashMap<String, Event> eventsMap; // objectId and event map
-    private HashMap<Marker, String> eventsMapMarkers; // marker and objectId map
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
@@ -37,7 +36,6 @@ public class EventArray
     public EventArray(Context context, String db)
     {
         eventsMap = new HashMap<>();
-        eventsMapMarkers = new HashMap<>();
         this.context = context;
         this.db = db;
         eq = ParseQuery.getQuery(db);
@@ -98,13 +96,7 @@ public class EventArray
      * Get the ObjectId/Event Map<K, V>
      * @return a hashmap of objectid/event pairs
      */
-    public HashMap<String, Event> getObjectIdEventsMap() { return eventsMap; }
-
-    /**
-     * Get the Marker/ObjectId Map<K, V>
-     * @return a hashmap of marker/objectId pairs
-     */
-    public HashMap<Marker, String> getEventMarkersMap() { return eventsMapMarkers; }
+    public HashMap<String, Event> getEventMap(ArrayList<String> filter) { return eventsMap; }
 
     /**
      * setter for your current location

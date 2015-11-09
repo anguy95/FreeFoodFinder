@@ -53,10 +53,8 @@ public class MapTab extends Fragment implements View.OnClickListener
     private EventArray ea;
 
     /** parse **/
-    public ArrayList<Event> events = new ArrayList<>();
-    public HashMap<Marker, String> eventidMarkerMap = new HashMap<>();
-    public HashMap<String, Event> eventIdMap = new HashMap<>();
-    ParseQuery<ParseObject> eq;
+    private HashMap<String, Marker> eventMarkers = new HashMap<>();
+    private HashMap<Marker, Event> events = new HashMap<>();
 
     /** my location **/
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
@@ -74,8 +72,6 @@ public class MapTab extends Fragment implements View.OnClickListener
         addPin = (RelativeLayout) v.findViewById(R.id.add_pin);
 
         ea = MainActivity.ea;
-        eventidMarkerMap = ea.getEventMarkersMap();
-        eventIdMap = ea.getObjectIdEventsMap();
 
 
 
@@ -121,11 +117,9 @@ public class MapTab extends Fragment implements View.OnClickListener
             @Override
             public View getInfoContents(Marker marker) {
 
-                // ObjectID to get event
-                String markerObjectID = eventidMarkerMap.get(marker);
 
                 // Gets the event from objID,events hash
-                Event toDisplay = eventIdMap.get(markerObjectID);
+                Event toDisplay = events.get(marker);
 
 
 
@@ -157,11 +151,8 @@ public class MapTab extends Fragment implements View.OnClickListener
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), EventViewActivity.class);
 
-                // ObjectID to get event
-                String markerObjectID = eventidMarkerMap.get(marker);
-
                 // Gets the event from objID,events hash
-                Event toDisplay = eventIdMap.get(markerObjectID);
+                Event toDisplay = events.get(marker);
 
                 intent.putExtra("eventTitle", toDisplay.getTitle());
                 intent.putExtra("eventDesc", toDisplay.getDescription());
@@ -265,16 +256,36 @@ public class MapTab extends Fragment implements View.OnClickListener
      * @param filter out some results
      */
     public void update(ArrayList<String> filter) {
-        map.clear(); // clear the map
+
         ea.setMyLoc(map.getMyLocation()); // set up current location for distance calculations
 
-        events = ea.getEventArray(filter); // get some filtered results
-        for (int i = 0; i < events.size(); i++) {
-            Event temp = events.get(i);
-            MarkerOptions markerToAdd = new MarkerOptions().position(temp.getLocation());
-            Log.d("Pushing", " to hash: " + temp.getEventIDforMarker());
-            eventidMarkerMap.put( map.addMarker(markerToAdd),temp.getEventIDforMarker());
+        HashMap<String, Event> tempMap = ea.getEventMap(filter); // get some filtered results
 
+        String[] newKeys = new String[tempMap.size()]; // make an array that
+        tempMap.keySet().toArray(newKeys);             // contains all the new keys (objectIds)
+
+        String[] oldKeys = new String[eventMarkers.size()]; // also make an array that
+        eventMarkers.keySet().toArray(oldKeys);             // contains all the old keys
+
+        /* in with the new */
+        for (int i = 0; i < newKeys.length; i++) {
+
+            if ( !eventMarkers.containsKey(newKeys[i]) ) { // if the current event map doesn't have this marker, add
+                Event tempEvent = tempMap.get(newKeys[i]); // get the event (reference)
+                Marker tempMarker = map.addMarker(new MarkerOptions().position(tempEvent.getLocation())); // add to map
+                eventMarkers.put(newKeys[i], tempMarker);  // add marker to hashmap<id, marker>
+                events.put(tempMarker, tempEvent);         // add event to hashmap<marker, event>
+            }
+        }
+        /* and out with the old */
+        for (int i = 0; i < oldKeys.length; i++) {
+
+            if ( !tempMap.containsKey(oldKeys[i]) ) { // if the current event map has something expired
+                Marker tempMarker = eventMarkers.get(oldKeys[i]);
+                tempMarker.remove();
+                eventMarkers.remove(oldKeys[i]);
+                events.remove(tempMarker);
+            }
         }
     }
 }
