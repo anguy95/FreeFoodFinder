@@ -14,6 +14,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,6 +60,23 @@ public class EventArray
         newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
         newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
         newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+
+        //rebuild event expiration date
+        String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
+        String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
+
+        int offset = 0; // 0 offset for AM
+        if (timeArr[2].equals("PM")) {
+            offset = 12;
+        }
+        // else do nothing
+
+        Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
+                             monthToNum(dateArr[1]),              // intMonth
+                             Integer.parseInt(dateArr[2]),        // intDay
+                             Integer.parseInt(timeArr[0])-1+offset, // intHour
+                             Integer.parseInt(timeArr[1]));       // intMin
+        newEvent.put(context.getString(R.string.EXP), date.getTime());
 
         // save the event to parse
         try {
@@ -174,5 +192,22 @@ public class EventArray
                 }
             }
         });
+    }
+
+    private int monthToNum(String month) {
+        switch (month) {
+            case "Jan": return 0;
+            case "Feb": return 1;
+            case "Mar": return 2;
+            case "Apr": return 3;
+            case "May": return 4;
+            case "Jun": return 5;
+            case "Jul": return 6;
+            case "Aug": return 7;
+            case "Sep": return 8;
+            case "Oct": return 9;
+            case "Nov": return 10;
+            default:    return 11; // case "Dec":
+        }
     }
 }
