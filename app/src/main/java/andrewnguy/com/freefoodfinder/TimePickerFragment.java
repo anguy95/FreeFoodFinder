@@ -40,6 +40,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
             am_pm = "PM";
 
+
+        
         if (hourOfDay > 12){
             hourOfDay = hourOfDay-12;
         }

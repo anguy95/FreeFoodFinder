@@ -23,7 +23,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,11 +45,13 @@
 
         <activity
             android:name=".ConfirmEventActivity"
-            android:theme="@style/ThemeWithCorners" >
+            android:theme="@style/ThemeWithCorners"
+            android:screenOrientation="portrait">
         </activity>
 
 
-        <activity android:name=".EventViewActivity">
+        <activity android:name=".EventViewActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -19,13 +19,15 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:ellipsize="start"
+        android:gravity="center"
         android:textCursorDrawable="@null"
-        android:gravity="start"
         android:background="@android:color/transparent"
         android:layout_alignParentTop="false"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/confirm_event_activity_location_description"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:autoText="false" />
 
     <View
         android:id="@+id/view"
@@ -100,12 +102,11 @@
         android:id="@+id/confirm_event_activity_confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="11dp"
         android:text="@string/confirm_button"
         android:background="@drawable/confirm_activity_confirm_button"
         android:layout_below="@+id/confirm_event_activity_event_description"
-        android:layout_alignEnd="@+id/confirm_event_activity_event_description"/>
+        android:layout_alignEnd="@+id/confirm_event_activity_event_description" />
 
     <Button
         android:id="@+id/confirm_event_activity_cancel_button"

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Selection;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,6 +31,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_event_activity);
 
+
+        //Stops keyboard from popping up all the time on activity create
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
         ea = MainActivity.ea;
 
 
@@ -35,8 +43,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);   // cancel post button
 
         title = (EditText) findViewById(R.id.confirm_event_activity_title);
-
-
 
         eventDesc = (EditText) findViewById(R.id.confirm_event_activity_event_description);
 
