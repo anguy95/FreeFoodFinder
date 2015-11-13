@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -20,10 +21,20 @@ import java.util.Date;
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     private Button confirm, cancel;
-    private EditText title, eventDesc, locDesc, start, end, date;
+    private EditText title, eventDesc, start, end, date;
+    private TextView locDesc;
     private String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
     private EventArray ea; // reference the main EventArray
 
+    // create some dummmy coords
+    private double lat = 0, lng = 0;
+    private double currLat = 0, currLng = 0;
+
+    private int times = 0; // event desc check
+
+    // API for ucsd maps
+    private final static String APP_KEY = "yA1qdB9d1elQ5rhz12h9Q1ZKxlMa";
+    private final static String APP_SECRET = "6XcIqzIgbuP8hGhf959MLF8pQPMa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +72,26 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
         confirm.setOnClickListener(this);
         cancel.setOnClickListener(this);
+
+        // try to get the coords
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            try {
+                lat = extras.getDouble("latitude");
+                lng = extras.getDouble("longitude");
+                currLat = extras.getDouble("currLat");
+                currLng = extras.getDouble("currLng");
+            } catch (NullPointerException npe) { // if no good, set all to 0
+                Log.d("mylocation", npe.getMessage());
+                lat = 0;
+                lng = 0;
+                currLat = 0;
+                currLng = 0;
+            }
+        }
+
+
+        locDesc.setText(this.getLoc(), TextView.BufferType.NORMAL);
     }
 
     @Override
@@ -102,13 +133,13 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 msg.append(" Title");
                 emptyFields = true;
             }
-            if (isEmpty(locDesc)) {
+            /*if (isEmpty(locDesc)) {
                 if (emptyFields) {
                     msg.append(",");
                 }
                 msg.append(" Location Description");
                 emptyFields = true;
-            }
+            }*/
             if (isEmpty(date)) {
                 if (emptyFields) {
                     msg.append(",");
@@ -136,38 +167,22 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 return;
             }
 
-            if (isEmpty(eventDesc)) {
+            if (isEmpty(eventDesc) && times != 1) {
                 // maybe warn them? it's okay to have empty event description
+                Toast.makeText(this, "Are you sure the event you want to leave the event description field empty?", Toast.LENGTH_LONG).show();
+                times++;
+                return;
             }
 
 
             titleStr = title.getText().toString();
             eventDescStr = eventDesc.getText().toString();
-            locDescStr = locDesc.getText().toString();
             dateStr = date.getText().toString();
             startStr = start.getText().toString();
             endStr = end.getText().toString();
+            locDescStr = locDesc.getText().toString();
 
-            // create some dummmy coords
-            double lat = 0, lng = 0;
-            double currLat = 0, currLng = 0;
 
-            // try to get the coords
-            Bundle extras = getIntent().getExtras();
-            if (extras != null) {
-                try {
-                    lat = extras.getDouble("latitude");
-                    lng = extras.getDouble("longitude");
-                    currLat = extras.getDouble("currLat");
-                    currLng = extras.getDouble("currLng");
-                } catch (NullPointerException npe) { // if no good, set all to 0
-                    Log.d("mylocation", npe.getMessage());
-                    lat = 0;
-                    lng = 0;
-                    currLat = 0;
-                    currLng = 0;
-                }
-            }
             LatLng eventLoc = new LatLng(lat, lng);
             LatLng currentLoc = new LatLng(currLat, currLng);
 
@@ -181,9 +196,29 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     }
 
     private boolean isEmpty(EditText text) {
-        if (text.getText().toString().trim().length() > 0)
-            return false;
-        else
-            return true;
+        return text.getText().toString().trim().length() <= 0;
+    }
+
+    /**
+     * request from UCSD
+     * @return
+     */
+    private String getLoc()
+    {
+        String requestURL = "https://api-qa.ucsd.edu:8243/location/v1/buildings?";
+        requestURL = requestURL.concat("lat=" + Double.toString(lat) + "&");
+        requestURL = requestURL.concat("lng=" + Double.toString(lng) + "&");
+        requestURL = requestURL.concat("&groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19&radius=50");
+
+
+        String str = "wow";
+
+
+
+
+
+
+
+        return str;
     }
 }
