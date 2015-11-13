@@ -14,8 +14,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Date;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
@@ -206,9 +223,32 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     private String getLoc()
     {
         String requestURL = "https://api-qa.ucsd.edu:8243/location/v1/buildings?";
-        requestURL = requestURL.concat("lat=" + Double.toString(lat) + "&");
-        requestURL = requestURL.concat("lng=" + Double.toString(lng) + "&");
-        requestURL = requestURL.concat("&groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19&radius=50");
+
+        String param1 = "lat=" + Double.toString(lat);
+        String param2 = "lng=" + Double.toString(lng);
+        String param3 = "groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19&radius=50";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url =requestURL + param1 + "&" + param2 + "&" + param3;
+        Log.d("URL", url);
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Log.d("Test", response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Errpr", error.getMessage());
+
+            }
+        });
+        queue.add(stringRequest);
+
 
 
         String str = "wow";
@@ -221,4 +261,5 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
         return str;
     }
+
 }
