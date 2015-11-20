@@ -19,6 +19,7 @@ public class Event {
     private String endTimeOfEvent; // time of an event
     private LatLng latLng;      // location of an event
     private double dist;        // distance from you to event
+    private boolean visibility;
 
 
     //We need to figure out how to store the times and what not, see if there is a scrollable and
@@ -63,10 +64,11 @@ public class Event {
      * @param currLL
      */
     public Event(String id, String title, String date, String startTime, String endTime,
-                 String description, String tags, LatLng latlng, LatLng currLL)
+                 String description, String tags, LatLng latlng, LatLng currLL, boolean vis)
     {
         this(title, date, startTime, endTime, description, tags, latlng, currLL);
         this.eventId = id;
+        this.visibility = vis;
     }
 
 
@@ -126,6 +128,8 @@ public class Event {
      * @return
      */
     public String getEventId() { return eventId; }
+
+    public boolean getVisibility() {return visibility;}
 
     /* ----------  SETTERS ---------- */
 

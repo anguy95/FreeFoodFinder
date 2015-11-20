@@ -152,6 +152,14 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
      */
     public void update(ArrayList<String> filter) {
         events = ea.getEventArray(filter);
+        /*
+        events = new ArrayList<Event>(ea.getEventMap(filter).values());
+        for (Event e : events) {
+            if (!e.getVisibility()) {
+                events.remove(e);
+            }
+        }
+        */
         eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
         listView.setAdapter(eventAdapter);
     }

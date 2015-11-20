@@ -21,21 +21,21 @@ import java.util.List;
 /**
  * Created by Ivan on 10/31/2015.
  */
-public class EventArray
-{
+public class EventArray {
     private HashMap<String, Event> eventsMap; // objectId and event map
     private ParseQuery<ParseObject> eq;   //event query
     private String db;                    //the database
     private Context context;
     private Location myLoc;
+    private ArrayList<String> filterArray;
 
     /**
      * Construct new event array class
+     *
      * @param context of the app
-     * @param db the name of the database
+     * @param db      the name of the database
      */
-    public EventArray(Context context, String db)
-    {
+    public EventArray(Context context, String db) {
         eventsMap = new HashMap<>();
         this.context = context;
         this.db = db;
@@ -45,10 +45,10 @@ public class EventArray
 
     /**
      * Add an event to the parse
+     *
      * @param e event to add
      */
-    public void add(Event e)
-    {
+    public void add(Event e) {
         ParseObject newEvent = new ParseObject(db);
         ParseGeoPoint pgp = new ParseGeoPoint(e.getLocation().latitude, e.getLocation().longitude);
 
@@ -79,10 +79,10 @@ public class EventArray
          *  min - the minutes between 0-59              */
 
         Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
-                             monthToNum(dateArr[1]),              // intMonth
-                             Integer.parseInt(dateArr[2]),        // intDay
-                             Integer.parseInt(timeArr[0])-1+offset, // intHour
-                             Integer.parseInt(timeArr[1]));       // intMin
+                monthToNum(dateArr[1]),              // intMonth
+                Integer.parseInt(dateArr[2]),        // intDay
+                Integer.parseInt(timeArr[0]) - 1 + offset, // intHour
+                Integer.parseInt(timeArr[1]));       // intMin
         newEvent.put(context.getString(R.string.EXP), date.getTime());
 
         // save the event to parse
@@ -99,52 +99,69 @@ public class EventArray
             }
         });*/
 
-        
+
         update(MainActivity.EMPTY, 2); // re-fetch data
     }
 
     /**
      * Get the event with matching ID
+     *
      * @param objectId id of the event
      * @return return Event object matching that objectId
      */
-    public Event get(String objectId) { return eventsMap.get(objectId); }
+    public Event get(String objectId) {
+        return eventsMap.get(objectId);
+    }
 
     /**
      * Get most recent array list of all the events
+     *
      * @param filter if looking for something specific
      * @return an ArrayList object of all the events
      */
-    public ArrayList<Event> getEventArray(ArrayList<String> filter) { return new ArrayList<>(eventsMap.values()); }
+    public ArrayList<Event> getEventArray(ArrayList<String> filter) {
+        return new ArrayList<>(eventsMap.values());
+    }
 
     /**
      * Get the ObjectId/Event Map<K, V>
+     *
      * @return a hashmap of objectid/event pairs
      */
-    public HashMap<String, Event> getEventMap(ArrayList<String> filter) { return eventsMap; }
+    public HashMap<String, Event> getEventMap(ArrayList<String> filter) {
+        return eventsMap;
+    }
 
     /**
      * setter for your current location
+     *
      * @param loc
      */
-    public void setMyLoc(Location loc) { this.myLoc = loc; }
+    public void setMyLoc(Location loc) {
+        this.myLoc = loc;
+    }
 
     /**
      * Helper method to update the local db
-     * @param filter find correct events
+     *
+     * @param filter   find correct events
      * @param position 0 = map, 1 = list, 2 = both
      */
-    public void update(ArrayList<String> filter, final int position)
-    {
+    public void update(ArrayList<String> filter, final int position) {
+
         /* filter check */
+        filter = new ArrayList<String>();
+        filter.add("fire");
+        filter.add("Vietnamese");
 
         if (!filter.isEmpty()) // if the filter is NOT empty
         {                      // prep it
+            filterArray = filter;
             //TODO filter prep
         }
 
         eq.cancel(); // cancel an older request:: MAKE SURE THIS IS GOOD WHEN WE HAVE LOTS OF EVENTS
-                    // needs to be heavily stress tested -> lots of runtime exceptions
+        // needs to be heavily stress tested -> lots of runtime exceptions
         eq.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> temp, ParseException exception) {
@@ -156,7 +173,7 @@ public class EventArray
                         try {
                             currLL = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
                         } catch (NullPointerException nullexception) {
-                            Log.d("current location", nullexception.getMessage());
+                            Log.d("current location", "error");
                         }
 
                         for (ParseObject e : temp) {
@@ -166,8 +183,14 @@ public class EventArray
                             if (currLL == null)
                                 currLL = eventLL;
 
-                            eventsMap.put(e.getObjectId(), //store ParseObject objectId
-                                    new Event( //make new event to store
+                            boolean vis = false;
+                            if (!filterArray.isEmpty() && filterArray != null) {
+                                for (String tag : filterArray) {
+                                    if (vis) break;
+                                    if (e.getString("Tags").contains(tag)) {
+                                        vis = true;
+                                    }
+                                    eventsMap.put(e.getObjectId(), new Event( //make new event to store
                                             e.getObjectId(),
                                             e.getString(context.getString(R.string.TIT)),
                                             e.getString(context.getString(R.string.DAT)),
@@ -176,9 +199,27 @@ public class EventArray
                                             e.getString(context.getString(R.string.DES)),
                                             e.getString(context.getString(R.string.TAG)),
                                             eventLL,
-                                            currLL
+                                            currLL,
+                                            vis));
+                                }
+
+                            } else {
+
+                                eventsMap.put(e.getObjectId(), //store ParseObject objectId
+                                        new Event( //make new event to store
+                                                e.getObjectId(),
+                                                e.getString(context.getString(R.string.TIT)),
+                                                e.getString(context.getString(R.string.DAT)),
+                                                e.getString(context.getString(R.string.STIM)),
+                                                e.getString(context.getString(R.string.ETIM)),
+                                                e.getString(context.getString(R.string.DES)),
+                                                e.getString(context.getString(R.string.TAG)),
+                                                eventLL,
+                                                currLL,
+                                                true
                                         )
                                 );
+                            }
                         }
                     } else {
                         Log.d("update", exception.getMessage());
@@ -204,18 +245,30 @@ public class EventArray
 
     private int monthToNum(String month) {
         switch (month) {
-            case "Jan": return 0;
-            case "Feb": return 1;
-            case "Mar": return 2;
-            case "Apr": return 3;
-            case "May": return 4;
-            case "Jun": return 5;
-            case "Jul": return 6;
-            case "Aug": return 7;
-            case "Sep": return 8;
-            case "Oct": return 9;
-            case "Nov": return 10;
-            default:    return 11; // case "Dec":
+            case "Jan":
+                return 0;
+            case "Feb":
+                return 1;
+            case "Mar":
+                return 2;
+            case "Apr":
+                return 3;
+            case "May":
+                return 4;
+            case "Jun":
+                return 5;
+            case "Jul":
+                return 6;
+            case "Aug":
+                return 7;
+            case "Sep":
+                return 8;
+            case "Oct":
+                return 9;
+            case "Nov":
+                return 10;
+            default:
+                return 11; // case "Dec":
         }
     }
 }

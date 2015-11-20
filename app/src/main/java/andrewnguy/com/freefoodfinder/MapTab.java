@@ -212,7 +212,7 @@ public class MapTab extends Fragment implements View.OnClickListener
             try {
                 intent.putExtra("currLat", map.getMyLocation().getLatitude());
                 intent.putExtra("currLng", map.getMyLocation().getLongitude());
-            } catch(NullPointerException npe) { Log.d("mylocation", npe.getMessage()); }
+            } catch(NullPointerException npe) { Log.d("mylocation", "error"/*npe.getMessage()*/); }
             startActivityForResult(intent, MAP_CREATE_EVENT);
         }
     }
@@ -270,7 +270,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
             if ( !eventMarkers.containsKey(newKeys[i]) ) { // if the current event map doesn't have this marker, add
                 Event tempEvent = tempMap.get(newKeys[i]); // get the event (reference)
-                Marker tempMarker = map.addMarker(new MarkerOptions().position(tempEvent.getLocation())); // add to map
+                Marker tempMarker = map.addMarker(new MarkerOptions().position(tempEvent.getLocation()).visible(tempEvent.getVisibility())); // add to map
                 eventMarkers.put(newKeys[i], tempMarker);  // add marker to hashmap<id, marker>
                 events.put(tempMarker, tempEvent);         // add event to hashmap<marker, event>
             }
@@ -285,6 +285,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 events.remove(tempMarker);
             }
         }
+
     }
 }
 
