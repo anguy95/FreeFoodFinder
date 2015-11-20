@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Selection;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,26 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.android.gms.maps.model.LatLng;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.Date;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
@@ -49,9 +30,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
     private int times = 0; // event desc check
 
-    // API for ucsd maps
-    private final static String APP_KEY = "yA1qdB9d1elQ5rhz12h9Q1ZKxlMa";
-    private final static String APP_SECRET = "6XcIqzIgbuP8hGhf959MLF8pQPMa";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -108,7 +86,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         }
 
 
-        locDesc.setText(this.getLoc(), TextView.BufferType.NORMAL);
+            getLoc();
     }
 
     @Override
@@ -217,49 +195,19 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     }
 
     /**
-     * request from UCSD
+     * HTTP GET request UCSD maps
+     * Needs lat/lng
+     * Returns building names within a radius
      * @return
      */
-    private String getLoc()
-    {
-        String requestURL = "https://api-qa.ucsd.edu:8243/location/v1/buildings?";
+    private void getLoc() {
 
+        // convert lat/lng to strings for maps API
         String param1 = "lat=" + Double.toString(lat);
         String param2 = "lng=" + Double.toString(lng);
-        String param3 = "groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19&radius=50";
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url =requestURL + param1 + "&" + param2 + "&" + param3;
-        Log.d("URL", url);
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d("Test", response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Errpr", error.getMessage());
-
-            }
-        });
-        queue.add(stringRequest);
-
-
-
-        String str = "wow";
-
-
-
-
-
-
-
-        return str;
+        LocationSetter rl = new LocationSetter(locDesc);
+        rl.execute(param1 + "&" + param2); //toss in lat/lng as params
     }
 
 }
