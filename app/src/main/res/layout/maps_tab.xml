@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="31dp"
         android:layout_marginEnd="31dp"
-        android:tint="@color/colorPrimaryDark"
+        android:tint="#FFFFFF"
         app:backgroundTint="@color/colorPrimary"
         android:layout_gravity="bottom|end"
         android:src="@android:drawable/ic_input_add"
