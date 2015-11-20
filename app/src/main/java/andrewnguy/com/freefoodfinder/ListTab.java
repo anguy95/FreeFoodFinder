@@ -170,8 +170,5 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
                     temp.add(events.get(i));
 
         events = temp;
-
-        for (int i = 0; i < events.size(); i++)
-            Log.e("event", events.get(i).getEventId());
     }
 }
