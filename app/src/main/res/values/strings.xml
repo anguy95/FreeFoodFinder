@@ -2,15 +2,10 @@
     <string name="app_name">FreeFoodFinder</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
-    <string name="add_event_description">Enter a description of the event.</string>
-    <string name="add_location_description">Enter location of event.</string>
-    <string name="add_event_title">Title of Event</string>
-    <string name="edit_start_time">Start Time</string>
-    <string name="edit_end_time">End Time</string>
-    <string name="edit_event_date">Select Date of Event</string>
-    <string name="title_activity_event_view">EventViewActivity</string>
+
     <string name="location_description_title">Location Description</string>
     <string name="event_description_title">Event Description</string>
+    <string name="title_activity_event_view">EventViewActivity</string>
 
 
     <string name="location_temp_holder">In York Hall level 2 in room 2000</string>
@@ -23,13 +18,20 @@
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
 
-
-
+    <!-- CONFIRM EVENT ACTIVITY -->
+    <string name="add_event_title">Title of Event</string>
+    <string name="add_event_description">Enter description of the event (i.e. room/floor number, reasons for event, pictures) </string>
+    <string name="add_event_tags">Enter tags (i.e. types of food, hosting club/org, etc)</string>
+    <string name="add_location_description">Enter location of the event.</string>
+    <string name="edit_start_time">Start Time</string>
+    <string name="edit_end_time">End Time</string>
+    <string name="edit_event_date">Date of Event</string>
 
     <!-- DATABASE STUFF -->
     <string name="DB">currentFreeFoodsDB</string>
     <string name="TIT">Title</string>
     <string name="DES">Description</string>
+    <string name="TAG">Tags</string>
 
     <string name="DAT">Date</string>
     <string name="STIM">startTime</string>
@@ -41,7 +43,6 @@
     <string name="LNG">Longitude</string>
     <string name="LOC">Location</string>
 
-    <string name="TAG">Tags</string>
     <!-- DATABASE STUFF -->
 
 

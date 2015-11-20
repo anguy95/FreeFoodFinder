@@ -13,6 +13,7 @@ public class Event {
     private String eventId;     // id # of an event
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
+    private String eventTags;   // event tags
     private String dateOfEvent; // start date of the event
     private String startTimeOfEvent; // time of an event
     private String endTimeOfEvent; // time of an event
@@ -34,13 +35,14 @@ public class Event {
      * @param currLL
      */
     public Event (String title, String date, String startTime, String endTime,
-                  String description, LatLng latlng, LatLng currLL)
+                  String description, String tags, LatLng latlng, LatLng currLL)
     {
         this.eventTitle = title;
         this.dateOfEvent = date;
         this.startTimeOfEvent = startTime;
         this.endTimeOfEvent = endTime;
         this.eventDesc = description;
+        this.eventTags = tags;
         this.latLng = latlng;
 
         // calc distance from you and the event
@@ -61,9 +63,9 @@ public class Event {
      * @param currLL
      */
     public Event(String id, String title, String date, String startTime, String endTime,
-                 String description, LatLng latlng, LatLng currLL)
+                 String description, String tags, LatLng latlng, LatLng currLL)
     {
-        this(title, date, startTime, endTime, description, latlng, currLL);
+        this(title, date, startTime, endTime, description, tags, latlng, currLL);
         this.eventId = id;
     }
 
@@ -81,6 +83,12 @@ public class Event {
      * @return a String of the event description
      */
     public String getDescription() { return eventDesc; }
+
+    /**
+     * Get the event tags
+     * @return
+     */
+    public String getTags() { return eventTags; }
 
     /**
      * Get date of the event

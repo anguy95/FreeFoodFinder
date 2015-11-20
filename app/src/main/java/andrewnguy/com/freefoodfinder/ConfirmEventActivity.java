@@ -14,14 +14,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.IOException;
-
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     private Button confirm, cancel;
-    private EditText title, eventDesc, start, end, date;
-    private TextView locDesc;
-    private String titleStr, eventDescStr, locDescStr, dateStr, startStr, endStr;
+    private EditText title, desc, tags, start, end, date;
+    private TextView loc;
+
     private EventArray ea; // reference the main EventArray
 
     // create some dummmy coords
@@ -44,17 +42,11 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
         ea = MainActivity.ea;
 
-
-        confirm = (Button) findViewById(R.id.confirm_event_activity_confirm_button); // confirm post button
-        cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);   // cancel post button
-
-        title = (EditText) findViewById(R.id.confirm_event_activity_title);
-
-        eventDesc = (EditText) findViewById(R.id.confirm_event_activity_event_description);
-
-
-
-        locDesc = (EditText) findViewById(R.id.confirm_event_activity_location_description);
+        // edit texts
+        title = (EditText) findViewById(R.id.confirm_event_activity_title); // event description
+        desc = (EditText) findViewById(R.id.confirm_event_activity_event_description);  // event description
+        loc = (EditText) findViewById(R.id.confirm_event_activity_location_description); // event location
+        tags = (EditText) findViewById(R.id.confirm_event_activity_tags); // event tags
 
         start = (EditText) findViewById(R.id.event_date_time_startTime); // start time
         start.setOnClickListener(this);
@@ -62,10 +54,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         end = (EditText) findViewById(R.id.event_date_time_endTime); // end time
         end.setOnClickListener(this);
 
-        date = (EditText) findViewById(R.id.event_date_time_date);
+        date = (EditText) findViewById(R.id.event_date_time_date); // date of event
         date.setOnClickListener(this);
 
+        // buttons
+        confirm = (Button) findViewById(R.id.confirm_event_activity_confirm_button); // confirm post button
         confirm.setOnClickListener(this);
+
+        cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);   // cancel post button
         cancel.setOnClickListener(this);
 
         // try to get the coords
@@ -128,7 +124,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 msg.append(" Title");
                 emptyFields = true;
             }
-            /*if (isEmpty(locDesc)) {
+            /*if (isEmpty(loc)) {
                 if (emptyFields) {
                     msg.append(",");
                 }
@@ -162,20 +158,22 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 return;
             }
 
-            if (isEmpty(eventDesc) && times != 1) {
-                // maybe warn them? it's okay to have empty event description
-                Toast.makeText(this, "Are you sure the event you want to leave the event description field empty?", Toast.LENGTH_LONG).show();
+            if (times != 1 && isEmpty(desc) || isEmpty(tags)) {
+                // maybe warn them? it's okay to have an empty event description/tags
+                String optionalFields = isEmpty(desc) ? "event descriptions" : "event tags";
+                Toast.makeText(this, "Are you sure you want to leave the " + optionalFields + " blank?", Toast.LENGTH_LONG).show();
                 times++;
                 return;
             }
 
 
-            titleStr = title.getText().toString();
-            eventDescStr = eventDesc.getText().toString();
-            dateStr = date.getText().toString();
-            startStr = start.getText().toString();
-            endStr = end.getText().toString();
-            locDescStr = locDesc.getText().toString();
+            String titleStr = title.getText().toString();
+            String descStr = desc.getText().toString();
+            String dateStr = date.getText().toString();
+            String startStr = start.getText().toString();
+            String endStr = end.getText().toString();
+            String locStr = loc.getText().toString();
+            String tagsStr = tags.getText().toString();
 
 
             LatLng eventLoc = new LatLng(lat, lng);
@@ -183,7 +181,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             // add the new event
             ea.add(new Event(titleStr, dateStr, startStr, endStr,
-                             eventDescStr, eventLoc, currentLoc));
+                             descStr, tagsStr, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();
@@ -206,7 +204,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         String param1 = "lat=" + Double.toString(lat);
         String param2 = "lng=" + Double.toString(lng);
 
-        LocationSetter rl = new LocationSetter(locDesc);
+        LocationSetter rl = new LocationSetter(loc);
         rl.execute(param1 + "&" + param2); //toss in lat/lng as params
     }
 

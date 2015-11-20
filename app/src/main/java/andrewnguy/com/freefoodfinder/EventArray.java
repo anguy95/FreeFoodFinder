@@ -54,6 +54,7 @@ public class EventArray
 
         newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
         newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
+        newEvent.put(context.getString(R.string.TAG), e.getTags()); // put tags
         newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
         newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
         newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
@@ -173,6 +174,7 @@ public class EventArray
                                             e.getString(context.getString(R.string.STIM)),
                                             e.getString(context.getString(R.string.ETIM)),
                                             e.getString(context.getString(R.string.DES)),
+                                            e.getString(context.getString(R.string.TAG)),
                                             eventLL,
                                             currLL
                                         )
