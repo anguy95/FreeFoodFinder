@@ -40,7 +40,7 @@ public class EventArray
         this.context = context;
         this.db = db;
         eq = ParseQuery.getQuery(db);
-        update(MainActivity.EMPTY, 2);
+        update(2);
     }
 
     /**
@@ -100,7 +100,7 @@ public class EventArray
         });*/
 
         
-        update(MainActivity.EMPTY, 2); // re-fetch data
+        update(2); // re-fetch data
     }
 
     /**
@@ -112,16 +112,15 @@ public class EventArray
 
     /**
      * Get most recent array list of all the events
-     * @param filter if looking for something specific
      * @return an ArrayList object of all the events
      */
-    public ArrayList<Event> getEventArray(ArrayList<String> filter) { return new ArrayList<>(eventsMap.values()); }
+    public ArrayList<Event> getEventArray() { return new ArrayList<>(eventsMap.values()); }
 
     /**
      * Get the ObjectId/Event Map<K, V>
      * @return a hashmap of objectid/event pairs
      */
-    public HashMap<String, Event> getEventMap(ArrayList<String> filter) { return eventsMap; }
+    public HashMap<String, Event> getEventMap() { return eventsMap; }
 
     /**
      * setter for your current location
@@ -131,17 +130,11 @@ public class EventArray
 
     /**
      * Helper method to update the local db
-     * @param filter find correct events
      * @param position 0 = map, 1 = list, 2 = both
      */
-    public void update(ArrayList<String> filter, final int position)
+    public void update(final int position)
     {
         /* filter check */
-
-        if (!filter.isEmpty()) // if the filter is NOT empty
-        {                      // prep it
-            //TODO filter prep
-        }
 
         eq.cancel(); // cancel an older request:: MAKE SURE THIS IS GOOD WHEN WE HAVE LOTS OF EVENTS
                     // needs to be heavily stress tested -> lots of runtime exceptions
@@ -188,14 +181,14 @@ public class EventArray
                 /* update the map or the list or both after successful find */
                 switch (position) {
                     case 0:
-                        MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
+                        MainActivity.adapter.getMapTab().update();
                         break;
                     case 1:
-                        MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                        MainActivity.adapter.getListTab().update();
                         break;
                     default:
-                        MainActivity.adapter.getMapTab().update(MainActivity.EMPTY);
-                        MainActivity.adapter.getListTab().update(MainActivity.EMPTY);
+                        MainActivity.adapter.getMapTab().update();
+                        MainActivity.adapter.getListTab().update();
                         break;
                 }
             }

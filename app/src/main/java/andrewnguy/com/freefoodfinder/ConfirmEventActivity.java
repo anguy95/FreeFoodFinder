@@ -158,7 +158,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 return;
             }
 
-            if (times != 1 && isEmpty(desc) || isEmpty(tags)) {
+            if (times == 0 && isEmpty(desc) || isEmpty(tags)) {
                 // maybe warn them? it's okay to have an empty event description/tags
                 String optionalFields = isEmpty(desc) ? "event descriptions" : "event tags";
                 Toast.makeText(this, "Are you sure you want to leave the " + optionalFields + " blank?", Toast.LENGTH_LONG).show();

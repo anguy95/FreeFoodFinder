@@ -7,11 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
 
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private CharSequence Titles[]={"Map","List"};
     private int Numboftabs = 2;
 
+    private Button searchBtn;
+    private static ArrayList<String> tags = new ArrayList<>();
+
     /* parse updates */
     private Handler h;
     private boolean stop;
@@ -36,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
 
         ea = new EventArray(this, getString(R.string.DB));
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        // search button
+        searchBtn = (Button) findViewById(R.id.search_button);
+        searchBtn.setOnClickListener(this);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -66,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             public void run() {
 
                 if (!stop) { // check if we are stopped
-                    ea.update(EMPTY, update);
+                    ea.update(update);
                 }
                 h.postDelayed(this, DELAY);
             }
@@ -75,6 +88,28 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
     }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.search_button) {
+            EditText editText = (EditText) findViewById(R.id.search_bar); // get the edittext
+            String searchTags = editText.getText().toString(); // get the filter parameters
+            searchTags = searchTags.replace(":", " ").replace(",", " ").replace(";", " ");  // replace
+            searchTags = searchTags.replace("-", " ").replace("_", " ").replace("/", " "); // tags splits
+            String[] tagsArr = searchTags.split("\\s"); // get tags array to iterate through
+
+            for (int i = 0; i < tagsArr.length; i++)
+            {
+                tags.clear();
+                tags.add(tagsArr[i]);
+            }
+
+            adapter.getMapTab().filter(tags);
+            adapter.getListTab().update();
+        }
+    }
+
+    public static ArrayList<String> getTags() { return tags; }
 
     @Override
     public void onPause() {

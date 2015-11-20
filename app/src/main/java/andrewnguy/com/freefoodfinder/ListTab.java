@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +40,12 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         listView = (ListView) v.findViewById(R.id.list_tab_listview);
 
         ea = MainActivity.ea;
-        events = ea.getEventArray(MainActivity.EMPTY); // get events array
+        events = ea.getEventArray(); // get events array
 
         fab = (FloatingActionButton) v.findViewById(R.id.list_tab_fab);
         fab.setOnClickListener(this);
 
-        update(MainActivity.EMPTY);
+        update();
 
         listView.setOnItemClickListener(this);
 
@@ -63,7 +64,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     public void onResume()
     {
         super.onResume();
-        update(MainActivity.EMPTY);
+        update();
     }
     /**
      * Check click events. Responds to:
@@ -140,7 +141,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
                 // manipulate the Intent data to get simple data
                 Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
 
-                ea.update(MainActivity.EMPTY, 1); // update the list tab
+                ea.update(1); // update the list tab
             }
             // else do nothing
         }
@@ -148,11 +149,29 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     /**
      * update the list view on add or launch or request
-     * @param filter out some results
      */
-    public void update(ArrayList<String> filter) {
-        events = ea.getEventArray(filter);
+    public void update() {
+        events = ea.getEventArray();
+        filter(MainActivity.getTags());
         eventAdapter = new EventListAdapter(getActivity().getApplicationContext(), R.layout.list_row_view, events);
         listView.setAdapter(eventAdapter);
+    }
+
+    public void filter(ArrayList<String> tags) {
+
+        if (tags.isEmpty())
+            return;
+
+        ArrayList<Event> temp = new ArrayList<>();
+
+        for (int i = 0; i < events.size(); i++)
+            for (int j = 0; j < tags.size(); j++)
+                if (events.get(i).getTags().contains(tags.get(j)))
+                    temp.add(events.get(i));
+
+        events = temp;
+
+        for (int i = 0; i < events.size(); i++)
+            Log.e("event", events.get(i).getEventId());
     }
 }

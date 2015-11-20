@@ -29,7 +29,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class MapTab extends Fragment implements View.OnClickListener
@@ -93,7 +95,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         map.setOnMyLocationChangeListener(myLocationChangeListener);
 
         /* Adding existing markers */
-        update(MainActivity.EMPTY);
+        update();
 
 
         /* set up marker info viewing */
@@ -236,7 +238,7 @@ public class MapTab extends Fragment implements View.OnClickListener
             // check the resultCode
             if (resultCode == Activity.RESULT_OK) { // OK
                 Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
-                update(MainActivity.EMPTY);
+                update();
             }
 
             /* do this stuff if cancelled as well (or after adding the marker) */
@@ -251,13 +253,12 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     /**
      * update the map view on add or launch or request
-     * @param filter out some results
      */
-    public void update(ArrayList<String> filter) {
+    public void update() {
 
         ea.setMyLoc(map.getMyLocation()); // set up current location for distance calculations
 
-        HashMap<String, Event> tempMap = ea.getEventMap(filter); // get some filtered results
+        HashMap<String, Event> tempMap = ea.getEventMap(); // get some filtered results
 
         String[] newKeys = new String[tempMap.size()]; // make an array that
         tempMap.keySet().toArray(newKeys);             // contains all the new keys (objectIds)
@@ -285,6 +286,37 @@ public class MapTab extends Fragment implements View.OnClickListener
                 events.remove(tempMarker);
             }
         }
+
+        filter(MainActivity.getTags());
+    }
+
+    public void filter(ArrayList<String> tags) {
+        //private HashMap<String, Marker> eventMarkers = new HashMap<>();
+        //private HashMap<Marker, Event> events = new HashMap<>();
+
+        if (tags.isEmpty())
+            return;
+
+        //get values (events)
+        Collection<Event> eventCollection = events.values();
+        List<Event> eventsArray = new ArrayList<>(eventCollection);
+
+        //filter tags
+        ArrayList<Event> filteredEvents = new ArrayList<>();
+        for (int i = 0; i < eventsArray.size(); i++)
+            for (int j = 0; j < tags.size(); j++)
+                if (eventsArray.get(i).getTags().contains(tags.get(j)))
+                    filteredEvents.add(eventsArray.get(i));
+
+        // set all markers invisible
+        Collection<Marker> markers = eventMarkers.values();
+        List<Marker> markersArray = new ArrayList<>(markers);
+        for (int i = 0; i < markersArray.size(); i++)
+            markersArray.get(i).setVisible(false);
+
+        // set filtered visible
+        for (int i = 0; i < filteredEvents.size(); i++)
+            eventMarkers.get(filteredEvents.get(i).getEventId()).setVisible(true);
     }
 }
 
