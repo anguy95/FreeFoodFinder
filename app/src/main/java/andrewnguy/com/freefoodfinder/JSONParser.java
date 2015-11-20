@@ -11,21 +11,22 @@ import org.json.JSONObject;
  */
 public class JSONParser {
 
-    private String str = "";
+    private JSONObject jobj;
 
-    public JSONParser(String stringToParse) {
-        this.str = stringToParse;
+    public JSONParser(String stringToParse) throws JSONException {
+        jobj = new JSONObject(stringToParse);
     }
 
     public String parse(String find) throws JSONException {
 
         String result = "";
 
-        JSONObject jobj = new JSONObject(str); //create the JSON object
         JSONArray jarr = jobj.getJSONArray("markers"); // break down the markers
 
         Log.e("count", Integer.toString(jobj.length()));
         Log.e("count", Integer.toString(jarr.length()));
+
+        // TODO shuffle through the markers and search for the "find" string (most likely location)
 
         return result;
     }

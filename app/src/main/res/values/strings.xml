@@ -17,6 +17,7 @@
     <!-- BUTTON STUFF-->
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
+    <string name="search_btn">Search</string>
 
     <!-- CONFIRM EVENT ACTIVITY -->
     <string name="add_event_title">Title of Event</string>
