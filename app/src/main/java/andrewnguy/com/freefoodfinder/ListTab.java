@@ -166,7 +166,8 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
         for (int i = 0; i < events.size(); i++)
             for (int j = 0; j < tags.size(); j++)
-                if (events.get(i).getTags().contains(tags.get(j)))
+                if (events.get(i).getTitle().toLowerCase().contains(tags.get(j).toLowerCase()) || // check if title
+                    events.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
                     temp.add(events.get(i));
 
         events = temp;

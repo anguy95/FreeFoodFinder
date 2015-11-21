@@ -305,7 +305,8 @@ public class MapTab extends Fragment implements View.OnClickListener
         ArrayList<Event> filteredEvents = new ArrayList<>();
         for (int i = 0; i < eventsArray.size(); i++)
             for (int j = 0; j < tags.size(); j++)
-                if (eventsArray.get(i).getTags().contains(tags.get(j)))
+                if (eventsArray.get(i).getTitle().toLowerCase().contains(tags.get(j).toLowerCase()) || // check if title
+                    eventsArray.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
                     filteredEvents.add(eventsArray.get(i));
 
         // set all markers invisible

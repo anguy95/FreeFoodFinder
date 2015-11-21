@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +14,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
-
-    public static final ArrayList<String> EMPTY = new ArrayList<>(); // empty array list for no filter usage
-
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener
+{
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
     private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth
 
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         });
 
-        /* Handler to update every 15 seconds */
+        /* Handler to update every DELAY seconds */
         stop = false;
         h = new Handler(); // the loop timer
         h.postDelayed(new Runnable() {

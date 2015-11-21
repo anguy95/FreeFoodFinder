@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
-    private Button confirm, cancel;
     private EditText title, desc, tags, start, end, date;
     private TextView loc;
 
@@ -26,7 +25,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     private double lat = 0, lng = 0;
     private double currLat = 0, currLng = 0;
 
-    private int times = 0; // event desc check
+    private int times; // event desc check
 
 
     @Override
@@ -35,6 +34,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirm_event_activity);
 
+        times = 0;
 
         //Stops keyboard from popping up all the time on activity create
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -58,10 +58,10 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         date.setOnClickListener(this);
 
         // buttons
-        confirm = (Button) findViewById(R.id.confirm_event_activity_confirm_button); // confirm post button
+        Button confirm = (Button) findViewById(R.id.confirm_event_activity_confirm_button);
         confirm.setOnClickListener(this);
 
-        cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);   // cancel post button
+        Button cancel = (Button) findViewById(R.id.confirm_event_activity_cancel_button);
         cancel.setOnClickListener(this);
 
         // try to get the coords
@@ -158,7 +158,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 return;
             }
 
-            if (times == 0 && isEmpty(desc) || isEmpty(tags)) {
+            if (times == 0 && (isEmpty(desc) || isEmpty(tags))) {
                 // maybe warn them? it's okay to have an empty event description/tags
                 String optionalFields = isEmpty(desc) ? "event descriptions" : "event tags";
                 Toast.makeText(this, "Are you sure you want to leave the " + optionalFields + " blank?", Toast.LENGTH_LONG).show();
@@ -196,7 +196,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
      * HTTP GET request UCSD maps
      * Needs lat/lng
      * Returns building names within a radius
-     * @return
      */
     private void getLoc() {
 
