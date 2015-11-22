@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -46,6 +47,12 @@ import android.widget.TextView;
             viewEndTime.setText(extras.getString("eventEndTime"));
             TextView viewDate = (TextView) findViewById(R.id.event_date_time_date);
             viewDate.setText(extras.getString("eventDate"));
+
+            LinearLayout viewTagHolder = (LinearLayout)findViewById(R.id.event_view_tag_display);
+            TextView viewTags = new TextView(this);
+            viewTags.setText(extras.getString("eventTags"));
+            viewTagHolder.addView(viewTags);
+
 
 
         }

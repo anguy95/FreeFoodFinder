@@ -127,9 +127,11 @@ public class MapTab extends Fragment implements View.OnClickListener
                 eventDate.setText(dateOfEvent);
 
 
-                //TODO SET TIME UPDATE HARD CODED
                 TextView eventTime = (TextView) v.findViewById(R.id.marker_info_window_time);
                 eventTime.setText((String) (toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
+
+                TextView eventTag = (TextView) v.findViewById(R.id.marker_info_window_food_list);
+                eventTag.setText( (toDisplay.getTags()));
 
                 return v;
             }
@@ -154,6 +156,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
                 intent.putExtra("eventDate", toDisplay.getDate());
                 intent.putExtra("eventLocDesc", toDisplay.getLocation());
+                intent.putExtra("eventTags", toDisplay.getTags());
 
                 startActivity(intent);
             }
