@@ -6,9 +6,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="andrewnguy.com.freefoodfinder.ConfirmEventActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_horizontal_margin">
 
-    <!-- TODO GET COLORS OF THE STUFF AND PUT INTO COLORS FILE-->
+    <!-- TITLE-->
     <EditText
         android:id="@+id/confirm_event_activity_title"
         android:layout_width="wrap_content"
@@ -17,7 +18,7 @@
         android:textColor="#8D8D8D"
         android:hint="@string/add_event_title"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="@dimen/confirm_event_main_title"
         android:textStyle="bold"
         android:ellipsize="start"
         android:gravity="center"
@@ -29,7 +30,7 @@
         android:layout_alignParentEnd="true"
         android:autoText="false" />
 
-
+    <!-- DATE AND TIME PICKER-->
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -39,16 +40,6 @@
         android:layout_below="@+id/confirm_event_activity_title"
         android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"/>
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="60dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/view"
-        android:layout_alignParentStart="true"
-        android:visibility="invisible" />
-
     <include
         android:id="@+id/confirm_event_activity_date_time"
         layout="@layout/event_date_time"
@@ -57,8 +48,9 @@
         android:layout_below="@+id/view"
     android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"> </include>
 
+    <!-- -->
     <View
-        android:id="@+id/view3"
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
@@ -77,10 +69,9 @@
         android:textCursorDrawable="@null"
         android:textSize="12sp"
         android:background="@drawable/confirm_event_activity_text_bg"
-        android:layout_below="@+id/view3"
+        android:layout_below="@+id/confirm_event_activity_tags"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"/>
-
     <EditText
         android:id="@+id/confirm_event_activity_event_description"
         android:layout_width="wrap_content"
@@ -102,37 +93,34 @@
         android:hint="@string/add_event_tags"
         android:textCursorDrawable="@null"
         android:textSize="12sp"
+        android:singleLine="true"
         android:background="@drawable/confirm_event_activity_text_bg"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:padding="15dp"
         android:textColor="#8D8D8D"
-        android:layout_below="@+id/confirm_event_activity_event_description"
+        android:layout_below="@+id/view2"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
-
     <Button
         android:id="@+id/confirm_event_activity_confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="@string/confirm_button"
         android:background="@drawable/confirm_activity_confirm_button"
+        android:textSize="12dp"
         android:layout_alignTop="@+id/confirm_event_activity_cancel_button"
         android:layout_alignEnd="@+id/confirm_event_activity_tags" />
-
     <Button
         android:id="@+id/confirm_event_activity_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginTop="15dp"
         android:text="@string/cancel_button"
         android:background="@drawable/confirm_activity_cancel_button"
-        android:layout_below="@+id/confirm_event_activity_tags"
+        android:textSize="12dp"
+        android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/confirm_event_activity_confirm_button" />
-
-
-
 </RelativeLayout>

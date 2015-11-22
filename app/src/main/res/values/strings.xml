@@ -17,6 +17,7 @@
     <string name="add_event_pin_description">An image of how the marker dropper looks like</string>
 
     <!-- BUTTON STUFF-->
+    <string name="comment_send">Submit</string>
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
     <string name="search_btn">Search</string>
@@ -24,7 +25,7 @@
     <!-- CONFIRM EVENT ACTIVITY -->
     <string name="add_event_title">Title of Event</string>
     <string name="add_event_description">Enter description of the event (i.e. room/floor number, reasons for event, pictures) </string>
-    <string name="add_event_tags">Enter tags (i.e. types of food, hosting club/org, etc)</string>
+    <string name="add_event_tags">Enter tags (i.e. type of food, club, free)</string>
     <string name="add_location_description">Enter location of the event.</string>
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>

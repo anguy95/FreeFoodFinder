@@ -7,11 +7,11 @@
     <EditText
         android:id="@+id/event_date_time_date"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:inputType="date"
         android:ems="10"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="@dimen/confirm_event_sub_title"
         android:textColor="#8D8D8D"
         android:hint="@string/edit_event_date"
         android:textAlignment="center"
@@ -23,25 +23,27 @@
     <EditText
         android:id="@+id/event_date_time_startTime"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:ems="10"
         android:hint="@string/edit_start_time"
-        android:textSize="13sp"
+        android:textSize="@dimen/date_start_end_text"
         android:textColor="#8D8D8D"
+        android:background="@android:color/transparent"
         android:textAlignment="center"
         android:textCursorDrawable="@null"
         android:layout_below="@+id/event_date_time_date"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="false"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        android:gravity="bottom" />
     <TextView
         android:id="@+id/time_to_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="to"
         android:textStyle="bold"
-        android:textSize="12sp"
+        android:textSize="@dimen/date_to_text"
         android:textColor="#545454"
         android:layout_alignBaseline="@+id/event_date_time_startTime"
         android:layout_alignBottom="@+id/event_date_time_startTime"
@@ -49,16 +51,18 @@
     <EditText
         android:id="@+id/event_date_time_endTime"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="25dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="39dp"
         android:hint="@string/edit_end_time"
         android:textAlignment="center"
-        android:textSize="13sp"
+        android:textSize="@dimen/date_start_end_text"
+        android:background="@android:color/transparent"
         android:textColor="#8D8D8D"
         android:textCursorDrawable="@null"
         android:layout_below="@+id/event_date_time_date"
         android:layout_alignParentEnd="true"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        android:gravity="bottom" />
 
 </RelativeLayout>

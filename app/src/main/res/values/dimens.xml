@@ -5,4 +5,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+
+    <dimen name="confirm_event_main_title">25sp</dimen>
+    <dimen name="confirm_event_sub_title">16sp</dimen>
+    <dimen name="date_start_end_text">14sp</dimen>
+    <dimen name="date_to_text">15sp</dimen>
 </resources>

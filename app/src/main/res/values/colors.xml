@@ -2,5 +2,12 @@
 <resources>
     <color name="colorPrimary">#BB4144</color>
     <color name="colorPrimaryDark">#8e3134</color>
-    <color name="tabsScrollColor">#8e3134</color>
+
+    <!-- CONFIRM/EVENT ACTIVITY COLORS-->
+    <color name="textBoxBG">#e9e8e8</color>
+    <color name="confirmActivityBG">#F6F6F6</color>
+
+    <!-- TAB VIEW COLORS-->
+    <color name="tabsScrollColor">#fff</color>
+    <color name="tab_text_color">#fff</color>
 </resources>
