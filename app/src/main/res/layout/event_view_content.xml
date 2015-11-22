@@ -31,24 +31,16 @@
             android:gravity="center" />
 
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/event_view_title"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="10dp" />
-
         <HorizontalScrollView
             android:id="@+id/event_view_tag"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/view"
             android:background="#FFFFFF"
-            android:fillViewport="false">
+            android:fillViewport="false"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/view3"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
 
             <LinearLayout
                 android:id="@+id/event_view_tag_display"
@@ -64,11 +56,20 @@
 
         <!--The Date and Time -->
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_view_title"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp" />
+
         <TextView
             android:id="@+id/event_date_time_date"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_below="@+id/view2"
+            android:layout_below="@+id/view"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@android:color/transparent"
@@ -139,9 +140,9 @@
             android:layout_marginTop="15dp"
             android:text="@string/location_description_title"
             android:textAlignment="center"
-            android:textColor="#8D8D8D"
+            android:textColor="@color/text_box_color"
             android:textStyle="bold"
-            android:layout_below="@+id/view3"
+            android:layout_below="@+id/view2"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/confirm_event_sub_title" />
 
@@ -152,7 +153,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/location_temp_holder"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="@color/text_box_color"
             android:background="@drawable/event_view_text_bg"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
@@ -174,7 +175,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/event_description_title"
             android:textSize="@dimen/confirm_event_sub_title"
-            android:textColor="#8D8D8D"
+            android:textColor="@color/text_box_color"
             android:textStyle="bold"
             android:layout_below="@+id/view4"
             android:layout_centerHorizontal="true"/>
@@ -185,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="@color/text_box_color"
             android:background="@drawable/event_view_text_bg"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
@@ -213,18 +214,18 @@
             android:id="@+id/event_view_comment_submit"
             android:hint="@string/event_view_comment_to_add"
             android:textCursorDrawable="@null"
-            android:textSize="12sp"
             android:gravity="start"
             android:background="@drawable/confirm_event_activity_text_bg"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_marginTop="25dp"
-            android:textColor="#8D8D8D"
+            android:textColor="@color/text_box_color"
             android:layout_below="@+id/view5"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/confirm_comment_button"
             android:layout_marginEnd="15dp"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/confirm_comment_button"
@@ -240,7 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/event_comment_box_title"
-            android:textColor="#8D8D8D"
+            android:textColor="@color/text_box_color"
             android:textSize="@dimen/confirm_event_sub_title"
             android:textStyle="bold"
             android:layout_below="@+id/event_view_comment_submit"
@@ -255,6 +256,30 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/like_toggle_selector"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="25dp"
+            android:layout_above="@+id/confirm_comment_button"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="125"
+            android:id="@+id/event_view_likes"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:layout_alignEnd="@+id/view5"
+            android:layout_marginRight="20dp"
+            android:layout_above="@+id/toggleButton"
+            android:layout_marginBottom="20dp" />
 
     </RelativeLayout>
 

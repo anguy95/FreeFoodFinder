@@ -1,126 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="550dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="andrewnguy.com.freefoodfinder.ConfirmEventActivity"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_horizontal_margin">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-    <!-- TITLE-->
-    <EditText
-        android:id="@+id/confirm_event_activity_title"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#8D8D8D"
-        android:hint="@string/add_event_title"
-        android:textAlignment="center"
-        android:textSize="@dimen/confirm_event_main_title"
-        android:textStyle="bold"
-        android:ellipsize="start"
-        android:gravity="center"
-        android:textCursorDrawable="@null"
-        android:background="@android:color/transparent"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/confirm_event_activity_location_description"
-        android:layout_alignParentEnd="true"
-        android:autoText="false" />
-
-    <!-- DATE AND TIME PICKER-->
-    <View
-        android:id="@+id/view"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/confirm_event_activity_title"
-        android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"/>
+        android:layout_height="550dp"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        tools:context="andrewnguy.com.freefoodfinder.ConfirmEventActivity">
 
-    <include
-        android:id="@+id/confirm_event_activity_date_time"
-        layout="@layout/event_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-    android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"> </include>
+        <!-- TITLE-->
+        <EditText
+            android:id="@+id/confirm_event_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignEnd="@+id/confirm_event_activity_location_description"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="false"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:hint="@string/add_event_title"
+            android:textAlignment="center"
+            android:textColor="@color/text_box_color"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/confirm_event_main_title"
+            android:textStyle="bold" />
 
-    <!-- -->
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/darker_gray"
-        android:layout_below="@+id/confirm_event_activity_date_time"
-        android:layout_alignParentStart="true"/>
+        <!-- DATE AND TIME PICKER-->
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"
+            android:layout_below="@+id/confirm_event_activity_title"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/darker_gray" />
 
-    <EditText
-        android:id="@+id/confirm_event_activity_location_description"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
-        android:textColor="#8D8D8D"
-        android:hint="@string/add_location_description"
-        android:textCursorDrawable="@null"
-        android:textSize="12sp"
-        android:background="@drawable/confirm_event_activity_text_bg"
-        android:layout_below="@+id/confirm_event_activity_tags"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"/>
-    <EditText
-        android:id="@+id/confirm_event_activity_event_description"
-        android:layout_width="wrap_content"
-        android:layout_height="210dp"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
-        android:textColor="#8D8D8D"
-        android:hint="@string/add_event_description"
-        android:background="@drawable/confirm_event_activity_text_bg"
-        android:textCursorDrawable="@null"
-        android:textSize="12sp"
-        android:layout_below="@+id/confirm_event_activity_location_description"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/confirm_event_activity_location_description"
-        android:gravity="top" />
+        <include
+            android:id="@+id/confirm_event_activity_date_time"
+            layout="@layout/event_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/confirm_event_activity_confirm_button"
+            android:layout_below="@+id/view"> </include>
 
-    <EditText
-        android:id="@+id/confirm_event_activity_tags"
-        android:hint="@string/add_event_tags"
-        android:textCursorDrawable="@null"
-        android:textSize="12sp"
-        android:singleLine="true"
-        android:background="@drawable/confirm_event_activity_text_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:padding="15dp"
-        android:textColor="#8D8D8D"
-        android:layout_below="@+id/view2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:id="@+id/confirm_event_activity_confirm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="@string/confirm_button"
-        android:background="@drawable/confirm_activity_confirm_button"
-        android:textSize="12dp"
-        android:layout_alignTop="@+id/confirm_event_activity_cancel_button"
-        android:layout_alignEnd="@+id/confirm_event_activity_tags" />
-    <Button
-        android:id="@+id/confirm_event_activity_cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginEnd="22dp"
-        android:text="@string/cancel_button"
-        android:background="@drawable/confirm_activity_cancel_button"
-        android:textSize="12dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/confirm_event_activity_confirm_button" />
-</RelativeLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confirm_event_activity_date_time"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/confirm_event_loc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_event_loc_title"
+            android:textSize="@dimen/confirm_event_sub_title"
+            android:textStyle="bold"
+            android:textColor="@color/text_box_color" />
+
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/confirm_event_activity_location_description"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/confirm_event_activity_location_description"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confirm_event_loc_title"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/confirm_event_activity_text_bg"
+            android:hint="@string/add_location_description"
+            android:padding="15dp"
+            android:textColor="@color/text_box_color"
+            android:textCursorDrawable="@null"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/confirm_event_desc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_event_desc_title"
+            android:textSize="@dimen/confirm_event_sub_title"
+            android:textStyle="bold"
+            android:textColor="@color/text_box_color" />
+
+        <EditText
+            android:id="@+id/confirm_event_activity_event_description"
+            android:layout_width="wrap_content"
+            android:layout_height="210dp"
+            android:layout_alignEnd="@+id/confirm_event_activity_location_description"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confirm_event_desc_title"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/confirm_event_activity_text_bg"
+            android:gravity="top"
+            android:hint="@string/add_event_description"
+            android:padding="15dp"
+            android:textColor="@color/text_box_color"
+            android:textCursorDrawable="@null"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/confirm_event_tag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_event_tag_title"
+            android:textSize="@dimen/confirm_event_sub_title"
+            android:textStyle="bold"
+            android:textColor="@color/text_box_color" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confirm_event_activity_tags"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/confirm_event_activity_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/confirm_event_tag_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/confirm_event_activity_text_bg"
+            android:hint="@string/add_event_tags"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:textColor="@color/text_box_color"
+            android:textCursorDrawable="@null"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/confirm_event_activity_confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignEnd="@+id/confirm_event_activity_tags"
+            android:layout_alignTop="@+id/confirm_event_activity_cancel_button"
+            android:background="@drawable/confirm_activity_confirm_button"
+            android:text="@string/confirm_button"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/confirm_event_activity_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/confirm_event_activity_event_description"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_toStartOf="@+id/confirm_event_activity_confirm_button"
+            android:background="@drawable/confirm_activity_cancel_button"
+            android:text="@string/cancel_button"
+            android:textSize="13sp" />
+
+
+    </RelativeLayout>
+</ScrollView>

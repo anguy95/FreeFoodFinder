@@ -27,6 +27,9 @@
     <string name="add_event_description">Enter description of the event (i.e. room/floor number, reasons for event, pictures) </string>
     <string name="add_event_tags">Enter tags (i.e. type of food, club, free)</string>
     <string name="add_location_description">Enter location of the event.</string>
+    <string name="confirm_event_tag_title">Tags</string>
+    <string name="confirm_event_loc_title">Location Description</string>
+    <string name="confirm_event_desc_title">Event Description</string>
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>
     <string name="edit_event_date">Date of Event</string>
