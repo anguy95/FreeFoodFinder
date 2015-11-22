@@ -6,6 +6,8 @@
     <string name="location_description_title">Location Description</string>
     <string name="event_description_title">Event Description</string>
     <string name="title_activity_event_view">EventViewActivity</string>
+    <string name="event_view_comment_to_add"> Anything you want to say about this event?</string>
+    <string name="event_comment_box_title">Here\'s what people are saying</string>
 
 
     <string name="location_temp_holder">In York Hall level 2 in room 2000</string>

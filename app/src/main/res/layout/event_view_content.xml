@@ -205,6 +205,52 @@
             android:layout_below="@+id/event_view_eventDesc"
             android:background="@android:color/darker_gray" />
 
+        <EditText
+            android:id="@+id/event_view_comment_submit"
+            android:hint="@string/event_view_comment_to_add"
+            android:textCursorDrawable="@null"
+            android:textSize="12sp"
+            android:background="@drawable/confirm_event_activity_text_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:padding="15dp"
+            android:textColor="#8D8D8D"
+            android:layout_below="@+id/event_view_eventDesc"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/confirm_comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/confirm_button"
+            android:background="@drawable/confirm_activity_confirm_button"
+            android:layout_below="@+id/event_view_comment_submit"
+            android:layout_alignEnd="@+id/event_view_eventDesc" />
+        <TextView
+            android:id="@+id/event_view_comment_box_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/event_comment_box_title"
+            android:textColor="#8D8D8D"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/confirm_comment_button"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/event_view_comment_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textColor="#8D8D8D"
+            android:layout_below="@+id/event_view_comment_box_title"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
