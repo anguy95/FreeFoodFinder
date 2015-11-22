@@ -53,7 +53,6 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Chinese, Vietnamese, Mexican, Burritos, Fries, Pizza, Soda, Milk"
             android:textSize="12sp"
             android:layout_alignTop="@+id/marker_info_window_food_title"
             android:layout_toEndOf="@+id/marker_info_window_food_title"/>
