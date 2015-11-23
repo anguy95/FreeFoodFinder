@@ -10,5 +10,5 @@
     <dimen name="confirm_event_main_title">25sp</dimen>
     <dimen name="confirm_event_sub_title">16sp</dimen>
     <dimen name="date_start_end_text">14sp</dimen>
-    <dimen name="date_to_text">15sp</dimen>
+    <dimen name="date_to_text">13sp</dimen>
 </resources>

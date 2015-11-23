@@ -23,16 +23,16 @@
     <string name="search_btn">Search</string>
 
     <!-- CONFIRM EVENT ACTIVITY -->
-    <string name="add_event_title">Title of Event</string>
+    <string name="add_event_title">Event Title</string>
     <string name="add_event_description">Enter description of the event (e.g. room/floor number, reasons for event, pictures) </string>
     <string name="add_event_tags">Enter tags (e.g. type of food, club, free)</string>
     <string name="add_location_description">Enter location of the event.</string>
     <string name="confirm_event_tag_title">Tags</string>
     <string name="confirm_event_loc_title">Location</string>
-    <string name="confirm_event_desc_title">Event Description</string>
+    <string name="confirm_event_desc_title">Description</string>
     <string name="edit_start_time">Start Time</string>
     <string name="edit_end_time">End Time</string>
-    <string name="edit_event_date">Date of Event</string>
+    <string name="edit_event_date">Date</string>
 
     <!-- DATABASE STUFF -->
     <string name="DB">currentFreeFoodsDB</string>

@@ -42,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="to"
-        android:textStyle="bold"
         android:textSize="@dimen/date_to_text"
-        android:textColor="#545454"
+        android:textColor="#8D8D8D"
+        android:background="@android:color/transparent"
         android:layout_alignBaseline="@+id/event_date_time_startTime"
         android:layout_alignBottom="@+id/event_date_time_startTime"
         android:layout_centerHorizontal="true"/>
