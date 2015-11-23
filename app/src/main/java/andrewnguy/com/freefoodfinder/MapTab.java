@@ -294,8 +294,18 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     public void filter(ArrayList<String> tags) {
 
-        if (tags.isEmpty())
+        // get references to markers (make them invisible or visible
+        Collection<Marker> markers = eventMarkers.values();
+        List<Marker> markersArray = new ArrayList<>(markers);
+
+        if (tags.isEmpty()) {// if empty set all visible
+            for (int i = 0; i < markersArray.size(); i++)
+                markersArray.get(i).setVisible(true);
             return;
+        }
+        // else set all markers invisible
+        for (int i = 0; i < markersArray.size(); i++)
+            markersArray.get(i).setVisible(false);
 
         //get values (events)
         Collection<Event> eventCollection = events.values();
@@ -307,13 +317,10 @@ public class MapTab extends Fragment implements View.OnClickListener
             for (int j = 0; j < tags.size(); j++)
                 if (eventsArray.get(i).getTitle().toLowerCase().contains(tags.get(j).toLowerCase()) || // check if title
                     eventsArray.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
+                {
                     filteredEvents.add(eventsArray.get(i));
+                }
 
-        // set all markers invisible
-        Collection<Marker> markers = eventMarkers.values();
-        List<Marker> markersArray = new ArrayList<>(markers);
-        for (int i = 0; i < markersArray.size(); i++)
-            markersArray.get(i).setVisible(false);
 
         // set filtered visible
         for (int i = 0; i < filteredEvents.size(); i++)

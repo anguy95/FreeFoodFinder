@@ -12,20 +12,9 @@
         android:padding="5dp"
         android:textSize="14sp"
         android:textColor="#ffffff"
-        android:layout_toEndOf="@+id/search_cancel_button"
-        android:layout_toStartOf="@+id/search_button"
+        android:layout_toEndOf="@+id/search_button"
+        android:layout_toStartOf="@+id/search_cancel_button"
         android:layout_marginTop="8dp" />
-
-    <ImageButton
-        android:id="@+id/search_button"
-        android:src="@drawable/search_button"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="8dp" />
 
     <ImageButton
         android:id="@+id/search_cancel_button"
@@ -33,9 +22,20 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:layout_width="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp" />
+
+    <ImageButton
+        android:id="@+id/search_button"
+        android:src="@drawable/search_button"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentStart="true"
-        android:layout_margin="8dp" />
+        android:layout_margin="10dp" />
 
 </RelativeLayout>

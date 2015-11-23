@@ -1,20 +1,28 @@
 package andrewnguy.com.freefoodfinder;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
+                                                               View.OnClickListener,
+                                                               TextView.OnKeyListener
 {
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
     private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private int Numboftabs = 2;
 
     // searching/filtering/tagging
+    ImageButton searchBtn, cancelBtn;
     private EditText tags_text;
     private static ArrayList<String> tags = new ArrayList<>();
 
@@ -45,12 +54,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         // search and cancel button
-        ImageButton searchBtn = (ImageButton) findViewById(R.id.search_button);
-        ImageButton cancelBtn = (ImageButton) findViewById(R.id.search_cancel_button);
+        searchBtn = (ImageButton) findViewById(R.id.search_button);
+        cancelBtn = (ImageButton) findViewById(R.id.search_cancel_button);
         searchBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
 
         tags_text = (EditText) findViewById(R.id.search_bar); // get the edittext
+        tags_text.setOnKeyListener(this);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -91,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         tabs.setViewPager(pager);
     }
 
+    /** search and cancel search buttons **/
     @Override
     public void onClick(View v) {
 
@@ -111,9 +122,27 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
         else { return; }
 
+        // put the keyboard away
+        try {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+        catch (NullPointerException e) { e.printStackTrace(); }
         // update
         adapter.getMapTab().filter(tags);
         adapter.getListTab().update();
+    }
+
+    /** press enter on search to send activate a search **/
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        // this will always be search bar so no need to check v.getId()
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) { // if enter was pressed,
+            this.onClick(searchBtn);                       // search
+            return true;
+        }
+
+        return false;
     }
 
     public static ArrayList<String> getTags() { return tags; }
