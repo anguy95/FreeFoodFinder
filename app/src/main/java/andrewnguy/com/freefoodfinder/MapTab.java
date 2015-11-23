@@ -128,7 +128,7 @@ public class MapTab extends Fragment implements View.OnClickListener
 
 
                 TextView eventTime = (TextView) v.findViewById(R.id.marker_info_window_time);
-                eventTime.setText((String) (toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
+                eventTime.setText((toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
 
                 TextView eventTag = (TextView) v.findViewById(R.id.marker_info_window_food_list);
                 eventTag.setText( (toDisplay.getTags()));
@@ -271,32 +271,28 @@ public class MapTab extends Fragment implements View.OnClickListener
         eventMarkers.keySet().toArray(oldKeys);             // contains all the old keys
 
         /* in with the new */
-        for (int i = 0; i < newKeys.length; i++) {
-
-            if ( !eventMarkers.containsKey(newKeys[i]) ) { // if the current event map doesn't have this marker, add
-                Event tempEvent = tempMap.get(newKeys[i]); // get the event (reference)
+        for (String newKey : newKeys)
+            if (!eventMarkers.containsKey(newKey))  // if the current event map doesn't have this marker, add
+            {
+                Event tempEvent = tempMap.get(newKey); // get the event (reference)
                 Marker tempMarker = map.addMarker(new MarkerOptions().position(tempEvent.getLocation())); // add to map
-                eventMarkers.put(newKeys[i], tempMarker);  // add marker to hashmap<id, marker>
+                eventMarkers.put(newKey, tempMarker);  // add marker to hashmap<id, marker>
                 events.put(tempMarker, tempEvent);         // add event to hashmap<marker, event>
             }
-        }
         /* and out with the old */
-        for (int i = 0; i < oldKeys.length; i++) {
-
-            if ( !tempMap.containsKey(oldKeys[i]) ) { // if the current event map has something expired
-                Marker tempMarker = eventMarkers.get(oldKeys[i]); // get the marker reference
+        for (String oldKey : oldKeys)
+            if (!tempMap.containsKey(oldKey)) // if the current event map has something expired
+            {
+                Marker tempMarker = eventMarkers.get(oldKey); // get the marker reference
                 tempMarker.remove();                              // and remove it from everything
-                eventMarkers.remove(oldKeys[i]);
+                eventMarkers.remove(oldKey);
                 events.remove(tempMarker);
             }
-        }
 
         filter(MainActivity.getTags());
     }
 
     public void filter(ArrayList<String> tags) {
-        //private HashMap<String, Marker> eventMarkers = new HashMap<>();
-        //private HashMap<Marker, Event> events = new HashMap<>();
 
         if (tags.isEmpty())
             return;

@@ -8,8 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private CharSequence Titles[]={"Map","List"};
     private int Numboftabs = 2;
 
-    private Button searchBtn;
+    // searching/filtering/tagging
+    private EditText tags_text;
     private static ArrayList<String> tags = new ArrayList<>();
 
     /* parse updates */
@@ -43,9 +44,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        // search button
-        searchBtn = (Button) findViewById(R.id.search_button);
+        // search and cancel button
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.search_button);
+        ImageButton cancelBtn = (ImageButton) findViewById(R.id.search_cancel_button);
         searchBtn.setOnClickListener(this);
+        cancelBtn.setOnClickListener(this);
+
+        tags_text = (EditText) findViewById(R.id.search_bar); // get the edittext
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -88,22 +93,27 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void onClick(View v) {
+
         if (v.getId() == R.id.search_button) {
-            EditText editText = (EditText) findViewById(R.id.search_bar); // get the edittext
-            String searchTags = editText.getText().toString(); // get the filter parameters
+            String searchTags = tags_text.getText().toString(); // get the filter parameters
             searchTags = searchTags.replace(":", " ").replace(",", " ").replace(";", " ");  // replace
             searchTags = searchTags.replace("-", " ").replace("_", " ").replace("/", " "); // tags splits
             String[] tagsArr = searchTags.split("\\s"); // get tags array to iterate through
 
-            for (int i = 0; i < tagsArr.length; i++)
-            {
+            for (String aTagsArr : tagsArr) {
                 tags.clear();
-                tags.add(tagsArr[i]);
+                tags.add(aTagsArr);
             }
-
-            adapter.getMapTab().filter(tags);
-            adapter.getListTab().update();
         }
+        else if (v.getId() == R.id.search_cancel_button) { // clear all tags
+            tags_text.setText("");
+            tags.clear();
+        }
+        else { return; }
+
+        // update
+        adapter.getMapTab().filter(tags);
+        adapter.getListTab().update();
     }
 
     public static ArrayList<String> getTags() { return tags; }
