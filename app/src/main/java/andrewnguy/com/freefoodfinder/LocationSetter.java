@@ -26,7 +26,7 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     // for ucsd maps API
     private final String APP_KEY = "yA1qdB9d1elQ5rhz12h9Q1ZKxlMa";
     private final String APP_SECRET = "6XcIqzIgbuP8hGhf959MLF8pQPMa";
-    private final String BEARER = "2475c7d2df894720633e9edbd2f2ee9";
+    private final String BEARER = "9ce2bec3b44235681badd6568bf83a8e";
 
     private final String BASE_LINK = "https://api-qa.ucsd.edu:8243/location/v1/buildings?";
     private final String BLDGS = "groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19"; // all buildings UCSD
