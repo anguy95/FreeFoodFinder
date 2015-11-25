@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class EventViewActivity extends AppCompatActivity implements OnClickListener {
     private EditText commentToAdd;
-    private TextView viewComments;
+    private TextView viewComments, viewScore;
     private int tempScore;
     private HashMap<String, Event> eventsMap;
 
@@ -78,9 +78,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         viewTags.setText(extras.getString("eventTags"));
         viewTagHolder.addView(viewTags);
 
-        TextView viewScore = (TextView) findViewById(R.id.event_view_likes);
-        viewScore.setText(String.valueOf(extras.getInt("eventScore")));
-        tempScore = extras.getInt("eventScore");
+        viewScore = (TextView) findViewById(R.id.event_view_likes);
+        Event temp = eventsMap.get(extras.getString("eventId"));
+
+        viewScore.setText(String.valueOf(temp.getEventScore()));
+        tempScore = temp.getEventScore();
         tempScore++;
 
         String objid = extras.getString("eventId");
@@ -133,9 +135,9 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 Toast.makeText(getApplicationContext(), "Your comment has been submitted", Toast.LENGTH_SHORT).show();
 
                 //Immediately adds to show responsive for user combined with toast
-                String toAddDispaly = (String) viewComments.getText();
-                toAddDispaly = toAddDispaly + commentToParse + '\n';
-                viewComments.setText(toAddDispaly);
+                String toAddDisplay = (String) viewComments.getText();
+                toAddDisplay = toAddDisplay + commentToParse + '\n';
+                viewComments.setText(toAddDisplay);
 
                 //Hide keyboard on submit
                 InputMethodManager inputManager = (InputMethodManager)
@@ -155,9 +157,21 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 try {
                     Event temp = eventsMap.get(extras.getString("eventId"));
                     ParseObject eventScore = query.get(extras.getString("eventId"));
-                    eventScore.put("Score", tempScore);
-                    temp.setEventScore(tempScore);
-                    eventScore.saveInBackground();
+                    if(viewScore.getText() == String.valueOf(tempScore)){
+                        viewScore.setText(String.valueOf((tempScore - 1)));
+                        eventScore.put("Score", tempScore -1);
+                        temp.setEventScore(tempScore - 1);
+                        eventScore.saveInBackground();
+
+
+                    }else {
+                        viewScore.setText(String.valueOf(tempScore));
+                        eventScore.put("Score", tempScore);
+                        temp.setEventScore(tempScore);
+                        eventScore.saveInBackground();
+                    }
+
+
 
                 }catch(ParseException e){
 
