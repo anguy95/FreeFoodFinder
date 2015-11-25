@@ -49,28 +49,29 @@ public class EventArray
      */
     public void add(Event e)
     {
+
         ParseObject newEvent = new ParseObject(db);
         ParseGeoPoint pgp = new ParseGeoPoint(e.getLocation().latitude, e.getLocation().longitude);
 
-        newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
-        newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
-        newEvent.put(context.getString(R.string.TAG), e.getTags()); // put tags
-        newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
-        newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
-        newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
-        newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
-        newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
-        newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+            newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
+            newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
+            newEvent.put(context.getString(R.string.TAG), e.getTags()); // put tags
+            newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
+            newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
+            newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
+            newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
+            newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
+            newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+            newEvent.put(context.getString(R.string.SCO), e.getEventScore());
+            //rebuild event expiration date
+            String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
+            String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
 
-        //rebuild event expiration date
-        String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
-        String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
-
-        int offset = 0; // 0 offset for AM
-        if (timeArr[2].equals("PM")) {
-            offset = 12;
-        }
-        // else do nothing
+            int offset = 0; // 0 offset for AM
+            if (timeArr[2].equals("PM")) {
+                offset = 12;
+            }
+            // else do nothing
 
         /*  year - the year plus 1900.                  *
          *  month - the month between 0-11.             *
@@ -78,19 +79,20 @@ public class EventArray
          *  hrs - the hours between 0-23.               *
          *  min - the minutes between 0-59              */
 
-        Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
-                             monthToNum(dateArr[1]),              // intMonth
-                             Integer.parseInt(dateArr[2]),        // intDay
-                             Integer.parseInt(timeArr[0])-1+offset, // intHour
-                             Integer.parseInt(timeArr[1]));       // intMin
-        newEvent.put(context.getString(R.string.EXP), date.getTime());
+            Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
+                    monthToNum(dateArr[1]),              // intMonth
+                    Integer.parseInt(dateArr[2]),        // intDay
+                    Integer.parseInt(timeArr[0]) - 1 + offset, // intHour
+                    Integer.parseInt(timeArr[1]));       // intMin
+            newEvent.put(context.getString(R.string.EXP), date.getTime());
 
-        // save the event to parse
-        try {
-            newEvent.save();
-        } catch (ParseException e1) {
-            e1.printStackTrace();
-        }
+            // save the event to parse
+            try {
+                newEvent.save();
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
+
         /*newEvent.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -168,6 +170,7 @@ public class EventArray
                                             e.getString(context.getString(R.string.ETIM)),
                                             e.getString(context.getString(R.string.DES)),
                                             e.getString(context.getString(R.string.TAG)),
+                                            e.getInt(context.getString(R.string.SCO)),
                                             eventLL,
                                             currLL
                                         )

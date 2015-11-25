@@ -157,14 +157,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
             }
-
+/*
             if (times == 0 && (isEmpty(desc) || isEmpty(tags))) {
                 // maybe warn them? it's okay to have an empty event description/tags
                 String optionalFields = isEmpty(desc) ? "event descriptions" : "event tags";
                 Toast.makeText(this, "Are you sure you want to leave the " + optionalFields + " blank?", Toast.LENGTH_LONG).show();
                 times++;
                 return;
-            }
+            }*/
 
 
             String titleStr = title.getText().toString();
@@ -174,6 +174,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             String endStr = end.getText().toString();
             String locStr = loc.getText().toString();
             String tagsStr = tags.getText().toString();
+            int score = 0;
 
 
             LatLng eventLoc = new LatLng(lat, lng);
@@ -181,7 +182,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             // add the new event
             ea.add(new Event(titleStr, dateStr, startStr, endStr,
-                             descStr, tagsStr, eventLoc, currentLoc));
+                             descStr, tagsStr, score, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();

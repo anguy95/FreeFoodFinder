@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     ImageButton searchBtn, cancelBtn;
     private EditText tags_text;
     private static ArrayList<String> tags = new ArrayList<>();
-
     /* parse updates */
     private Handler h;
     private boolean stop;

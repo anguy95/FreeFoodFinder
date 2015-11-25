@@ -14,10 +14,12 @@ public class Event {
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
     private String eventTags;   // event tags
+    private int    eventScore;
     private String dateOfEvent; // start date of the event
     private String startTimeOfEvent; // time of an event
     private String endTimeOfEvent; // time of an event
     private LatLng latLng;      // location of an event
+
     private double dist;        // distance from you to event
 
 
@@ -35,7 +37,7 @@ public class Event {
      * @param currLL
      */
     public Event (String title, String date, String startTime, String endTime,
-                  String description, String tags, LatLng latlng, LatLng currLL)
+                  String description, String tags, int score, LatLng latlng, LatLng currLL)
     {
         this.eventTitle = title;
         this.dateOfEvent = date;
@@ -44,6 +46,7 @@ public class Event {
         this.eventDesc = description;
         this.eventTags = tags;
         this.latLng = latlng;
+        this.eventScore = score;
 
         // calc distance from you and the event
         ParseGeoPoint toLocation = new ParseGeoPoint(latlng.latitude, latlng.longitude);
@@ -63,9 +66,9 @@ public class Event {
      * @param currLL
      */
     public Event(String id, String title, String date, String startTime, String endTime,
-                 String description, String tags, LatLng latlng, LatLng currLL)
+                 String description, String tags,int score, LatLng latlng, LatLng currLL )
     {
-        this(title, date, startTime, endTime, description, tags, latlng, currLL);
+        this(title, date, startTime, endTime, description, tags, score, latlng, currLL);
         this.eventId = id;
     }
 
@@ -127,10 +130,21 @@ public class Event {
      */
     public String getEventId() { return eventId; }
 
+    /**
+     * gets the score of the event
+     * @return
+     */
+    public int getEventScore() { return eventScore;}
+
     /* ----------  SETTERS ---------- */
 
     public void setEventID(String objectID){
         this.eventId = objectID;
+    }
+
+    public void setEventScore(int score){
+        this.eventScore = score;
+
     }
 
 }

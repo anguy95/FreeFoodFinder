@@ -20,6 +20,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,9 +31,12 @@ import java.util.List;
 public class EventViewActivity extends AppCompatActivity implements OnClickListener {
     private EditText commentToAdd;
     private TextView viewComments;
+    private int tempScore;
+    private HashMap<String, Event> eventsMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        eventsMap = MainActivity.ea.getEventMap();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_view_main);
 
@@ -74,12 +78,18 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         viewTags.setText(extras.getString("eventTags"));
         viewTagHolder.addView(viewTags);
 
+        TextView viewScore = (TextView) findViewById(R.id.event_view_likes);
+        viewScore.setText(String.valueOf(extras.getInt("eventScore")));
+        tempScore = extras.getInt("eventScore");
+        tempScore++;
+
         String objid = extras.getString("eventId");
         viewComments = (TextView) findViewById(R.id.event_view_comment_box);
 
         ParseQuery commentsQuery = new ParseQuery("commentsDB");
 
         commentsQuery.whereEqualTo("eventObjectId", objid);
+        commentsQuery.orderByAscending("createdAt");
         commentsQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> temp, ParseException exception) {
@@ -119,13 +129,13 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 eventComments.put("eventObjectId", objid);
                 eventComments.put("comment", commentToParse);
                 Log.d("Comment", commentToParse);
+                eventComments.saveInBackground();
                 Toast.makeText(getApplicationContext(), "Your comment has been submitted", Toast.LENGTH_SHORT).show();
 
                 //Immediately adds to show responsive for user combined with toast
                 String toAddDispaly = (String) viewComments.getText();
                 toAddDispaly = toAddDispaly + commentToParse + '\n';
                 viewComments.setText(toAddDispaly);
-                eventComments.saveInBackground();
 
                 //Hide keyboard on submit
                 InputMethodManager inputManager = (InputMethodManager)
@@ -133,6 +143,28 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
+
+            }
+        });
+
+        Button heartButton = (Button) findViewById(R.id.toggleButton);
+        heartButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseQuery query = new ParseQuery("currentFreeFoodsDB");
+                try {
+                    Event temp = eventsMap.get(extras.getString("eventId"));
+                    ParseObject eventScore = query.get(extras.getString("eventId"));
+                    eventScore.put("Score", tempScore);
+                    temp.setEventScore(tempScore);
+                    eventScore.saveInBackground();
+
+                }catch(ParseException e){
+
+                }
+
+
+
 
             }
         });

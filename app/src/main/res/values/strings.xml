@@ -49,6 +49,7 @@
     <string name="LAT">Latitude</string>
     <string name="LNG">Longitude</string>
     <string name="LOC">Location</string>
+    <string name="SCO">Score</string>
 
     <!-- DATABASE STUFF -->
 
