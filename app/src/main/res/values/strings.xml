@@ -13,6 +13,9 @@
     <string name="location_temp_holder">In York Hall level 2 in room 2000</string>
 
 
+    <!--SEARCH BAR HINT-->
+    <string name="search_hint">Search for tacos, burgers, food.</string>
+
     <!-- ADD EVENT PIN STUFF-->
     <string name="add_event_pin_description">An image of how the marker dropper looks like</string>
 

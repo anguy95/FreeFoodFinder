@@ -17,8 +17,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/colorPrimary"
-        android:elevation="2dp"/> <!-- this needs API 21, do we need it? -->
+        android:background="@color/colorPrimary" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

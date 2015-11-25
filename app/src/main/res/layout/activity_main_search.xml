@@ -4,17 +4,31 @@
     android:background="@color/colorPrimary">
 
 
-    <EditText
-        android:id="@+id/search_bar"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_main_search_bar"
+        android:id="@+id/linearLayout"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/search_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp">
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
         android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_main_search_bar"
+        android:hint="@string/search_hint"
+        android:textColorHint="#fff"
         android:textSize="14sp"
         android:textColor="#ffffff"
-        android:layout_toEndOf="@+id/search_button"
-        android:layout_toStartOf="@+id/search_cancel_button"
-        android:layout_marginTop="8dp" />
+        android:textCursorDrawable="@null"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp" />
 
     <ImageButton
         android:id="@+id/search_cancel_button"
@@ -22,10 +36,11 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:layout_height="25dp"
-        android:layout_width="25dp"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp" />
+        android:layout_height="15dp"
+        android:layout_width="15dp"
+        android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/search_button"
@@ -33,9 +48,12 @@
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentStart="true"
-        android:layout_margin="10dp" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="4dp" />
 
 </RelativeLayout>

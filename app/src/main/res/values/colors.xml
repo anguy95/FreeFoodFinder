@@ -10,6 +10,10 @@
     <color name="confirmActivityBG">#F6F6F6</color>
 
     <!-- TAB VIEW COLORS-->
-    <color name="tabsScrollColor">#fff</color>
+    <color name="tabsScrollColor">#8e3134</color>
     <color name="tab_text_color">#fff</color>
+
+    <!--FAB COLORS-->
+    <color name="outer_color">#BB4144</color>
+    <color name="plus_color">#fff</color>
 </resources>
