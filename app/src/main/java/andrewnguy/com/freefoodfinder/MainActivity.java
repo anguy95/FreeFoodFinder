@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +52,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     /* parse updates */
     private Handler h;
     private boolean stop;
+
+    //UUID for username
+    private String androidId;
+    static ParseUser currentUser;
+    static JSONArray likedEvents;
+    static ArrayList<String> likedEventsList = new ArrayList<String>();
+    static ArrayList<String> likedEventsListtoRemove = new ArrayList<String>();
+
 
 
     @Override
@@ -82,6 +100,52 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
             }
         });
+
+        androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        // Gets the current user
+        currentUser = ParseUser.getCurrentUser();
+
+        //If signed in from before Dank
+        if(currentUser != null){
+            // This gets the users liked events to compare
+            likedEvents = MainActivity.currentUser.getJSONArray("likedEvents");
+            if (likedEvents != null) {
+                int len = likedEvents.length();
+                for (int i=0;i<len;i++){
+                    try {
+                        likedEventsList.add(likedEvents.get(i).toString());
+                    }catch (JSONException e){
+                        Log.d("JSONArray error", e.getMessage());
+                    }
+                }
+            }
+        }
+        //Else signs up the user and logs them in
+        else{
+            currentUser = new ParseUser();
+            currentUser.setUsername(androidId);
+            currentUser.setPassword("planetext");
+            currentUser.signUpInBackground(new SignUpCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+
+                        ParseUser.logInInBackground(androidId, "planetext", new LogInCallback() {
+                            public void done(ParseUser user, ParseException e) {
+                                if (user != null) {
+                                    // Hooray! The user is logged in.
+                                } else {
+                                    // Signup failed. Look at the ParseException to see what happened.
+                                }
+                            }
+                        });
+                    } else {
+                        // Sign up didn't succeed. Look at the ParseException
+                        // to figure out what went wrong
+                    }
+                }
+            });
+        }
 
         /* Handler to update every DELAY seconds */
         stop = false;

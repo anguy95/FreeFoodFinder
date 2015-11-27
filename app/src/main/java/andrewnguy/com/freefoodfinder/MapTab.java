@@ -146,19 +146,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 // Gets the event from objID,events hash
                 Event toDisplay = events.get(marker);
 
-                intent.putExtra("eventTitle", toDisplay.getTitle());
-                intent.putExtra("eventDesc", toDisplay.getDescription());
-
-                //TODO ADD THE DATE, START AND END TIME, AS WELL AS LOCATION DESC
-                intent.putExtra("eventStartTime", toDisplay.getStartTime());
-                intent.putExtra("eventEndTime", toDisplay.getEndTime());
-                intent.putExtra("eventDate", toDisplay.getDate());
-
-                intent.putExtra("eventDate", toDisplay.getDate());
-                intent.putExtra("eventLocDesc", toDisplay.getLocation());
-                intent.putExtra("eventTags", toDisplay.getTags());
                 intent.putExtra("eventId", toDisplay.getEventId());
-                intent.putExtra("eventScore", toDisplay.getEventScore());
 
                 startActivity(intent);
             }

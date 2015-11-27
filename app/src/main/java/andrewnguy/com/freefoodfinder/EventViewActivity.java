@@ -14,12 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import android.provider.Settings.Secure;
+import android.widget.ToggleButton;
+
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,6 +40,14 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
     private TextView viewComments, viewScore;
     private int tempScore;
     private HashMap<String, Event> eventsMap;
+    private Event temp;
+    private String objid = "";
+    private ParseObject eventScore;
+    private JSONArray likedEvents;
+    private ArrayList<String> likedEventsList = new ArrayList<String>();
+    private boolean hasLikedBefore = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,34 +73,47 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         commentToAdd = (EditText) findViewById(R.id.event_view_comment_submit); // Edit text field for comment
 
 
+
+
         final Bundle extras = getIntent().getExtras();
+        objid = extras.getString("eventId");
+
+        temp = eventsMap.get(extras.getString("eventId"));
 
         TextView viewTitle = (TextView) findViewById(R.id.event_view_title);
-        viewTitle.setText(extras.getString("eventTitle"));
+        viewTitle.setText(temp.getTitle());
         TextView viewDesc = (TextView) findViewById(R.id.event_view_eventDesc);
-        viewDesc.setText(extras.getString("eventDesc"));
+        viewDesc.setText(temp.getDescription());
 
 
         TextView viewStartTime = (TextView) findViewById(R.id.event_date_time_startTime);
-        viewStartTime.setText(extras.getString("eventStartTime"));
+        viewStartTime.setText(temp.getStartTime());
         TextView viewEndTime = (TextView) findViewById(R.id.event_date_time_endTime);
-        viewEndTime.setText(extras.getString("eventEndTime"));
+        viewEndTime.setText(temp.getEndTime());
         TextView viewDate = (TextView) findViewById(R.id.event_date_time_date);
-        viewDate.setText(extras.getString("eventDate"));
+        viewDate.setText(temp.getDate());
+
+        //TODO Add location description
 
         LinearLayout viewTagHolder = (LinearLayout) findViewById(R.id.event_view_tag_display);
         TextView viewTags = new TextView(this);
-        viewTags.setText(extras.getString("eventTags"));
+        viewTags.setText(temp.getTags());
         viewTagHolder.addView(viewTags);
 
         viewScore = (TextView) findViewById(R.id.event_view_likes);
-        Event temp = eventsMap.get(extras.getString("eventId"));
 
         viewScore.setText(String.valueOf(temp.getEventScore()));
         tempScore = temp.getEventScore();
         tempScore++;
 
-        String objid = extras.getString("eventId");
+        if(MainActivity.likedEventsList.contains(objid)){
+
+            ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(true);
+            hasLikedBefore = true;
+
+        }
+
+
         viewComments = (TextView) findViewById(R.id.event_view_comment_box);
 
         ParseQuery commentsQuery = new ParseQuery("commentsDB");
@@ -154,21 +182,32 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             @Override
             public void onClick(View v) {
                 ParseQuery query = new ParseQuery("currentFreeFoodsDB");
-                try {
-                    Event temp = eventsMap.get(extras.getString("eventId"));
-                    ParseObject eventScore = query.get(extras.getString("eventId"));
-                    if(viewScore.getText() == String.valueOf(tempScore)){
-                        viewScore.setText(String.valueOf((tempScore - 1)));
-                        eventScore.put("Score", tempScore -1);
-                        temp.setEventScore(tempScore - 1);
-                        eventScore.saveInBackground();
 
+
+                try {
+                    eventScore = query.get(extras.getString("eventId"));
+
+                    if(hasLikedBefore){
+                        viewScore.setText(String.valueOf((tempScore - 1)));
+                        eventScore.increment("Score", -1);
+                        temp.setEventScore(tempScore - 1);
+                        ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(false);
+                        hasLikedBefore = false;
+                        MainActivity.likedEventsListtoRemove.add(objid);
+
+
+
+
+                        //TODO CHANGE APPROPRIATLY YA DINFUS
 
                     }else {
                         viewScore.setText(String.valueOf(tempScore));
-                        eventScore.put("Score", tempScore);
+                        eventScore.increment("Score", 1);
                         temp.setEventScore(tempScore);
-                        eventScore.saveInBackground();
+                        ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(true);
+                        hasLikedBefore = true;
+                        MainActivity.likedEventsList.add(objid);
+
                     }
 
 
@@ -176,9 +215,6 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 }catch(ParseException e){
 
                 }
-
-
-
 
             }
         });
@@ -196,7 +232,28 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(MainActivity.likedEventsList.size() > 0) {
+            Log.d("Values in array", MainActivity.likedEventsList.get(0));
+            MainActivity.currentUser.addAllUnique("likedEvents", MainActivity.likedEventsList);
 
+
+
+            // Should only save score when you exit
+            MainActivity.currentUser.saveInBackground();
+        }
+        if(MainActivity.likedEventsListtoRemove.size() > 0){
+            MainActivity.currentUser.removeAll("likedEvents", MainActivity.likedEventsListtoRemove);
+            MainActivity.currentUser.saveInBackground();
+            MainActivity.likedEventsList.remove(objid);
+
+            MainActivity.likedEventsListtoRemove.remove(0);
+
+        }
+
+
+        if(eventScore != null) {
+            eventScore.saveInBackground();
+        }
     }
 
 
