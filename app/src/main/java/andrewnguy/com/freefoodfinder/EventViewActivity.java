@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -119,28 +120,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             hasLikedBefore = true;
 
         }
+        updateComments();
 
 
 
-        ParseQuery commentsQuery = new ParseQuery("commentsDB");
 
-        commentsQuery.whereEqualTo("eventObjectId", objid);
-        commentsQuery.orderByDescending("createdAt");
-        commentsQuery.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> temp, ParseException exception) {
-
-                if (exception == null) {
-                    commentAdapter = new CommentListAdapter(getApplicationContext(), R.layout.comment_row, (ArrayList<ParseObject>) temp);
-                    commentView.setNestedScrollingEnabled(true);
-
-                    commentView.setAdapter(commentAdapter);
-
-
-
-                }
-            }
-        });
 
 
 
@@ -161,21 +145,19 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
                 eventComments.put("eventObjectId", objid);
                 eventComments.put("comment", commentToParse);
+                eventComments.put("postId", MainActivity.currentUser.getUsername());
                 Log.d("Comment", commentToParse);
                 eventComments.saveInBackground();
                 Toast.makeText(getApplicationContext(), "Your comment has been submitted", Toast.LENGTH_SHORT).show();
 
                 //Immediately adds to show responsive for user combined with toast
-                String toAddDisplay = (String) viewComments.getText();
-                toAddDisplay = toAddDisplay + commentToParse + '\n';
-                viewComments.setText(toAddDisplay);
-
                 //Hide keyboard on submit
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
 
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
+                updateComments();
 
             }
         });
@@ -202,9 +184,6 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                         }
                         else
                             MainActivity.likedEventsListtoRemove.add(objid);
-
-
-
 
 
                         //TODO CHANGE APPROPRIATLY YA DINFUS
@@ -235,6 +214,27 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         });
 
 
+    }
+    public void updateComments(){
+        ParseQuery commentsQuery = new ParseQuery("commentsDB");
+
+        commentsQuery.whereEqualTo("eventObjectId", objid);
+        commentsQuery.orderByDescending("createdAt");
+        commentsQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> temp, ParseException exception) {
+
+                if (exception == null) {
+                    commentAdapter = new CommentListAdapter(getApplicationContext(), R.layout.comment_row, (ArrayList<ParseObject>) temp);
+                    commentView.setNestedScrollingEnabled(true);
+
+                    commentView.setAdapter(commentAdapter);
+
+
+
+                }
+            }
+        });
     }
 
 
