@@ -43,7 +43,7 @@ public class MapTab extends Fragment implements View.OnClickListener
     private MapView mapView;
     private FloatingActionButton fab; // FAB to bring up the addPin
     private RelativeLayout addPin;    // the add-an-event-pin
-    private Button cancel, confirm, seeMore;   // add event buttons
+    private Button cancel, confirm;   // add event buttons
     private EventArray ea;
 
     /** parse **/

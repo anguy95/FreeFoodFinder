@@ -202,9 +202,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     /** press enter on search to send activate a search **/
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
+
         // this will always be search bar so no need to check v.getId()
         if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) { // if enter was pressed,
             this.onClick(searchBtn);                       // search
+
             return true;
         }
 
