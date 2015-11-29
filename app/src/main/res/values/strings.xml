@@ -40,6 +40,7 @@
     <string name="edit_end_time">End Time</string>
     <string name="edit_event_date">Date</string>
 
+
     <!-- DATABASE STUFF -->
     <string name="DB">currentFreeFoodsDB</string>
     <string name="TIT">Title</string>
@@ -56,6 +57,7 @@
     <string name="LNG">Longitude</string>
     <string name="LOC">Location</string> <!-- location object -->
     <string name="SCO">Score</string>
+    <string name="EAUTH">eventAuthor</string>
 
 
 

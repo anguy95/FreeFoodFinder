@@ -174,6 +174,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             String endStr = end.getText().toString();
             String locStr = loc.getText().toString();
             String tagsStr = tags.getText().toString();
+            String evnAuth = MainActivity.currentUser.getUsername();
             int score = 0;
 
 
@@ -182,7 +183,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             // add the new event
             ea.add(new Event(titleStr, dateStr, startStr, endStr,
-                             descStr, tagsStr, score, eventLoc, currentLoc));
+                             descStr, tagsStr, score, evnAuth, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();

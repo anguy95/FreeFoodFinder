@@ -14,7 +14,8 @@ public class Event {
     private String eventTitle;  // title of an event
     private String eventDesc;   // description of an event
     private String eventTags;   // event tags
-    private int    eventScore;
+    private String eventAuthor; // event creator
+    private int    eventScore;  // event score
     private String dateOfEvent; // start date of the event
     private String startTimeOfEvent; // time of an event
     private String endTimeOfEvent; // time of an event
@@ -37,7 +38,7 @@ public class Event {
      * @param currLL
      */
     public Event (String title, String date, String startTime, String endTime,
-                  String description, String tags, int score, LatLng latlng, LatLng currLL)
+                  String description, String tags, int score, String eventAuthor, LatLng latlng, LatLng currLL)
     {
         this.eventTitle = title;
         this.dateOfEvent = date;
@@ -46,6 +47,7 @@ public class Event {
         this.eventDesc = description;
         this.eventTags = tags;
         this.latLng = latlng;
+        this.eventAuthor = eventAuthor;
         this.eventScore = score;
 
         // calc distance from you and the event
@@ -66,9 +68,9 @@ public class Event {
      * @param currLL
      */
     public Event(String id, String title, String date, String startTime, String endTime,
-                 String description, String tags,int score, LatLng latlng, LatLng currLL )
+                 String description, String tags,int score, String eventAuthor, LatLng latlng, LatLng currLL )
     {
-        this(title, date, startTime, endTime, description, tags, score, latlng, currLL);
+        this(title, date, startTime, endTime, description, tags, score, eventAuthor, latlng, currLL);
         this.eventId = id;
     }
 
@@ -135,6 +137,13 @@ public class Event {
      * @return
      */
     public int getEventScore() { return eventScore;}
+
+    /**
+     * gets the author user
+     * @return
+     */
+    public String getEventAuthor() { return eventAuthor;}
+
 
     /* ----------  SETTERS ---------- */
 

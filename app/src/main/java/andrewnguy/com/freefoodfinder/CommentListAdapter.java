@@ -1,7 +1,9 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Picture;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Kevin on 11/26/15.
@@ -23,15 +27,18 @@ import java.util.Date;
 public class CommentListAdapter extends ArrayAdapter<ParseObject>{
     private final Context context;
     private final ArrayList<ParseObject> data;
+    private final HashMap<String, String> authorToImage = new HashMap<>(8);
     private final int layoutResourceId;
+    private final String eventAuthor;
 
 
-    public CommentListAdapter(Context context,  int layoutResourceId, ArrayList<ParseObject> data) {
+    public CommentListAdapter(Context context,  int layoutResourceId, ArrayList<ParseObject> data, String eventAuthor) {
 
         super(context, layoutResourceId, data);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.data = data;
+        this.eventAuthor = eventAuthor;
     }
 
     @Override
@@ -42,6 +49,7 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
 
         //Class that holds all our types of views
         ViewHolder holder = null;
+
 
         if(row == null) {  //If the row of the ViewGroup is empty then add a new item using list_row_view layout
 
@@ -118,9 +126,36 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
             }
             String dateToDisplay = timeOfComment.format(comment.getCreatedAt());
 
+
+            // Sets the icons
+            // If your previous comment keeps consistent
+            if(comment.getString("postId").equals(MainActivity.currentUser.getUsername())) {
+                holder.commentIcon.setImageResource(R.drawable.you);
+            }
+
+            else if(comment.getString("postId").equals(eventAuthor)){
+                holder.commentIcon.setImageResource(R.drawable.op);
+
+
+            } else{ // hashes user ids
+                if(authorToImage.containsKey(comment.getString("postId"))){
+                    String str = authorToImage.get(comment.getString("postId"));
+                    holder.commentIcon.setImageResource(getResourceID(str, "drawable", getContext()));
+
+                }else{
+                    final Random rnd = new Random();
+                    final String str = "img_" + rnd.nextInt(8);
+                    if(authorToImage.size() < 8){
+                        authorToImage.put(comment.getString("postId"), str);
+
+                    }
+                    holder.commentIcon.setImageResource(getResourceID(str, "drawable", getContext()));
+
+                }
+
+            }
             //Sets the views Comment
-            holder.commentName.setText("Random");
-            holder.commentIcon.setImageResource(R.drawable.icon);
+            holder.commentName.setText(comment.getString("postId"));
             holder.commentContent.setText(comment.getString("comment"));
             holder.commentDate.setText(monthOfYear + dateToDisplay);
         }
@@ -128,7 +163,24 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
 
     }
 
-
+    protected final static int getResourceID
+            (final String resName, final String resType, final Context ctx)
+    {
+        final int ResourceID =
+                ctx.getResources().getIdentifier(resName, resType,
+                        ctx.getApplicationInfo().packageName);
+        if (ResourceID == 0)
+        {
+            throw new IllegalArgumentException
+                    (
+                            "No resource string found with name " + resName
+                    );
+        }
+        else
+        {
+            return ResourceID;
+        }
+    }
 
 
 

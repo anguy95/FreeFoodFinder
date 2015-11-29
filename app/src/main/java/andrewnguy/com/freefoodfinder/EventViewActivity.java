@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,9 +46,10 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
     private Event temp;
     private String objid = "";
     private ParseObject eventScore;
+    private String eventAuthor = "";
 
-    private ArrayList<String> likedEventsList = new ArrayList<String>();
     private boolean hasLikedBefore = false;
+
     private ListView commentView;
     private CommentListAdapter commentAdapter;
 
@@ -83,8 +85,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         final Bundle extras = getIntent().getExtras();
         objid = extras.getString("eventId");
 
-        temp = eventsMap.get(extras.getString("eventId"));
 
+
+
+        temp = eventsMap.get(extras.getString("eventId"));
+        eventAuthor = temp.getEventAuthor();
         TextView viewTitle = (TextView) findViewById(R.id.event_view_title);
         viewTitle.setText(temp.getTitle());
         TextView viewDesc = (TextView) findViewById(R.id.event_view_eventDesc);
@@ -120,17 +125,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             hasLikedBefore = true;
 
         }
+
+        // Pulls the comments
         updateComments();
 
 
-
-
-
-
-
-
-
-            /* For commenting */
         // buttons on click gets the eventId and comment to add and sends it to commentsDB class
 
         Button button = (Button) findViewById(R.id.confirm_comment_button);
@@ -146,6 +145,7 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 eventComments.put("eventObjectId", objid);
                 eventComments.put("comment", commentToParse);
                 eventComments.put("postId", MainActivity.currentUser.getUsername());
+
                 Log.d("Comment", commentToParse);
                 eventComments.saveInBackground();
                 Toast.makeText(getApplicationContext(), "Your comment has been submitted", Toast.LENGTH_SHORT).show();
@@ -225,7 +225,7 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             public void done(List<ParseObject> temp, ParseException exception) {
 
                 if (exception == null) {
-                    commentAdapter = new CommentListAdapter(getApplicationContext(), R.layout.comment_row, (ArrayList<ParseObject>) temp);
+                    commentAdapter = new CommentListAdapter(getApplicationContext(), R.layout.comment_row, (ArrayList<ParseObject>) temp, eventAuthor);
                     commentView.setNestedScrollingEnabled(true);
 
                     commentView.setAdapter(commentAdapter);

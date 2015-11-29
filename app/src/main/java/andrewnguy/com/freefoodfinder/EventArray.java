@@ -63,6 +63,7 @@ public class EventArray
             newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
             newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
             newEvent.put(context.getString(R.string.SCO), e.getEventScore());
+            newEvent.put(context.getString(R.string.EAUTH), MainActivity.currentUser.getUsername());
             //rebuild event expiration date
             String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
             String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
@@ -171,6 +172,7 @@ public class EventArray
                                             e.getString(context.getString(R.string.DES)),
                                             e.getString(context.getString(R.string.TAG)),
                                             e.getInt(context.getString(R.string.SCO)),
+                                            e.getString(context.getString(R.string.EAUTH)),
                                             eventLL,
                                             currLL
                                         )
