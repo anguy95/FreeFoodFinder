@@ -18,7 +18,7 @@
 
 
     <!--SEARCH BAR HINT-->
-    <string name="search_hint">Search for tacos, burgers, food.</string>
+    <string name="search_hint">Search</string>
 
     <!-- ADD EVENT PIN STUFF-->
     <string name="add_event_pin_description">An image of how the marker dropper looks like</string>
@@ -27,7 +27,6 @@
     <string name="comment_send">Submit</string>
     <string name="confirm_button">Confirm</string>
     <string name="cancel_button">Cancel</string>
-    <string name="search_btn">Search</string>
 
     <!-- CONFIRM EVENT ACTIVITY -->
     <string name="add_event_title">Event Title</string>
@@ -55,10 +54,9 @@
 
     <string name="LAT">Latitude</string>
     <string name="LNG">Longitude</string>
-    <string name="LOC">Location</string>
+    <string name="LOC">Location</string> <!-- location object -->
     <string name="SCO">Score</string>
 
-    <!-- DATABASE STUFF -->
 
 
 </resources>
