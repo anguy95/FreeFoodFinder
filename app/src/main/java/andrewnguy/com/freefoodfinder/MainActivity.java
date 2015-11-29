@@ -71,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
         androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        currentUser = ParseUser.getCurrentUser();
+        try{
+            currentUser = ParseUser.getCurrentUser();
+        }catch(NullPointerException e){
+
+        }
 
         ea = new EventArray(this, getString(R.string.DB));
 
