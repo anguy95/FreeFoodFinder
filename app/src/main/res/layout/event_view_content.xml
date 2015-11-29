@@ -250,7 +250,7 @@
         <ListView
             android:id="@+id/event_view_comment_box"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="240dp"
             android:padding="15dp"
             android:textColor="#8D8D8D"
             android:layout_below="@+id/event_view_comment_box_title"

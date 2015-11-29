@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -46,7 +47,8 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
     private ArrayList<String> likedEventsList = new ArrayList<String>();
     private boolean hasLikedBefore = false;
-    private CommentListAdapter commentList;
+    private ListView commentView;
+    private CommentListAdapter commentAdapter;
 
 
 
@@ -102,6 +104,10 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         viewTags.setText(temp.getTags());
         viewTagHolder.addView(viewTags);
 
+        commentView = (ListView) findViewById(R.id.event_view_comment_box);
+
+
+
         viewScore = (TextView) findViewById(R.id.event_view_likes);
 
         viewScore.setText(String.valueOf(temp.getEventScore()));
@@ -115,24 +121,22 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         }
 
 
-        viewComments = (TextView) findViewById(R.id.event_view_comment_box);
 
         ParseQuery commentsQuery = new ParseQuery("commentsDB");
 
         commentsQuery.whereEqualTo("eventObjectId", objid);
-        commentsQuery.orderByAscending("createdAt");
+        commentsQuery.orderByDescending("createdAt");
         commentsQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> temp, ParseException exception) {
 
                 if (exception == null) {
-                    int i = 0;
-                    ArrayList<String> commentToDisplay = new ArrayList();
-                    while (i < temp.size()) {
-                        commentToDisplay.add(temp.get(i).getString("comment"));
+                    commentAdapter = new CommentListAdapter(getApplicationContext(), R.layout.comment_row, (ArrayList<ParseObject>) temp);
+                    commentView.setNestedScrollingEnabled(true);
 
-                        i++;
-                    }
+                    commentView.setAdapter(commentAdapter);
+
+
 
                 }
             }

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "andrewnguy.com.freefoodfinder"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.parse.bolts:bolts-android:1.+'
 
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     //compile 'com.parse:parse-android:1.+'
