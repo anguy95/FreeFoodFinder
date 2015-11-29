@@ -43,9 +43,10 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
     private Event temp;
     private String objid = "";
     private ParseObject eventScore;
-    private JSONArray likedEvents;
+
     private ArrayList<String> likedEventsList = new ArrayList<String>();
     private boolean hasLikedBefore = false;
+    private CommentListAdapter commentList;
 
 
 
@@ -104,7 +105,6 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
         viewScore.setText(String.valueOf(temp.getEventScore()));
         tempScore = temp.getEventScore();
-        tempScore++;
 
         if(MainActivity.likedEventsList.contains(objid)){
 
@@ -126,14 +126,12 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
                 if (exception == null) {
                     int i = 0;
-                    String commentToDisplay = "";
+                    ArrayList<String> commentToDisplay = new ArrayList();
                     while (i < temp.size()) {
-                        commentToDisplay += temp.get(i).getString("comment");
-                        commentToDisplay += (char) '\n';
+                        commentToDisplay.add(temp.get(i).getString("comment"));
 
                         i++;
                     }
-                    viewComments.setText(commentToDisplay);
 
                 }
             }
@@ -188,12 +186,18 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                     eventScore = query.get(extras.getString("eventId"));
 
                     if(hasLikedBefore){
-                        viewScore.setText(String.valueOf((tempScore - 1)));
+                        tempScore--;
+                        viewScore.setText(String.valueOf((tempScore)));
                         eventScore.increment("Score", -1);
-                        temp.setEventScore(tempScore - 1);
+                        temp.setEventScore(tempScore);
                         ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(false);
                         hasLikedBefore = false;
-                        MainActivity.likedEventsListtoRemove.add(objid);
+                        if(MainActivity.likedEventsListtoRemove.size() > 0){
+
+                        }
+                        else
+                            MainActivity.likedEventsListtoRemove.add(objid);
+
 
 
 
@@ -201,12 +205,18 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                         //TODO CHANGE APPROPRIATLY YA DINFUS
 
                     }else {
+                        tempScore++;
                         viewScore.setText(String.valueOf(tempScore));
                         eventScore.increment("Score", 1);
                         temp.setEventScore(tempScore);
                         ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(true);
                         hasLikedBefore = true;
-                        MainActivity.likedEventsList.add(objid);
+                        if(MainActivity.likedEventsListtoRemove.size() >0) MainActivity.likedEventsListtoRemove.remove(0);
+
+                        if(!MainActivity.likedEventsList.contains(objid)) MainActivity.likedEventsList.add(objid);
+
+
+
 
                     }
 
@@ -232,25 +242,32 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        // Should only save score when you exit
+
         if(MainActivity.likedEventsList.size() > 0) {
             Log.d("Values in array", MainActivity.likedEventsList.get(0));
             MainActivity.currentUser.addAllUnique("likedEvents", MainActivity.likedEventsList);
 
 
 
-            // Should only save score when you exit
             MainActivity.currentUser.saveInBackground();
         }
+        Log.d("Size toRemove", String.valueOf(MainActivity.likedEventsListtoRemove.size()));
+
         if(MainActivity.likedEventsListtoRemove.size() > 0){
             MainActivity.currentUser.removeAll("likedEvents", MainActivity.likedEventsListtoRemove);
             MainActivity.currentUser.saveInBackground();
+
             MainActivity.likedEventsList.remove(objid);
 
+            //TODO REMOVE ALL PLS MAKE NEW ARRAY DINGUS
             MainActivity.likedEventsListtoRemove.remove(0);
 
         }
+        Log.d("Size liked", String.valueOf(MainActivity.likedEventsList.size()));
 
-
+        Log.d("Size toRemove", String.valueOf(MainActivity.likedEventsListtoRemove.size()));
         if(eventScore != null) {
             eventScore.saveInBackground();
         }

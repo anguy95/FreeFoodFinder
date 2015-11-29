@@ -246,10 +246,11 @@
             android:textStyle="bold"
             android:layout_below="@+id/event_view_comment_submit"
             android:layout_centerHorizontal="true"/>
-        <TextView
+
+        <ListView
             android:id="@+id/event_view_comment_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="15dp"
             android:textColor="#8D8D8D"
             android:layout_below="@+id/event_view_comment_box_title"
