@@ -19,6 +19,7 @@ android {
         }
     }
 }
+repositories { mavenCentral() }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -29,6 +30,7 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
 
     compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     //compile 'com.parse:parse-android:1.+'
     compile files('libs/Parse-1.10.3.jar')
