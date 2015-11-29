@@ -179,11 +179,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                         temp.setEventScore(tempScore);
                         ((ToggleButton) findViewById(R.id.toggleButton)).setChecked(false);
                         hasLikedBefore = false;
-                        if(MainActivity.likedEventsListtoRemove.size() > 0){
+                        if(MainActivity.likedEventsListtoRemove.size() == 0){
+                            MainActivity.likedEventsListtoRemove.add(objid);
 
                         }
-                        else
-                            MainActivity.likedEventsListtoRemove.add(objid);
+
 
 
                         //TODO CHANGE APPROPRIATLY YA DINFUS
@@ -251,28 +251,42 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         // Should only save score when you exit
 
         if(MainActivity.likedEventsList.size() > 0) {
-            Log.d("Values in array", MainActivity.likedEventsList.get(0));
             MainActivity.currentUser.addAllUnique("likedEvents", MainActivity.likedEventsList);
 
 
 
             MainActivity.currentUser.saveInBackground();
         }
-        Log.d("Size toRemove", String.valueOf(MainActivity.likedEventsListtoRemove.size()));
+
 
         if(MainActivity.likedEventsListtoRemove.size() > 0){
-            MainActivity.currentUser.removeAll("likedEvents", MainActivity.likedEventsListtoRemove);
+
+            JSONArray temp = MainActivity.currentUser.getJSONArray("likedEvents");
+            ArrayList<String> newLikedEvents = new ArrayList<>();
+            int indexToRemove = 0;
+            if (temp != null) {
+                for (int i=0;i<temp.length();i++){
+                    try {
+                        newLikedEvents.add(temp.get(i).toString());
+                    }catch (JSONException e){
+                        Log.d("JSONArray error", e.getMessage());
+                    }
+                }
+            }
+            for(int i = 0; i < (newLikedEvents.size()-1); i++){
+                if(newLikedEvents.get(i) == MainActivity.likedEventsListtoRemove.get(0)){
+                    indexToRemove = i;
+                }
+            }
+            newLikedEvents.remove(indexToRemove);
+            MainActivity.currentUser.put("likedEvents", newLikedEvents);
             MainActivity.currentUser.saveInBackground();
 
             MainActivity.likedEventsList.remove(objid);
-
-            //TODO REMOVE ALL PLS MAKE NEW ARRAY DINGUS
             MainActivity.likedEventsListtoRemove.remove(0);
 
         }
-        Log.d("Size liked", String.valueOf(MainActivity.likedEventsList.size()));
 
-        Log.d("Size toRemove", String.valueOf(MainActivity.likedEventsListtoRemove.size()));
         if(eventScore != null) {
             eventScore.saveInBackground();
         }

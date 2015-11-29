@@ -144,7 +144,7 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
 
                 }else{
                     final Random rnd = new Random();
-                    final String str = "img_" + rnd.nextInt(8);
+                    final String str = "img_" + rnd.nextInt(7);
                     if(authorToImage.size() < 8){
                         authorToImage.put(comment.getString("postId"), str);
 

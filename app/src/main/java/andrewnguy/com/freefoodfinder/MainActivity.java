@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseSession;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        currentUser = ParseUser.getCurrentUser();
 
         ea = new EventArray(this, getString(R.string.DB));
 
@@ -103,18 +107,22 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         });
 
-        androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+
         // Gets the current user
-        currentUser = ParseUser.getCurrentUser();
+
 
         //If signed in from before Dank
-        if(currentUser != null){
+        if(currentUser.getCurrentUser() != null){
+
             // This gets the users liked events to compare
-            likedEvents = MainActivity.currentUser.getJSONArray("likedEvents");
+            try{
+                likedEvents = MainActivity.currentUser.getJSONArray("likedEvents");
+
+            }catch(NullPointerException e){
+                Log.d("ParseErrpr", e.getMessage());
+            }
             if (likedEvents != null) {
-                int len = likedEvents.length();
-                for (int i=0;i<len;i++){
+                for (int i=0;i<likedEvents.length();i++){
                     try {
                         likedEventsList.add(likedEvents.get(i).toString());
                     }catch (JSONException e){
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
         //Else signs up the user and logs them in
         else{
+
             currentUser = new ParseUser();
             currentUser.setUsername(androidId);
             currentUser.setPassword("planetext");
@@ -137,12 +146,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                                 if (user != null) {
                                     // Hooray! The user is logged in.
                                 } else {
+                                    Log.d("Login Error", e.getMessage());
                                     // Signup failed. Look at the ParseException to see what happened.
                                 }
                             }
                         });
                     } else {
-                        // Sign up didn't succeed. Look at the ParseException
+                        Log.d("Signup Error", e.getMessage());
                         // to figure out what went wrong
                     }
                 }
