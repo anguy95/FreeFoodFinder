@@ -13,3 +13,5 @@ CSE110 project to find free food around you.
 * MAPS API 
  * MapTabs -> auto-fill location (with best guess) almost done
  * ListTabs -> place marker based on choosen location (need to talk to Alex about this)
+* TAGS
+ * Keyboard enter issue 
