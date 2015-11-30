@@ -71,11 +71,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
         androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        try{
-            currentUser = ParseUser.getCurrentUser();
-        }catch(NullPointerException e){
+        ParseUser.enableAutomaticUser();
 
-        }
+
 
         ea = new EventArray(this, getString(R.string.DB));
 
@@ -114,9 +112,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Gets the current user
 
+        try{
+            currentUser = ParseUser.getCurrentUser();
+        }catch (NullPointerException e){
+
+        }
 
         //If signed in from before Dank
-        if(currentUser.getCurrentUser() != null){
+        if(currentUser != null){
 
             // This gets the users liked events to compare
             try{
