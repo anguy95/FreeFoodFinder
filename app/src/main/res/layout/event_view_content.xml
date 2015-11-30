@@ -273,14 +273,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="125"
             android:id="@+id/event_view_likes"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
-            android:layout_alignEnd="@+id/view5"
-            android:layout_marginRight="20dp"
-            android:layout_above="@+id/toggleButton"
-            android:layout_marginBottom="20dp" />
+            android:textAlignment="center"
+            android:layout_alignTop="@+id/event_view_comment_submit"
+            android:layout_alignStart="@+id/toggleButton"
+            android:layout_marginLeft="2dp" />
 
     </RelativeLayout>
 
