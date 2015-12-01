@@ -35,8 +35,8 @@ import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
-                                                               View.OnClickListener,
-                                                               TextView.OnKeyListener
+                                                                View.OnClickListener,
+                                                                TextView.OnKeyListener
 {
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
     private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth

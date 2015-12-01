@@ -183,7 +183,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
 
             // add the new event
             ea.add(new Event(titleStr, dateStr, startStr, endStr,
-                             descStr, tagsStr, score, evnAuth, eventLoc, currentLoc));
+                             descStr, tagsStr, score, evnAuth, locStr, eventLoc, currentLoc));
 
             setResult(Activity.RESULT_OK, returnIntent); //return 1
             finish();

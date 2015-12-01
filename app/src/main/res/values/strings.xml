@@ -4,7 +4,6 @@
     <string name="title_activity_maps">Map</string>
 
 
-
     <string name="facebook_app_id">636064249866504</string>
 
     <string name="location_description_title">Location</string>
@@ -55,6 +54,7 @@
 
     <string name="LAT">Latitude</string>
     <string name="LNG">Longitude</string>
+    <string name="LOCSTRING">LocationString</string>
     <string name="LOC">Location</string> <!-- location object -->
     <string name="SCO">Score</string>
     <string name="EAUTH">eventAuthor</string>

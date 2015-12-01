@@ -19,6 +19,7 @@ public class Event {
     private String dateOfEvent; // start date of the event
     private String startTimeOfEvent; // time of an event
     private String endTimeOfEvent; // time of an event
+    private String locDesc;     // description of location
     private LatLng latLng;      // location of an event
 
     private double dist;        // distance from you to event
@@ -38,7 +39,7 @@ public class Event {
      * @param currLL
      */
     public Event (String title, String date, String startTime, String endTime,
-                  String description, String tags, int score, String eventAuthor, LatLng latlng, LatLng currLL)
+                  String description, String tags, int score, String eventAuthor, String locDesc, LatLng latlng, LatLng currLL)
     {
         this.eventTitle = title;
         this.dateOfEvent = date;
@@ -48,6 +49,7 @@ public class Event {
         this.eventTags = tags;
         this.latLng = latlng;
         this.eventAuthor = eventAuthor;
+        this.locDesc = locDesc;
         this.eventScore = score;
 
         // calc distance from you and the event
@@ -68,9 +70,9 @@ public class Event {
      * @param currLL
      */
     public Event(String id, String title, String date, String startTime, String endTime,
-                 String description, String tags,int score, String eventAuthor, LatLng latlng, LatLng currLL )
+                 String description, String tags,int score, String eventAuthor, String locDesc, LatLng latlng, LatLng currLL )
     {
-        this(title, date, startTime, endTime, description, tags, score, eventAuthor, latlng, currLL);
+        this(title, date, startTime, endTime, description, tags, score, eventAuthor, locDesc, latlng, currLL);
         this.eventId = id;
     }
 
@@ -137,7 +139,11 @@ public class Event {
      * @return
      */
     public int getEventScore() { return eventScore;}
-
+    /**
+     * gets the Location description
+     * @return
+     */
+    public String getLocationDescription() { return locDesc;}
     /**
      * gets the author user
      * @return

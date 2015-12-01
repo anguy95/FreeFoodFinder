@@ -103,7 +103,9 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
         TextView viewDate = (TextView) findViewById(R.id.event_date_time_date);
         viewDate.setText(temp.getDate());
 
-        //TODO Add location description
+        TextView locationDesc = (TextView) findViewById(R.id.event_view_locDesc);
+        locationDesc.setText(temp.getLocationDescription());
+
 
         LinearLayout viewTagHolder = (LinearLayout) findViewById(R.id.event_view_tag_display);
         TextView viewTags = new TextView(this);
@@ -186,7 +188,6 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
 
 
-                        //TODO CHANGE APPROPRIATLY YA DINFUS
 
                     }else {
                         tempScore++;
