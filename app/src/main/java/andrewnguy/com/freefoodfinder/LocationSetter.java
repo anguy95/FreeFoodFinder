@@ -54,6 +54,8 @@ public class LocationSetter extends AsyncTask<String, String, String> {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + BEARER);
 
+            Log.e("response code", Integer.toString(connection.getResponseCode()));
+
             // read response
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;

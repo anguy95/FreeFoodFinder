@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
         androidId = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        ParseUser.enableAutomaticUser();
 
         // INTERNET CHECK
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -169,13 +168,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         // Gets the current user
 
         try {
-            currentUser = ParseUser.getCurrentUser();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+            currentUser = ParseUser.logIn(androidId, "planetext");
 
-        //If signed in from before Dank
-        if (currentUser != null) {
+            Log.e("currentuser", currentUser.getUsername());
 
             // This gets the users liked events to compare
             try {
@@ -193,10 +188,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     }
                 }
             }
-        }
-        //Else signs up the user and logs them in
-        else {
 
+        } catch (ParseException e) {
+            Log.e("current user login", e.getMessage());
+
+            currentUser = ParseUser.getCurrentUser();
+            currentUser.logOut();
             currentUser = new ParseUser();
             currentUser.setUsername(androidId);
             currentUser.setPassword("planetext");
@@ -209,13 +206,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                                 if (user != null) {
                                     // Hooray! The user is logged in.
                                 } else {
-                                    Log.d("Login Error", e.getMessage());
+                                    Log.e("Login Error", e.getMessage());
                                     // Signup failed. Look at the ParseException to see what happened.
                                 }
                             }
                         });
                     } else {
-                        Log.d("Signup Error", e.getMessage());
+                        Log.e("Signup Error", e.getMessage());
                         // to figure out what went wrong
                     }
                 }

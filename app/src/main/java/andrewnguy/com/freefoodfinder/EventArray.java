@@ -186,17 +186,21 @@ public class EventArray
                 }
 
                 /* update the map or the list or both after successful find */
-                switch (position) {
-                    case 0:
-                        MainActivity.adapter.getMapTab().update();
-                        break;
-                    case 1:
-                        MainActivity.adapter.getListTab().update();
-                        break;
-                    default:
-                        MainActivity.adapter.getMapTab().update();
-                        MainActivity.adapter.getListTab().update();
-                        break;
+                try {
+                    switch (position) {
+                        case 0:
+                            MainActivity.adapter.getMapTab().update();
+                            break;
+                        case 1:
+                            MainActivity.adapter.getListTab().update();
+                            break;
+                        default:
+                            MainActivity.adapter.getMapTab().update();
+                            MainActivity.adapter.getListTab().update();
+                            break;
+                    }
+                } catch (NullPointerException e) {
+                    Log.d("Unable to update", e.getMessage());
                 }
             }
         });

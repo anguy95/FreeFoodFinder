@@ -26,7 +26,7 @@ public class JSONParser {
         Log.e("count", Integer.toString(jobj.length()));
         Log.e("count", Integer.toString(jarr.length()));
 
-        // TODO shuffle through the markers and search for the "find" string (most likely location)
+        Log.e("count", jarr.getJSONObject(0).getString("location"));
 
         return result;
     }
