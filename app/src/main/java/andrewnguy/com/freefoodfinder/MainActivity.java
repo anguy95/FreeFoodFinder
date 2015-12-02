@@ -299,18 +299,25 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPause() {
         super.onPause();
         stop = true;
+        currentUser.logOut();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         stop = false;
+        try {
+            currentUser.logIn(androidId, "planetext");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onDestroy() {
         stop = true;
         super.onDestroy();
+        currentUser.logOut();
     }
 
     @Override

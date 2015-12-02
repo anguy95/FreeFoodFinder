@@ -200,7 +200,7 @@ public class EventArray
                             break;
                     }
                 } catch (NullPointerException e) {
-                    Log.d("Unable to update", e.getMessage());
+                    Log.e("Unable to update", e.getMessage());
                 }
             }
         });
