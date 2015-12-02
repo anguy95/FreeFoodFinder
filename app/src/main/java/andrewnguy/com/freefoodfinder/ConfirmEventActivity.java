@@ -240,42 +240,42 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         String[] dateSplit = date.split(" ");
         String[] timeSplit = time.split(":|\\s");
 
-        Calendar dateToReturn = Calendar.getInstance();
+        int month, day, year, hour, minute;
 
         //check month
         switch (dateSplit[1]) {
-            case "Jan": dateToReturn.set(Calendar.MONTH, 0); break;
-            case "Feb": dateToReturn.set(Calendar.MONTH, 1); break;
-            case "Mar": dateToReturn.set(Calendar.MONTH, 2); break;
-            case "Apr": dateToReturn.set(Calendar.MONTH, 3); break;
-            case "May": dateToReturn.set(Calendar.MONTH, 4); break;
-            case "Jun": dateToReturn.set(Calendar.MONTH, 5); break;
-            case "Jul": dateToReturn.set(Calendar.MONTH, 6); break;
-            case "Aug": dateToReturn.set(Calendar.MONTH, 7); break;
-            case "Sep": dateToReturn.set(Calendar.MONTH, 8); break;
-            case "Oct": dateToReturn.set(Calendar.MONTH, 9); break;
-            case "Nov": dateToReturn.set(Calendar.MONTH, 10); break;
-            default   : dateToReturn.set(Calendar.MONTH, 11); break; // DEC
+            case "Jan": month = 0; break;
+            case "Feb": month = 1; break;
+            case "Mar": month = 2; break;
+            case "Apr": month = 3; break;
+            case "May": month = 4; break;
+            case "Jun": month = 5; break;
+            case "Jul": month = 6; break;
+            case "Aug": month = 7; break;
+            case "Sep": month = 8; break;
+            case "Oct": month = 9; break;
+            case "Nov": month = 10; break;
+            default   : month = 11; break; // DEC
         }
 
-        // set day
-        dateToReturn.set(Calendar.DATE, Integer.parseInt(dateSplit[2]));
+        // set day; 1-31
+        day = Integer.parseInt(dateSplit[2]);
 
-        // set year
-        dateToReturn.set(Calendar.YEAR, Integer.parseInt(dateSplit[3]));
+        // set year; y-1900
+        year = Integer.parseInt(dateSplit[3]) - 1900;
 
-        // set hour
-        dateToReturn.set(Calendar.HOUR, Integer.parseInt(timeSplit[0]));
+        // set hour; 0-23
+        hour = Integer.parseInt(timeSplit[0]);
 
-        // set minute
-        dateToReturn.set(Calendar.MINUTE, Integer.parseInt(timeSplit[1]));
+        // check PM
+        if (timeSplit[2].equals("AM") && hour == 12)
+            hour = 0;
+        else if (timeSplit[2].equals("PM") && hour != 12)
+            hour += 12;
 
-        // set AM/PM
-        switch (timeSplit[2]) {
-            case "AM": dateToReturn.set(Calendar.AM_PM, 0); break;
-            default  : dateToReturn.set(Calendar.AM_PM, 1); break; // case PM
-        }
+        // set minute; 0-59
+        minute = Integer.parseInt(timeSplit[1]);
 
-        return dateToReturn.getTime();
+        return new Date(year, month, day, hour, minute);
     }
 }
