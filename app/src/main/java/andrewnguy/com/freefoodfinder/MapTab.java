@@ -34,11 +34,12 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MapTab extends Fragment implements View.OnClickListener
-{
+public class MapTab extends Fragment implements View.OnClickListener {
     private static final int MAP_CREATE_EVENT = 1; // give MatTab a requestCode of 1 when trying to make an event
 
-    /** map interaction **/
+    /**
+     * map interaction
+     **/
     private GoogleMap map;
     private MapView mapView;
     private FloatingActionButton fab; // FAB to bring up the addPin
@@ -46,11 +47,15 @@ public class MapTab extends Fragment implements View.OnClickListener
     private Button cancel, confirm;   // add event buttons
     private EventArray ea;
 
-    /** parse **/
+    /**
+     * parse
+     **/
     private HashMap<String, Marker> eventMarkers = new HashMap<>();
     private HashMap<Marker, Event> events = new HashMap<>();
 
-    /** my location **/
+    /**
+     * my location
+     **/
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
         @Override
         public void onMyLocationChange(Location location) {
@@ -60,9 +65,8 @@ public class MapTab extends Fragment implements View.OnClickListener
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState)
-    {
-        View v = inflater.inflate(R.layout.maps_tab,container,false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.maps_tab, container, false);
         addPin = (RelativeLayout) v.findViewById(R.id.maps_tab_add_pin);
 
         ea = MainActivity.ea;
@@ -131,7 +135,7 @@ public class MapTab extends Fragment implements View.OnClickListener
                 eventTime.setText((toDisplay.getStartTime() + " - " + toDisplay.getEndTime()));
 
                 TextView eventTag = (TextView) v.findViewById(R.id.marker_info_window_food_list);
-                eventTag.setText( (toDisplay.getTags()));
+                eventTag.setText((toDisplay.getTags()));
 
                 return v;
             }
@@ -185,19 +189,16 @@ public class MapTab extends Fragment implements View.OnClickListener
      * @param v View that triggered onClick
      */
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int id = v.getId(); // get the view id
 
         if (id == R.id.maps_tab_fab) { // if fab was hit
             addPin.setVisibility(View.VISIBLE);
             fab.setVisibility(View.GONE);
-        }
-        else if (id == R.id.add_event_pin_cancel_button) { // if cancel button
+        } else if (id == R.id.add_event_pin_cancel_button) { // if cancel button
             addPin.setVisibility(View.GONE);
             fab.setVisibility(View.VISIBLE);
-        }
-        else { // if confirm button
+        } else { // if confirm button
             LatLng eventLoc = map.getCameraPosition().target;
             double lat = eventLoc.latitude;
             double lng = eventLoc.longitude;
@@ -207,7 +208,9 @@ public class MapTab extends Fragment implements View.OnClickListener
             try {
                 intent.putExtra("currLat", map.getMyLocation().getLatitude());
                 intent.putExtra("currLng", map.getMyLocation().getLongitude());
-            } catch(NullPointerException npe) { Log.d("mylocation", npe.getMessage()); }
+            } catch (NullPointerException npe) {
+                Log.d("mylocation", npe.getMessage());
+            }
             startActivityForResult(intent, MAP_CREATE_EVENT);
         }
     }
@@ -215,19 +218,18 @@ public class MapTab extends Fragment implements View.OnClickListener
 
     /**
      * Get a result from an activity
+     *
      * @param requestCode code of request:
      *                    MAP_CREATE_EVENT
-     * @param resultCode Activity.RESULT_OK or Activity.RESULT_CANCEL
-     * @param data intent that the result came with
+     * @param resultCode  Activity.RESULT_OK or Activity.RESULT_CANCEL
+     * @param data        intent that the result came with
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // check for correct requestCode
-        if (requestCode == MAP_CREATE_EVENT)
-        {
+        if (requestCode == MAP_CREATE_EVENT) {
             // check the resultCode
             if (resultCode == Activity.RESULT_OK) { // OK
                 Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
@@ -305,7 +307,7 @@ public class MapTab extends Fragment implements View.OnClickListener
         for (int i = 0; i < eventsArray.size(); i++)
             for (int j = 0; j < tags.size(); j++)
                 if (eventsArray.get(i).getTitle().toLowerCase().contains(tags.get(j).toLowerCase()) || // check if title
-                    eventsArray.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
+                        eventsArray.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
                 {
                     filteredEvents.add(eventsArray.get(i));
                 }

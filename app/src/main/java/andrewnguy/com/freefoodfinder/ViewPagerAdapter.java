@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 /**
  * Created by anguy95 on 10/27/15.
  */
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,7 +21,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
+    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
         super(fm);
 
         this.Titles = mTitles;
@@ -32,13 +33,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if(position == 0) // if the position is 0 we are returning the First tab
+        if (position == 0) // if the position is 0 we are returning the First tab
         {
             if (mapTab == null)
                 mapTab = new MapTab();
             return mapTab;
-        }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        } else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             if (listTab == null)
                 listTab = new ListTab();
@@ -62,7 +62,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return NumbOfTabs;
     }
 
-    public MapTab getMapTab() { return mapTab; }
+    public MapTab getMapTab() {
+        return mapTab;
+    }
 
-    public ListTab getListTab() { return listTab; }
+    public ListTab getListTab() {
+        return listTab;
+    }
 }

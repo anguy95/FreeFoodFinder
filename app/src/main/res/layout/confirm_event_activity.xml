@@ -32,7 +32,8 @@
             android:textColor="@color/text_box_color"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/confirm_event_main_title"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:singleLine="true" />
 
         <!-- DATE AND TIME PICKER-->
         <View
@@ -69,9 +70,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="@string/confirm_event_loc_title"
+            android:textColor="@color/text_box_color"
             android:textSize="@dimen/confirm_event_sub_title"
-            android:textStyle="bold"
-            android:textColor="@color/text_box_color" />
+            android:textStyle="bold" />
 
 
         <View
@@ -97,7 +98,7 @@
             android:textColor="@color/text_box_color"
             android:textCursorDrawable="@null"
             android:textSize="12sp"
-             />
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/confirm_event_desc_title"
@@ -107,9 +108,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="@string/confirm_event_desc_title"
+            android:textColor="@color/text_box_color"
             android:textSize="@dimen/confirm_event_sub_title"
-            android:textStyle="bold"
-            android:textColor="@color/text_box_color" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/confirm_event_activity_event_description"
@@ -135,9 +136,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="@string/confirm_event_tag_title"
+            android:textColor="@color/text_box_color"
             android:textSize="@dimen/confirm_event_sub_title"
-            android:textStyle="bold"
-            android:textColor="@color/text_box_color" />
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/view3"
@@ -163,8 +164,7 @@
             android:singleLine="true"
             android:textColor="@color/text_box_color"
             android:textCursorDrawable="@null"
-            android:textSize="12sp"
-            android:nextFocusDown="@id/confirm_event_activity_location_description" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/confirm_event_activity_confirm_button"

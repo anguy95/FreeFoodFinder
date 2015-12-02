@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -23,35 +22,32 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:gravity="center"
             android:text="@string/add_event_title"
             android:textAlignment="center"
             android:textColor="#8D8D8D"
             android:textSize="@dimen/confirm_event_main_title"
-            android:textStyle="bold"
-            android:gravity="center" />
+            android:textStyle="bold" />
 
 
         <HorizontalScrollView
             android:id="@+id/event_view_tag"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:background="#FFFFFF"
-            android:fillViewport="false"
-            android:layout_marginTop="0dp"
-            android:layout_below="@+id/view3"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true">
+            android:layout_below="@+id/view3"
+            android:layout_marginTop="0dp"
+            android:background="#FFFFFF"
+            android:fillViewport="false">
 
             <LinearLayout
                 android:id="@+id/event_view_tag_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                </LinearLayout>
+                android:orientation="horizontal"> </LinearLayout>
 
         </HorizontalScrollView>
-
-
 
 
         <!--The Date and Time -->
@@ -62,8 +58,8 @@
             android:layout_height="1dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/event_view_title"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/event_date_time_date"
@@ -91,12 +87,12 @@
             android:layout_toStartOf="@+id/time_to_text"
             android:ems="10"
             android:focusableInTouchMode="false"
+            android:gravity="bottom"
             android:hint="@string/edit_start_time"
             android:textAlignment="center"
             android:textColor="#8D8D8D"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/date_start_end_text"
-            android:gravity="bottom" />
+            android:textSize="@dimen/date_start_end_text" />
 
         <TextView
             android:id="@+id/time_to_text"
@@ -118,12 +114,12 @@
             android:layout_marginStart="30dp"
             android:layout_toEndOf="@+id/time_to_text"
             android:focusableInTouchMode="false"
+            android:gravity="bottom"
             android:hint="@string/edit_end_time"
             android:textAlignment="center"
             android:textColor="#8D8D8D"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/date_start_end_text"
-            android:gravity="bottom" />
+            android:textSize="@dimen/date_start_end_text" />
 
         <View
             android:id="@+id/view2"
@@ -137,149 +133,150 @@
             android:id="@+id/event_view_locTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/view2"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="@string/location_description_title"
             android:textAlignment="center"
             android:textColor="@color/text_box_color"
-            android:textStyle="bold"
-            android:layout_below="@+id/view2"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/confirm_event_sub_title" />
+            android:textSize="@dimen/confirm_event_sub_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/event_view_locDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/location_temp_holder"
-            android:textAlignment="center"
-            android:textColor="@color/text_box_color"
-            android:background="@drawable/event_view_text_bg"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/event_view_locTitle" />
+            android:layout_below="@+id/event_view_locTitle"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/event_view_text_bg"
+            android:text="@string/location_temp_holder"
+            android:textAlignment="center"
+            android:textColor="@color/text_box_color" />
 
         <View
             android:id="@+id/view3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/event_date_time_startTime"/>
+            android:layout_below="@+id/event_date_time_startTime"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/event_view_descTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/view4"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="@string/event_description_title"
-            android:textSize="@dimen/confirm_event_sub_title"
             android:textColor="@color/text_box_color"
-            android:textStyle="bold"
-            android:layout_below="@+id/view4"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="@dimen/confirm_event_sub_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/event_view_eventDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textAlignment="center"
-            android:textColor="@color/text_box_color"
-            android:background="@drawable/event_view_text_bg"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/event_view_descTitle" />
+            android:layout_below="@+id/event_view_descTitle"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/event_view_text_bg"
+            android:textAlignment="center"
+            android:textColor="@color/text_box_color" />
 
         <View
             android:id="@+id/view4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="15dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/event_view_locDesc"
+            android:layout_marginTop="15dp"
             android:background="@android:color/darker_gray" />
 
         <View
             android:id="@+id/view5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="15dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/event_view_eventDesc"
+            android:layout_marginTop="15dp"
             android:background="@android:color/darker_gray" />
 
         <EditText
             android:id="@+id/event_view_comment_submit"
-            android:hint="@string/event_view_comment_to_add"
-            android:textCursorDrawable="@null"
-            android:gravity="start"
-            android:background="@drawable/confirm_event_activity_text_bg"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/text_box_color"
-            android:layout_below="@+id/view5"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/confirm_comment_button"
+            android:layout_below="@+id/view5"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_toStartOf="@+id/confirm_comment_button"
+            android:background="@drawable/confirm_event_activity_text_bg"
+            android:gravity="start"
+            android:hint="@string/event_view_comment_to_add"
             android:padding="10dp"
+            android:textColor="@color/text_box_color"
+            android:textCursorDrawable="@null"
             android:textSize="15sp" />
 
         <Button
             android:id="@+id/confirm_comment_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="@string/comment_send"
-            android:background="@drawable/confirm_activity_confirm_button"
             android:layout_alignBottom="@+id/event_view_comment_submit"
-            android:layout_alignEnd="@+id/view5" />
+            android:layout_alignEnd="@+id/view5"
+            android:background="@drawable/confirm_activity_confirm_button"
+            android:text="@string/comment_send" />
+
         <TextView
             android:id="@+id/event_view_comment_box_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/event_view_comment_submit"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="@string/event_comment_box_title"
             android:textColor="@color/text_box_color"
             android:textSize="@dimen/confirm_event_sub_title"
-            android:textStyle="bold"
-            android:layout_below="@+id/event_view_comment_submit"
-            android:layout_centerHorizontal="true"/>
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/event_view_comment_box"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:padding="15dp"
-            android:textColor="#8D8D8D"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/event_view_comment_box_title"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true" />
+            android:padding="15dp"
+            android:textColor="#8D8D8D" />
 
         <ToggleButton
             android:id="@+id/toggleButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:textOn=""
-            android:textOff=""
-            android:background="@drawable/like_toggle_selector"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="25dp"
             android:layout_above="@+id/confirm_comment_button"
-            android:layout_marginBottom="20dp" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/like_toggle_selector"
+            android:textOff=""
+            android:textOn="" />
 
         <TextView
+            android:id="@+id/event_view_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/event_view_likes"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:layout_alignTop="@+id/event_view_comment_submit"
             android:layout_alignStart="@+id/toggleButton"
-            android:layout_marginLeft="2dp" />
+            android:layout_alignTop="@+id/event_view_comment_submit"
+            android:layout_marginStart="2dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp" />
 
     </RelativeLayout>
 

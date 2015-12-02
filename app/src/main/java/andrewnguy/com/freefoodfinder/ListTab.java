@@ -3,6 +3,7 @@ package andrewnguy.com.freefoodfinder;
 /**
  * Created by anguy95 on 10/27/15.
  */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class ListTab extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
-{
+public class ListTab extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private static final int LIST_CREATE_EVENT = 11; // give ListTab a requestCode of 11 when trying to make an event
 
     private ArrayList<Event> events = new ArrayList<>(); // initial 0
@@ -34,8 +34,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.list_tab, container, false);
         listView = (ListView) v.findViewById(R.id.list_tab_listview);
 
@@ -53,19 +52,18 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         if (listView != null)
             listView.invalidate();
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         update();
     }
+
     /**
      * Check click events. Responds to:
      * fab button (create event)
@@ -73,8 +71,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
      * @param v View that triggered onClick
      */
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int id = v.getId(); // get view id
 
         if (id == R.id.list_tab_fab) { // if fab was pressed
@@ -86,14 +83,14 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     /**
      * Respond to a list click event
      * Used to view an event in greater detail
-     * @param parent the adapterview click originated from
-     * @param view that it came from
+     *
+     * @param parent   the adapterview click originated from
+     * @param view     that it came from
      * @param position of where the item was located
-     * @param id of the item that was clicked
+     * @param id       of the item that was clicked
      */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // display detailed event view
 
         // send intent to the event view class
@@ -121,18 +118,17 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
 
     /**
      * Get a result from an activity
+     *
      * @param requestCode code of request:
      *                    LIST_CREATE_EVENT
-     * @param resultCode Activity.RESULT_OK or Acitivty.RESULT_CANCEL
-     * @param data intent that the result came with
+     * @param resultCode  Activity.RESULT_OK or Acitivty.RESULT_CANCEL
+     * @param data        intent that the result came with
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LIST_CREATE_EVENT)
-        {
+        if (requestCode == LIST_CREATE_EVENT) {
             if (resultCode == Activity.RESULT_OK) { // OK
                 // manipulate the Intent data to get simple data
                 Toast.makeText(getContext(), "Your event has been posted", Toast.LENGTH_SHORT).show();
@@ -163,7 +159,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         for (int i = 0; i < events.size(); i++)
             for (int j = 0; j < tags.size(); j++)
                 if (events.get(i).getTitle().toLowerCase().contains(tags.get(j).toLowerCase()) || // check if title
-                    events.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
+                        events.get(i).getTags().toLowerCase().contains(tags.get(j).toLowerCase()))    // or tags match
                     temp.add(events.get(i));
 
         events = temp;

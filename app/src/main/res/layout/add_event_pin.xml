@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="170dp"
     android:layout_height="150dp"
+    android:orientation="vertical"
     android:weightSum="1">
 
 
@@ -10,28 +10,28 @@
         android:id="@+id/add_event_pin_drawing"
         android:layout_width="194dp"
         android:layout_height="149dp"
+        android:layout_centerInParent="true"
         android:layout_marginStart="66dp"
         android:layout_marginTop="48dp"
-        android:src="@drawable/add_event_pin"
-        android:layout_centerInParent="true"
-        android:contentDescription="@string/add_event_pin_description"/>
+        android:contentDescription="@string/add_event_pin_description"
+        android:src="@drawable/add_event_pin" />
 
     <Button
         android:id="@+id/add_event_pin_confirm_button"
         android:layout_width="75dp"
         android:layout_height="30dp"
-        android:text="@string/confirm_button"
-        android:background="#37FF43"
         android:layout_alignBottom="@+id/add_event_pin_drawing"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="#37FF43"
+        android:text="@string/confirm_button" />
 
     <Button
         android:id="@+id/add_event_pin_cancel_button"
         android:layout_width="75dp"
         android:layout_height="30dp"
+        android:layout_alignBottom="@+id/add_event_pin_drawing"
         android:layout_marginEnd="40dp"
-        android:text="@string/cancel_button"
         android:background="#FF2E30"
-        android:layout_alignBottom="@+id/add_event_pin_drawing"/>
+        android:text="@string/cancel_button" />
 
 </RelativeLayout>

@@ -13,7 +13,6 @@ import java.util.Calendar;
 
 /**
  * Created by anguy95 on 11/8/15.
- *
  */
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     @Override
@@ -41,9 +40,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             am_pm = "PM";
 
 
-        
-        if (hourOfDay > 12){
-            hourOfDay = hourOfDay-12;
+        if (hourOfDay > 12) {
+            hourOfDay = hourOfDay - 12;
         }
 
         // check for 12AM
