@@ -41,8 +41,7 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected String doInBackground(String... link)
-    {
+    protected String doInBackground(String... link) {
         try {
             String requestLink = BASE_LINK + link[0] + "&" + BLDGS + "&feet=" + Integer.toString(FEET);
 
@@ -71,8 +70,7 @@ public class LocationSetter extends AsyncTask<String, String, String> {
             JSONParser jp = new JSONParser(response.toString());
             str = jp.parse("location");
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.e("I/O error", "not run");
             e.printStackTrace();
         } catch (JSONException e) {
@@ -84,8 +82,7 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPostExecute(String string)
-    {
+    protected void onPostExecute(String string) {
         TextView textView = textViewWeakReference.get();
 
         textView.setText(str, TextView.BufferType.NORMAL);

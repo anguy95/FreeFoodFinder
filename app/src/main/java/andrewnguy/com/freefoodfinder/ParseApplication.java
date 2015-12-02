@@ -5,8 +5,7 @@ import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 
-public class ParseApplication extends Application
-{
+public class ParseApplication extends Application {
     /**
      * Create the Parse
      */

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.gms.maps.MapView android:id="@+id/mapview"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
@@ -11,16 +13,16 @@
         android:id="@+id/maps_tab_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
         android:layout_marginBottom="31dp"
         android:layout_marginEnd="31dp"
-        android:tint="@color/plus_color"
-        app:backgroundTint="@color/outer_color"
-        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:tint="@color/plus_color"
+        app:backgroundTint="@color/outer_color" />
 
 
     <include
@@ -29,5 +31,5 @@
         android:layout_width="170dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </RelativeLayout>
