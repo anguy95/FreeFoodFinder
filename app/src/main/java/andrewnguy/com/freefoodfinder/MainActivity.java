@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         View.OnClickListener,
         TextView.OnKeyListener {
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
-    private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth
+    private int update = 0;          // 0 = updateMap, 1 = updateList, else updateBoth
 
     static EventArray ea; // the event array; for parse
     private ViewPager pager;

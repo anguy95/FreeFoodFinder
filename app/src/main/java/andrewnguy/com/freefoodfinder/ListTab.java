@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import android.os.Handler;
 
 
 public class ListTab extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -31,6 +33,7 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
     private FloatingActionButton fab;
     private EventArray ea;
     private int flag = 1;
+    private SwipeRefreshLayout refresh;
 
 
     @Override
@@ -44,7 +47,21 @@ public class ListTab extends Fragment implements View.OnClickListener, AdapterVi
         fab = (FloatingActionButton) v.findViewById(R.id.list_tab_fab);
         fab.setOnClickListener(this);
 
-        update();
+
+        refresh = (SwipeRefreshLayout) v.findViewById(R.id.list_tab_refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        refresh.setRefreshing(false);
+                        update();
+                    }
+                }, 2000);
+            }
+        });
+
+
 
         listView.setOnItemClickListener(this);
 
