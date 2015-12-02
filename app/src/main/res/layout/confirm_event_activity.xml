@@ -96,7 +96,8 @@
             android:padding="15dp"
             android:textColor="@color/text_box_color"
             android:textCursorDrawable="@null"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+             />
 
         <TextView
             android:id="@+id/confirm_event_desc_title"
@@ -162,7 +163,8 @@
             android:singleLine="true"
             android:textColor="@color/text_box_color"
             android:textCursorDrawable="@null"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:nextFocusDown="@id/confirm_event_activity_location_description" />
 
         <Button
             android:id="@+id/confirm_event_activity_confirm_button"

@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Calendar;
+import java.util.Date;
+
+
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     private EditText title, desc, tags, start, end, date;
@@ -157,14 +161,14 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
                 return;
             }
-/*
+
             if (times == 0 && (isEmpty(desc) || isEmpty(tags))) {
                 // maybe warn them? it's okay to have an empty event description/tags
-                String optionalFields = isEmpty(desc) ? "event descriptions" : "event tags";
+                String optionalFields = isEmpty(tags) ? "event tags" : "event description";
                 Toast.makeText(this, "Are you sure you want to leave the " + optionalFields + " blank?", Toast.LENGTH_LONG).show();
                 times++;
                 return;
-            }*/
+            }
 
 
             String titleStr = title.getText().toString();
@@ -176,6 +180,22 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             String tagsStr = tags.getText().toString();
             String evnAuth = MainActivity.currentUser.getUsername();
             int score = 0;
+
+
+            /** TIME CHECKS **/
+            Date now = Calendar.getInstance().getTime();
+            Date startDate = getTimeOf(dateStr, startStr);
+            Date endDate = getTimeOf(dateStr, endStr);
+
+            if (startDate.getTime() > endDate.getTime()) {
+                Toast.makeText(this, "Your event cannot end before it starts.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (now.getTime() > endDate.getTime()) {
+                Toast.makeText(this, "Your event cannot end before now.", Toast.LENGTH_LONG).show();
+                return;
+            }
 
 
             LatLng eventLoc = new LatLng(lat, lng);
@@ -209,4 +229,53 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         rl.execute(param1 + "&" + param2); //toss in lat/lng as params
     }
 
+    /**
+     *
+     * @param date is in the format of [DayOfWeek], [Mon.] [Day] [Year]
+     * @param time is in the format of [HH:MM] [AM/PM] -- no 0's in front of single digit hour
+     * @return
+     */
+    private Date getTimeOf(String date, String time)
+    {
+        String[] dateSplit = date.split(" ");
+        String[] timeSplit = time.split(":|\\s");
+
+        Calendar dateToReturn = Calendar.getInstance();
+
+        //check month
+        switch (dateSplit[1]) {
+            case "Jan": dateToReturn.set(Calendar.MONTH, 0); break;
+            case "Feb": dateToReturn.set(Calendar.MONTH, 1); break;
+            case "Mar": dateToReturn.set(Calendar.MONTH, 2); break;
+            case "Apr": dateToReturn.set(Calendar.MONTH, 3); break;
+            case "May": dateToReturn.set(Calendar.MONTH, 4); break;
+            case "Jun": dateToReturn.set(Calendar.MONTH, 5); break;
+            case "Jul": dateToReturn.set(Calendar.MONTH, 6); break;
+            case "Aug": dateToReturn.set(Calendar.MONTH, 7); break;
+            case "Sep": dateToReturn.set(Calendar.MONTH, 8); break;
+            case "Oct": dateToReturn.set(Calendar.MONTH, 9); break;
+            case "Nov": dateToReturn.set(Calendar.MONTH, 10); break;
+            default   : dateToReturn.set(Calendar.MONTH, 11); break; // DEC
+        }
+
+        // set day
+        dateToReturn.set(Calendar.DATE, Integer.parseInt(dateSplit[2]));
+
+        // set year
+        dateToReturn.set(Calendar.YEAR, Integer.parseInt(dateSplit[3]));
+
+        // set hour
+        dateToReturn.set(Calendar.HOUR, Integer.parseInt(timeSplit[0]));
+
+        // set minute
+        dateToReturn.set(Calendar.MINUTE, Integer.parseInt(timeSplit[1]));
+
+        // set AM/PM
+        switch (timeSplit[2]) {
+            case "AM": dateToReturn.set(Calendar.AM_PM, 0); break;
+            default  : dateToReturn.set(Calendar.AM_PM, 1); break; // case PM
+        }
+
+        return dateToReturn.getTime();
+    }
 }

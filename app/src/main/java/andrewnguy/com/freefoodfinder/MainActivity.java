@@ -1,10 +1,17 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.method.KeyListener;
@@ -20,6 +27,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -32,12 +42,12 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.jar.Manifest;
 
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
-                                                               View.OnClickListener,
-                                                               TextView.OnKeyListener
-{
+        View.OnClickListener,
+        TextView.OnKeyListener {
     private final int DELAY = 10000; // 10 seconds (10,000 milliseconds)
     private int update = 2;          // 0 = updateMap, 1 = updateList, else updateBoth
 
@@ -45,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private ViewPager pager;
     static ViewPagerAdapter adapter;
     private SlidingTabLayout tabs;
-    private CharSequence Titles[]={"Map","List"};
+    private CharSequence Titles[] = {"Map", "List"};
     private int Numboftabs = 2;
 
     // searching/filtering/tagging
@@ -62,7 +72,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     static JSONArray likedEvents;
     static ArrayList<String> likedEventsList = new ArrayList<String>();
     static ArrayList<String> likedEventsListtoRemove = new ArrayList<String>();
-
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -73,6 +87,58 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 Settings.Secure.ANDROID_ID);
         ParseUser.enableAutomaticUser();
 
+        // WIFI CHECK
+//        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//        if (!wifi.isWifiEnabled()) { // if wifi is not enabled, ask to enable
+//            // ask to enable wifi
+//            AlertDialog.Builder alertWIFI = new AlertDialog.Builder(this);
+//
+//            alertWIFI
+//                    .setTitle("Enable WIFI?")
+//                    .setMessage("This app will not work correctly you are not connected to the internet is not enabled.")
+//                    .setCancelable(false)
+//                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent onWIFI = new Intent(Settings.ACTION_WIFI_SETTINGS);
+//                            startActivity(onWIFI);
+//                        }
+//                    })
+//                    .setNegativeButton("NO THANKS", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//
+//            AlertDialog alert = alertWIFI.create();
+//            alert.show();
+//        }
+        // LOCATION SERVICES CHECK
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) { // if location services are not enabled, ask to enable
+            AlertDialog.Builder alertGPS = new AlertDialog.Builder(this);
+
+            alertGPS
+                    .setTitle("Enable GPS?")
+                    .setMessage("This app may not work correctly if location services are not enabled.")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent onGPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(onGPS);
+                        }
+                    })
+                    .setNegativeButton("NO THANKS", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = alertGPS.create();
+            alert.show();
+        }
 
 
         ea = new EventArray(this, getString(R.string.DB));
@@ -89,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         tags_text.setOnKeyListener(this);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -112,34 +178,34 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Gets the current user
 
-        try{
+        try {
             currentUser = ParseUser.getCurrentUser();
-        }catch (NullPointerException e){
-
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
         //If signed in from before Dank
-        if(currentUser != null){
+        if (currentUser != null) {
 
             // This gets the users liked events to compare
-            try{
+            try {
                 likedEvents = MainActivity.currentUser.getJSONArray("likedEvents");
 
-            }catch(NullPointerException e){
-                Log.d("ParseErrpr", e.getMessage());
+            } catch (NullPointerException e) {
+                Log.d("ParseError", e.getMessage());
             }
             if (likedEvents != null) {
-                for (int i=0;i<likedEvents.length();i++){
+                for (int i = 0; i < likedEvents.length(); i++) {
                     try {
                         likedEventsList.add(likedEvents.get(i).toString());
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         Log.d("JSONArray error", e.getMessage());
                     }
                 }
             }
         }
         //Else signs up the user and logs them in
-        else{
+        else {
 
             currentUser = new ParseUser();
             currentUser.setUsername(androidId);
@@ -182,9 +248,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    /** search and cancel search buttons **/
+    /**
+     * search and cancel search buttons
+     **/
     @Override
     public void onClick(View v) {
 
@@ -198,25 +269,28 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 tags.clear();
                 tags.add(aTagsArr);
             }
-        }
-        else if (v.getId() == R.id.search_cancel_button) { // clear all tags
+        } else if (v.getId() == R.id.search_cancel_button) { // clear all tags
             tags_text.setText("");
             tags.clear();
+        } else {
+            return;
         }
-        else { return; }
 
         // put the keyboard away
         try {
             InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-        catch (NullPointerException e) { e.printStackTrace(); }
         // update
         adapter.getMapTab().filter(tags);
         adapter.getListTab().update();
     }
 
-    /** press enter on search to send activate a search **/
+    /**
+     * press enter on search to send activate a search
+     **/
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -230,7 +304,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         return false;
     }
 
-    public static ArrayList<String> getTags() { return tags; }
+    public static ArrayList<String> getTags() {
+        return tags;
+    }
 
     @Override
     public void onPause() {
@@ -279,12 +355,51 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageSelected(int position) {
         if (position == 1) { // list view
             update = 0;
-        }
-        else {
+        } else {
             update = 2;
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) { /* do nothing */ }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://andrewnguy.com.freefoodfinder/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://andrewnguy.com.freefoodfinder/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
