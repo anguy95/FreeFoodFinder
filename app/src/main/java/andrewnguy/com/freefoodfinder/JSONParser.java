@@ -19,15 +19,10 @@ public class JSONParser {
 
     public String parse(String find) throws JSONException {
 
-        String result = "";
-
         JSONArray jarr = jobj.getJSONArray("markers"); // break down the markers
 
-        Log.e("count", Integer.toString(jobj.length()));
-        Log.e("count", Integer.toString(jarr.length()));
+        Log.e("count", jarr.getJSONObject(0).getString(find));
 
-        Log.e("count", jarr.getJSONObject(0).getString("location"));
-
-        return result;
+        return jarr.getJSONObject(0).getString(find);
     }
 }

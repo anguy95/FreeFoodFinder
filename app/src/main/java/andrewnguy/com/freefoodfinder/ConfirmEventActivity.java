@@ -86,7 +86,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         }
 
 
-            getLoc();
+        getLoc(); // get location of pin
     }
 
     @Override

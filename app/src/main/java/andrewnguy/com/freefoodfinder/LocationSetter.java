@@ -27,7 +27,6 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     private final String APP_KEY = "yA1qdB9d1elQ5rhz12h9Q1ZKxlMa";
     private final String APP_SECRET = "6XcIqzIgbuP8hGhf959MLF8pQPMa";
     private final String BEARER = "9ce2bec3b44235681badd6568bf83a8e";
-
     private final String BASE_LINK = "https://api-qa.ucsd.edu:8243/location/v1/buildings?";
     private final String BLDGS = "groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19"; // all buildings UCSD
     private final int FEET = 200;
@@ -43,13 +42,13 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... link) {
         try {
-            String requestLink = BASE_LINK + link[0] + "&" + BLDGS + "&feet=" + Integer.toString(FEET);
+            String requestLink = BASE_LINK + link[0] + "&" + BLDGS + "&radius=" + Integer.toString(FEET);
 
             Log.e("url", requestLink);
 
             // try the request
             URL url = new URL(requestLink);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // default is GET
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + BEARER);
@@ -70,7 +69,7 @@ public class LocationSetter extends AsyncTask<String, String, String> {
 
             // breakdown the JSON
             JSONParser jp = new JSONParser(response.toString());
-            str = jp.parse("location");
+            str = jp.parse("title");
 
         } catch (IOException e) {
             Log.e("I/O error", "not run");
