@@ -4,24 +4,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,9 +27,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseSession;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -41,8 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.jar.Manifest;
+
 
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener,
@@ -87,33 +80,31 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 Settings.Secure.ANDROID_ID);
         ParseUser.enableAutomaticUser();
 
-        // WIFI CHECK
-//        WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-//        if (!wifi.isWifiEnabled()) { // if wifi is not enabled, ask to enable
-//            // ask to enable wifi
-//            AlertDialog.Builder alertWIFI = new AlertDialog.Builder(this);
-//
-//            alertWIFI
-//                    .setTitle("Enable WIFI?")
-//                    .setMessage("This app will not work correctly you are not connected to the internet is not enabled.")
-//                    .setCancelable(false)
-//                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent onWIFI = new Intent(Settings.ACTION_WIFI_SETTINGS);
-//                            startActivity(onWIFI);
-//                        }
-//                    })
-//                    .setNegativeButton("NO THANKS", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//
-//            AlertDialog alert = alertWIFI.create();
-//            alert.show();
-//        }
+        // INTERNET CHECK
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getActiveNetworkInfo() == null) { // ask to connect to an internet service
+
+            AlertDialog.Builder alertInternet = new AlertDialog.Builder(this);
+
+            alertInternet
+                    .setTitle("Check Internet Connection")
+                    .setMessage("This app will not work correctly if you are not connected to the internet.")
+                    .setCancelable(false)
+                    .setPositiveButton("ENABLE WIFI/DATA", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent onWIFI = new Intent(Settings.ACTION_SETTINGS);
+                            startActivity(onWIFI);
+                        }
+                    })
+                    .setNegativeButton("NO THANKS", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }
         // LOCATION SERVICES CHECK
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) { // if location services are not enabled, ask to enable
@@ -135,9 +126,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
                         }
-                    });
-            AlertDialog alert = alertGPS.create();
-            alert.show();
+                    })
+                    .show();
         }
 
 
