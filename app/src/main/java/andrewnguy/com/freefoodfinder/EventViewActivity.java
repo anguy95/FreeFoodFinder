@@ -140,6 +140,11 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             public void onClick(View v) {
                 ParseObject eventComments = new ParseObject("commentsDB");
                 String commentToParse = commentToAdd.getText().toString();
+                if(commentToParse == null || commentToParse.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter in a comment", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                commentToAdd.setText("");
                 String objid = extras.getString("eventId");
 
                 Log.d("comment", objid);
