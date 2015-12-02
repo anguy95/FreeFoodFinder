@@ -269,14 +269,14 @@
 
         <TextView
             android:id="@+id/event_view_likes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/toggleButton"
-            android:layout_alignTop="@+id/event_view_comment_submit"
-            android:layout_marginStart="2dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:text="99"
+            android:layout_alignTop="@+id/event_view_comment_submit"
+            android:layout_alignStart="@+id/toggleButton" />
 
     </RelativeLayout>
 
