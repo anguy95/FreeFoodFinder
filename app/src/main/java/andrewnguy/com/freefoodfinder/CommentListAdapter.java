@@ -28,8 +28,11 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
     private final Context context;
     private final ArrayList<ParseObject> data;
     private final HashMap<String, String> authorToImage = new HashMap<>(8);
+    private final HashMap<String, String> userToName = new HashMap<>(8);
     private final int layoutResourceId;
     private final String eventAuthor;
+    private final String[] names = {"Purple Boat", "Orange Balloon", "Red Sox", "Yellow Anchor", "Black UFO","Blue Compass","Red Map","Blue Paw"};
+    ;
 
 
     public CommentListAdapter(Context context,  int layoutResourceId, ArrayList<ParseObject> data, String eventAuthor) {
@@ -49,7 +52,6 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
 
         //Class that holds all our types of views
         ViewHolder holder = null;
-
 
         if(row == null) {  //If the row of the ViewGroup is empty then add a new item using list_row_view layout
 
@@ -131,31 +133,40 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
             // If your previous comment keeps consistent
             if(comment.getString("postId").equals(MainActivity.currentUser.getUsername())) {
                 holder.commentIcon.setImageResource(R.drawable.you);
+                holder.commentName.setText("You");
+
             }
 
             else if(comment.getString("postId").equals(eventAuthor)){
                 holder.commentIcon.setImageResource(R.drawable.op);
+                holder.commentName.setText("Original Poster");
 
 
             } else{ // hashes user ids
                 if(authorToImage.containsKey(comment.getString("postId"))){
                     String str = authorToImage.get(comment.getString("postId"));
                     holder.commentIcon.setImageResource(getResourceID(str, "drawable", getContext()));
+                    holder.commentName.setText(userToName.get(comment.getString("postId")));
+
+
 
                 }else{
                     final Random rnd = new Random();
-                    final String str = "img_" + rnd.nextInt(7);
+                    final int randNum = rnd.nextInt(7);
+                    final String str = "img_" + randNum;
                     if(authorToImage.size() < 8){
                         authorToImage.put(comment.getString("postId"), str);
+                        userToName.put(comment.getString("postId"), names[randNum]);
+
 
                     }
                     holder.commentIcon.setImageResource(getResourceID(str, "drawable", getContext()));
+                    holder.commentName.setText(userToName.get(comment.getString("postId")));
 
                 }
 
             }
             //Sets the views Comment
-            holder.commentName.setText(comment.getString("postId"));
             holder.commentContent.setText(comment.getString("comment"));
             holder.commentDate.setText(monthOfYear + dateToDisplay);
         }
