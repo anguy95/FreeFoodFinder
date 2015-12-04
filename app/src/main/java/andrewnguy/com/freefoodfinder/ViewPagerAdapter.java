@@ -1,16 +1,12 @@
 package andrewnguy.com.freefoodfinder;
 
-/**
- * Created by anguy95 on 10/27/15.
- */
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 /**
- * Created by hp1 on 21-01-2015.
+ * A view adapter that allows for two views (a map view of events and a list view of events)
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

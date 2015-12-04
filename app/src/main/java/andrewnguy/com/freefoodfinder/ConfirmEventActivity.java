@@ -17,7 +17,10 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * Class that handles event creation
+ * An instance is created when a user has decided to place a pin on the map
+ */
 public class ConfirmEventActivity extends Activity implements View.OnClickListener {
 
     private EditText title, desc, tags, start, end, date;
@@ -30,7 +33,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     private double currLat = 0, currLng = 0;
 
     private int times; // event desc check
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -89,20 +91,25 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
         getLoc(); // get location of pin
     }
 
+    /**
+     * processes the important click events
+     */
     @Override
     public void onClick(View v)
     {
         Intent returnIntent = new Intent(); // the return intent
+
         if (v.getId() == R.id.confirm_event_activity_cancel_button) { // cancel the post
+
             setResult(Activity.RESULT_CANCELED, returnIntent); // return 0
             finish();
         }
-        else if(v.getId() == R.id.event_date_time_date){
+        else if(v.getId() == R.id.event_date_time_date) { // choose the event date
+
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
-
         }
-        else if(v.getId() == R.id.event_date_time_startTime){
+        else if(v.getId() == R.id.event_date_time_startTime) { // choose the event start time
 
             Bundle b = new Bundle();
             b.putString("startTime", "start");
@@ -110,7 +117,7 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
-        else if(v.getId() == R.id.event_date_time_endTime){
+        else if(v.getId() == R.id.event_date_time_endTime) { // choose the event end time
 
             Bundle b = new Bundle();
             b.putString("endTime", "end");
@@ -118,23 +125,22 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             newFragment.setArguments(b);
             newFragment.show(getFragmentManager(), "timePicker");
         }
-        else { // finish the add
+        else { // finish the add (confirm the post)
 
-            /** ----- TODO:: FIELD/EVENT VARIABLE CHECKS ----- **/
-
+            /** BLANK FIELD CHECKS **/
             StringBuffer msg = new StringBuffer("Please fill out these fields:");
             boolean emptyFields = false;
             if (isEmpty(title)) {
                 msg.append(" Title");
                 emptyFields = true;
             }
-            /*if (isEmpty(loc)) {
+            if (isEmpty((EditText)loc)) {
                 if (emptyFields) {
                     msg.append(",");
                 }
                 msg.append(" Location Description");
                 emptyFields = true;
-            }*/
+            }
             if (isEmpty(date)) {
                 if (emptyFields) {
                     msg.append(",");
@@ -170,7 +176,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
                 return;
             }
 
-
             String titleStr = title.getText().toString();
             String descStr = desc.getText().toString();
             String dateStr = date.getText().toString();
@@ -180,7 +185,6 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
             String tagsStr = tags.getText().toString();
             String evnAuth = MainActivity.currentUser.getUsername();
             int score = 0;
-
 
             /** TIME CHECKS **/
             Date now = Calendar.getInstance().getTime();
@@ -230,10 +234,10 @@ public class ConfirmEventActivity extends Activity implements View.OnClickListen
     }
 
     /**
-     *
+     * helper function used to determine the time based on the strings provided (for the time checker)
      * @param date is in the format of [DayOfWeek], [Mon.] [Day] [Year]
      * @param time is in the format of [HH:MM] [AM/PM] -- no 0's in front of single digit hour
-     * @return
+     * @return a rebuilt date object
      */
     private Date getTimeOf(String date, String time)
     {

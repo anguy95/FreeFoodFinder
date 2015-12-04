@@ -5,6 +5,9 @@ import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 
+/**
+ * This class is used to initialize the parse database and enable the desired parse related functions
+ */
 public class ParseApplication extends Application {
     /**
      * Create the Parse

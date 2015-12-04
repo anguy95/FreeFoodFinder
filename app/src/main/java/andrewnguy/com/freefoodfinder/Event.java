@@ -3,10 +3,8 @@ package andrewnguy.com.freefoodfinder;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseGeoPoint;
 
-import java.util.Date;
-
 /**
- * Created by anguy95 on 10/31/15.
+ * Class used to create/hold all necessary data for each event
  */
 public class Event {
 
@@ -25,18 +23,19 @@ public class Event {
     private double dist;        // distance from you to event
 
 
-    //We need to figure out how to store the times and what not, see if there is a scrollable and
-    //clickable time selector as well as date selector
-
     /**
-     * Constructor without objectId
-     * @param title
-     * @param date
-     * @param startTime
-     * @param endTime
-     * @param description
-     * @param latlng
-     * @param currLL
+     * Constructor WITHOUT objectId
+     * @param title title of the event
+     * @param date date of the event
+     * @param startTime start time of the even
+     * @param endTime end time of the event
+     * @param description a description of the event
+     * @param tags tags associated with the event
+     * @param score number of likes the event has
+     * @param eventAuthor who created the event
+     * @param locDesc a string describing the location (e.g. building name)
+     * @param latlng a lat/long coordinate of where the event is located
+     * @param currLL a lat/long coordinate of where the user is (used distance between event and user calculations)
      */
     public Event (String title, String date, String startTime, String endTime,
                   String description, String tags, int score, String eventAuthor, String locDesc, LatLng latlng, LatLng currLL)
@@ -59,15 +58,19 @@ public class Event {
     }
 
     /**
-     * Constructor with objectId
-     * @param id
-     * @param title
-     * @param date
-     * @param startTime
-     * @param endTime
-     * @param description
-     * @param latlng
-     * @param currLL
+     * Constructor WITH objectId
+     * @param id the objectId of the event (based on parse assignment)
+     * @param title title of the event
+     * @param date date of the event
+     * @param startTime start time of the even
+     * @param endTime end time of the event
+     * @param description a description of the event
+     * @param tags tags associated with the event
+     * @param score number of likes the event has
+     * @param eventAuthor who created the event
+     * @param locDesc a string describing the location (e.g. building name)
+     * @param latlng a lat/long coordinate of where the event is located
+     * @param currLL a lat/long coordinate of where the user is (used distance between event and user calculations)
      */
     public Event(String id, String title, String date, String startTime, String endTime,
                  String description, String tags,int score, String eventAuthor, String locDesc, LatLng latlng, LatLng currLL )
@@ -80,86 +83,74 @@ public class Event {
     /* ----------  GETTERS ---------- */
 
     /**
-     * Gets the title of the Event
      * @return a String of the Event title
      */
     public String getTitle() { return eventTitle; }
 
     /**
-     * Get the description of the event
      * @return a String of the event description
      */
     public String getDescription() { return eventDesc; }
 
     /**
-     * Get the event tags
-     * @return
+     * @return a String of all the tags
      */
     public String getTags() { return eventTags; }
 
     /**
-     * Get date of the event
      * @return a string date of the event
      */
     public String getDate() { return dateOfEvent; }
 
     /**
-     * Get start time of the event
      * @return a string start time of the event
      */
     public String getStartTime() { return startTimeOfEvent; }
 
     /**
-     * Get end time of the event
      * @return a string end time of the event
      */
     public String getEndTime() { return endTimeOfEvent; }
 
     /**
-     * Get the location of the event
      * @return a LatLng object of the event
      */
     public LatLng getLocation() { return latLng; }
 
     /**
-     * get the distance from your location to the events
-     * @return
+     * @return the distance from your location to the event
      */
     public double getDist() { return dist; }
 
-
     /**
-     * get the eventID of the event
-     * @return
+     * @return a string of the event's id
      */
     public String getEventId() { return eventId; }
 
     /**
-     * gets the score of the event
-     * @return
+     * @return an int of the number of likes the event has
      */
     public int getEventScore() { return eventScore;}
+
     /**
-     * gets the Location description
-     * @return
+     * @return a string describing the event's location (e.g. building name)
      */
     public String getLocationDescription() { return locDesc;}
+
     /**
-     * gets the author user
-     * @return
+     * @return a string of the event author's id
      */
     public String getEventAuthor() { return eventAuthor;}
 
 
     /* ----------  SETTERS ---------- */
 
-    public void setEventID(String objectID){
-        this.eventId = objectID;
-    }
-
+    /**
+     * used users like/unlike an event
+     * @param score set the score of an event
+     */
     public void setEventScore(int score){
         this.eventScore = score;
-
     }
 
 }

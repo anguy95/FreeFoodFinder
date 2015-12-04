@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 /**
- * Created by anguy95 on 11/7/15.
+ * Class for the ConfirmEventActivity (CEA) date picking
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -38,74 +38,33 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String monthOfYear = null;
 
         switch(month){
-            case 0:
-                monthOfYear = "Jan";
-                break;
-            case 1:
-                monthOfYear = "Feb";
-                break;
-            case 2:
-                monthOfYear = "Mar";
-                break;
-            case 3:
-                monthOfYear = "Apr";
-                break;
-            case 4:
-                monthOfYear = "May";
-                break;
-            case 5:
-                monthOfYear = "Jun";
-                break;
-            case 6:
-                monthOfYear = "Jul";
-                break;
-            case 7:
-                monthOfYear = "Aug";
-                break;
-            case 8:
-                monthOfYear = "Sep";
-                break;
-            case 9:
-                monthOfYear = "Oct";
-                break;
-            case 10:
-                monthOfYear = "Nov";
-                break;
-            case 11:
-                monthOfYear = "Dec";
-                break;
-            default:
-                break;
+            case 0: monthOfYear = "Jan"; break;
+            case 1: monthOfYear = "Feb"; break;
+            case 2: monthOfYear = "Mar"; break;
+            case 3: monthOfYear = "Apr"; break;
+            case 4: monthOfYear = "May"; break;
+            case 5: monthOfYear = "Jun"; break;
+            case 6: monthOfYear = "Jul"; break;
+            case 7: monthOfYear = "Aug"; break;
+            case 8: monthOfYear = "Sep"; break;
+            case 9: monthOfYear = "Oct"; break;
+            case 10: monthOfYear = "Nov"; break;
+            case 11: monthOfYear = "Dec"; break;
+            default: break;
         }
 
         switch (weekDay){
-            case 1:
-                dayOfWeek = "Sun";
-                break;
-            case 2:
-                dayOfWeek = "Mon";
-                break;
-            case 3:
-                dayOfWeek = "Tue";
-                break;
-            case 4:
-                dayOfWeek = "Wed";
-                break;
-            case 5:
-                dayOfWeek = "Thur";
-                break;
-            case 6:
-                dayOfWeek = "Fri";
-                break;
-            case 7:
-                dayOfWeek = "Sat";
-                break;
-            default:
-                break;
+            case 1: dayOfWeek = "Sun"; break;
+            case 2: dayOfWeek = "Mon"; break;
+            case 3: dayOfWeek = "Tue"; break;
+            case 4: dayOfWeek = "Wed"; break;
+            case 5: dayOfWeek = "Thur"; break;
+            case 6: dayOfWeek = "Fri"; break;
+            case 7: dayOfWeek = "Sat"; break;
+            default: break;
         }
 
+        // update the CEA view based on what was chosen
         ((TextView) getActivity().findViewById(R.id.event_date_time_date)).setText(dayOfWeek+ ", " + monthOfYear + " " + day + " " + String.valueOf(year));
     }
-
-
 }

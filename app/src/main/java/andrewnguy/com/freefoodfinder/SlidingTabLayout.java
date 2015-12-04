@@ -33,6 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
+ * Shown above, class is from Google.
+ * This is used so the views can be changed (map to list or list to map) with a swipe
+ *
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
  * the user's scroll progress.
  * <p/>
@@ -60,7 +63,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private boolean mDistributeEvenly;
 
     private ViewPager mViewPager;
-    private SparseArray<String> mContentDescriptions = new SparseArray<String>();
+    private SparseArray<String> mContentDescriptions = new SparseArray<>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
     public SlidingTabLayout(Context context) {

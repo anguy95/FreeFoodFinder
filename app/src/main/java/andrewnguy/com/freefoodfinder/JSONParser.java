@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Mac on 11/19/15.
+ * Class that searches through a JSONObject
  */
 public class JSONParser {
 
@@ -17,6 +17,13 @@ public class JSONParser {
         jobj = new JSONObject(stringToParse);
     }
 
+    /**
+     * This class is used for the LocationSetter so just needs to find the best guess location
+     * based on where a marker was placed on the map
+     * @param find key to find
+     * @return value of the find
+     * @throws JSONException
+     */
     public String parse(String find) throws JSONException {
 
         JSONArray jarr = jobj.getJSONArray("markers"); // break down the markers

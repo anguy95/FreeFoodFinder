@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by anguy95 on 10/31/15.
+ * Class for viewing the events in a list (the list tab)
  */
 public class EventListAdapter extends ArrayAdapter<Event> {
 
@@ -32,7 +32,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         View row = convertView;
 
         //Class that holds all our types of views
-        ViewHolder holder = null;
+        ViewHolder holder;
 
         if(row == null) {  //If the row of the ViewGroup is empty then add a new item using list_row_view layout
 

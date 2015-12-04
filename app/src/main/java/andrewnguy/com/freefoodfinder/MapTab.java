@@ -1,9 +1,5 @@
 package andrewnguy.com.freefoodfinder;
 
-/**
- * Created by anguy95 on 10/27/15.
- */
-
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
@@ -34,6 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 
 
+/**
+ * Class that controls everything in the left tab (map tab)
+ */
 public class MapTab extends Fragment implements View.OnClickListener {
     private static final int MAP_CREATE_EVENT = 1; // give MatTab a requestCode of 1 when trying to make an event
 

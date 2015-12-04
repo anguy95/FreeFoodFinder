@@ -8,18 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
-import android.provider.Settings.Secure;
 import android.widget.ToggleButton;
-
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -52,7 +48,6 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
     private ListView commentView;
     private CommentListAdapter commentAdapter;
-
 
 
     @Override
@@ -140,7 +135,7 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
             public void onClick(View v) {
                 ParseObject eventComments = new ParseObject("commentsDB");
                 String commentToParse = commentToAdd.getText().toString();
-                if(commentToParse == null || commentToParse.isEmpty()){
+                if(commentToParse.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please enter in a comment", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -213,7 +208,7 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
 
 
                 }catch(ParseException e){
-
+                    e.printStackTrace();
                 }
 
             }
@@ -280,7 +275,7 @@ public class EventViewActivity extends AppCompatActivity implements OnClickListe
                 }
             }
             for(int i = 0; i < (newLikedEvents.size()-1); i++){
-                if(newLikedEvents.get(i) == MainActivity.likedEventsListtoRemove.get(0)){
+                if(newLikedEvents.get(i).equals(MainActivity.likedEventsListtoRemove.get(0))) {
                     indexToRemove = i;
                 }
             }

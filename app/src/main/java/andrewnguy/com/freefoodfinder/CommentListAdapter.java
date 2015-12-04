@@ -1,9 +1,6 @@
 package andrewnguy.com.freefoodfinder;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Picture;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +10,13 @@ import android.widget.TextView;
 
 import com.parse.ParseObject;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
 /**
- * Created by Kevin on 11/26/15.
+ * An adapter so users can view all the comments in the (larger) event view
  */
 public class CommentListAdapter extends ArrayAdapter<ParseObject>{
     private final Context context;
@@ -32,7 +26,6 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
     private final int layoutResourceId;
     private final String eventAuthor;
     private final String[] names = {"Purple Boat", "Orange Balloon", "Red Sox", "Yellow Anchor", "Black UFO","Blue Compass","Red Map","Blue Paw"};
-    ;
 
 
     public CommentListAdapter(Context context,  int layoutResourceId, ArrayList<ParseObject> data, String eventAuthor) {
@@ -51,7 +44,7 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
         View row = convertView;
 
         //Class that holds all our types of views
-        ViewHolder holder = null;
+        ViewHolder holder;
 
         if(row == null) {  //If the row of the ViewGroup is empty then add a new item using list_row_view layout
 
@@ -87,44 +80,19 @@ public class CommentListAdapter extends ArrayAdapter<ParseObject>{
             String monthOfYear = "";
             int month = comment.getCreatedAt().getMonth();
             switch(month){
-                case 0:
-                    monthOfYear = "Jan";
-                    break;
-                case 1:
-                    monthOfYear = "Feb";
-                    break;
-                case 2:
-                    monthOfYear = "Mar";
-                    break;
-                case 3:
-                    monthOfYear = "Apr";
-                    break;
-                case 4:
-                    monthOfYear = "May";
-                    break;
-                case 5:
-                    monthOfYear = "Jun";
-                    break;
-                case 6:
-                    monthOfYear = "Jul";
-                    break;
-                case 7:
-                    monthOfYear = "Aug";
-                    break;
-                case 8:
-                    monthOfYear = "Sep";
-                    break;
-                case 9:
-                    monthOfYear = "Oct";
-                    break;
-                case 10:
-                    monthOfYear = "Nov";
-                    break;
-                case 11:
-                    monthOfYear = "Dec";
-                    break;
-                default:
-                    break;
+                case 0: monthOfYear = "Jan"; break;
+                case 1: monthOfYear = "Feb"; break;
+                case 2: monthOfYear = "Mar"; break;
+                case 3: monthOfYear = "Apr"; break;
+                case 4: monthOfYear = "May"; break;
+                case 5: monthOfYear = "Jun"; break;
+                case 6: monthOfYear = "Jul"; break;
+                case 7: monthOfYear = "Aug"; break;
+                case 8: monthOfYear = "Sep"; break;
+                case 9: monthOfYear = "Oct"; break;
+                case 10: monthOfYear = "Nov"; break;
+                case 11: monthOfYear = "Dec"; break;
+                default: break;
             }
             String dateToDisplay = timeOfComment.format(comment.getCreatedAt());
 

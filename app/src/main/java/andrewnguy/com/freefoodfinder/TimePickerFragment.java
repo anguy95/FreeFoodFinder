@@ -5,14 +5,13 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 /**
- * Created by anguy95 on 11/8/15.
+ * Class for the ConfirmEventActivity (CEA) time picking
  */
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     @Override

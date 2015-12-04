@@ -4,26 +4,22 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Mac on 11/18/15.
+ * Used to auto-fill the location description in the ConfirmEventActivity (CEA)
+ * based on where the marker was placed
  */
 public class LocationSetter extends AsyncTask<String, String, String> {
 
-
-    // for ucsd maps API
+    // for UCSD maps API
     private final String APP_KEY = "yA1qdB9d1elQ5rhz12h9Q1ZKxlMa";
     private final String APP_SECRET = "6XcIqzIgbuP8hGhf959MLF8pQPMa";
     private final String BEARER = "9ce2bec3b44235681badd6568bf83a8e";
@@ -31,14 +27,19 @@ public class LocationSetter extends AsyncTask<String, String, String> {
     private final String BLDGS = "groupId=1241268398815896%2C18%2C60%2C14%2C15%2C16%2C17%2C19"; // all buildings UCSD
     private final int FEET = 200;
 
-
-    private WeakReference<TextView> textViewWeakReference;
+    private WeakReference<TextView> textViewWeakReference; // txtView to change
     private String str = "";
 
     public LocationSetter(TextView textView) {
         textViewWeakReference = new WeakReference<>(textView);
     }
 
+    /**
+     * Builds and fires an HTTP GET request to a UCSD maps server to find some kind of name
+     * associated with a lat/long pairing
+     * @param link a string of where to send the request to
+     * @return string of the location of an event
+     */
     @Override
     protected String doInBackground(String... link) {
         try {
@@ -82,6 +83,9 @@ public class LocationSetter extends AsyncTask<String, String, String> {
         return str;
     }
 
+    /**
+     * Updates the CEA view once the task above has finished
+     */
     @Override
     protected void onPostExecute(String string) {
         TextView textView = textViewWeakReference.get();

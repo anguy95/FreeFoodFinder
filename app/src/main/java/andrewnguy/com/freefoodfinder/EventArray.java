@@ -6,12 +6,10 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
-import com.google.android.gms.maps.model.Marker;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Ivan on 10/31/2015.
+ * Class that handles adding events to parse as well has storing
+ * a map of all the events
  */
 public class EventArray
 {
@@ -44,7 +43,7 @@ public class EventArray
     }
 
     /**
-     * Add an event to the parse
+     * Add an event to the parse, adds all necessary event information into a ParseObject
      * @param e event to add
      */
     public void add(Event e)
@@ -53,27 +52,28 @@ public class EventArray
         ParseObject newEvent = new ParseObject(db);
         ParseGeoPoint pgp = new ParseGeoPoint(e.getLocation().latitude, e.getLocation().longitude);
 
-            newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
-            newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
-            newEvent.put(context.getString(R.string.LOCSTRING), e.getLocationDescription());
-            newEvent.put(context.getString(R.string.TAG), e.getTags()); // put tags
-            newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
-            newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
-            newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
-            newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
-            newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
-            newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
-            newEvent.put(context.getString(R.string.SCO), e.getEventScore());
-            newEvent.put(context.getString(R.string.EAUTH), MainActivity.currentUser.getUsername());
-            //rebuild event expiration date
-            String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
-            String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
+        newEvent.put(context.getString(R.string.TIT), e.getTitle());              // put title
+        newEvent.put(context.getString(R.string.DES), e.getDescription());        // put description
+        newEvent.put(context.getString(R.string.LOCSTRING), e.getLocationDescription());
+        newEvent.put(context.getString(R.string.TAG), e.getTags()); // put tags
+        newEvent.put(context.getString(R.string.DAT), e.getDate());               // put date
+        newEvent.put(context.getString(R.string.STIM), e.getStartTime());               // put start time
+        newEvent.put(context.getString(R.string.ETIM), e.getEndTime());               // put end time
+        newEvent.put(context.getString(R.string.LAT), e.getLocation().latitude);  // put latitude
+        newEvent.put(context.getString(R.string.LNG), e.getLocation().longitude); // put longitude
+        newEvent.put(context.getString(R.string.LOC), pgp);                       // put ParseGeoPoint
+        newEvent.put(context.getString(R.string.SCO), e.getEventScore());
+        newEvent.put(context.getString(R.string.EAUTH), MainActivity.currentUser.getUsername());
 
-            int offset = 0; // 0 offset for AM
-            if (timeArr[2].equals("PM")) {
-                offset = 12;
-            }
-            // else do nothing
+        //rebuild event expiration date
+        String[] dateArr = e.getDate().split("\\s"); // String format: [DayOfWeek, Month #Day #Year]; splits based on spaces
+        String[] timeArr = e.getEndTime().replace(":", " ").split("\\s"); // String format: [hh:mm AM/PM]; splits based on : and spaces
+
+        int offset = 0; // 0 offset for AM
+        if (timeArr[2].equals("PM")) {
+            offset = 12;
+        }
+        // else do nothing
 
         /*  year - the year plus 1900.                  *
          *  month - the month between 0-11.             *
@@ -81,29 +81,20 @@ public class EventArray
          *  hrs - the hours between 0-23.               *
          *  min - the minutes between 0-59              */
 
-            Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
-                    monthToNum(dateArr[1]),              // intMonth
-                    Integer.parseInt(dateArr[2]),        // intDay
-                    Integer.parseInt(timeArr[0]) - 1 + offset, // intHour
-                    Integer.parseInt(timeArr[1]));       // intMin
-            newEvent.put(context.getString(R.string.EXP), date.getTime());
+        Date date = new Date(Integer.parseInt(dateArr[3]) - 1900, // intYear - 1900
+                monthToNum(dateArr[1]),              // intMonth
+                Integer.parseInt(dateArr[2]),        // intDay
+                Integer.parseInt(timeArr[0]) - 1 + offset, // intHour
+                Integer.parseInt(timeArr[1]));       // intMin
+        newEvent.put(context.getString(R.string.EXP), date.getTime());
 
-            // save the event to parse
-            try {
-                newEvent.save();
-            } catch (ParseException e1) {
-                e1.printStackTrace();
+        // save the event to parse
+        try {
+            newEvent.save();
+        } catch (ParseException e1) {
+            e1.printStackTrace();
             }
 
-        /*newEvent.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e != null)
-                    Log.d("parse", e.getMessage());
-            }
-        });*/
-
-        
         update(2); // re-fetch data
     }
 
@@ -128,7 +119,7 @@ public class EventArray
 
     /**
      * setter for your current location
-     * @param loc
+     * @param loc set a location object of the users current location/position based on GPS
      */
     public void setMyLoc(Location loc) { this.myLoc = loc; }
 
@@ -138,15 +129,13 @@ public class EventArray
      */
     public void update(final int position)
     {
-        /* filter check */
-
         eq.cancel(); // cancel an older request:: MAKE SURE THIS IS GOOD WHEN WE HAVE LOTS OF EVENTS
                     // needs to be heavily stress tested -> lots of runtime exceptions
         eq.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> temp, ParseException exception) {
                 if (exception == null) {
-                    if (temp != null) {
+                    if (temp != null) { // only do something if temp isn't null
                         eventsMap.clear(); // clear
 
                         LatLng currLL = null;
@@ -180,9 +169,10 @@ public class EventArray
                                         )
                                 );
                         }
-                    } else {
-                        Log.d("update", exception.getMessage());
                     }
+                }
+                else {
+                    Log.e("update", exception.getMessage());
                 }
 
                 /* update the map or the list or both after successful find */

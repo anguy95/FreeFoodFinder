@@ -1,9 +1,5 @@
 package andrewnguy.com.freefoodfinder;
 
-/**
- * Created by anguy95 on 10/27/15.
- */
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +18,9 @@ import java.util.ArrayList;
 import android.os.Handler;
 
 
+/**
+ * Class that controls everything in the right tab (list tab)
+ */
 public class ListTab extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private static final int LIST_CREATE_EVENT = 11; // give ListTab a requestCode of 11 when trying to make an event
 

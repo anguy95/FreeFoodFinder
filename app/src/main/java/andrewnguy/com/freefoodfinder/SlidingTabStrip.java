@@ -25,6 +25,12 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+/**
+ * Shown above, class is from Google.
+ * This is used so the views can be changed (map to list or list to map) with a swipe
+ *
+ * This class is linked to the small strip below the tab names
+ */
 class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
