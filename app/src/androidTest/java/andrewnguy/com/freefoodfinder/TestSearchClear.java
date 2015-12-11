@@ -24,17 +24,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 
-/** SCENARIO:
+/** SCENARIO 2:
  *
  *  Given there are existing events
  *  And the user is in the Map Tab
- *  When the user enters a string into the Search bar
+ *  And the user enters a string into the Search bar
  *  And hits the Search button
- *  Then the map will display events that match the search.
+ *  And the map will display events that match the search
+ *  When the user hits the cancel button
+ *  Then the map will display all the events.
  */
-
 @RunWith(AndroidJUnit4.class)
-public class SearchTest {
+public class TestSearchClear {
 
     @Rule
     //Given there are existing events
@@ -42,36 +43,41 @@ public class SearchTest {
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
 
-    /**
-     * SCENARIO
-     **/
+
+
+    //Given there are existing events
+    //And the user is in the Map Tab (MainActivity)
+    /** SCENARIO 2 **/
     @Test
-    public void ensureSearchFunction() {
+    public void testClearSearch(){
 
+        //get full list
+        EventArray temp = MainActivity.ea;
+        ArrayList<Event> eventList = temp.getEventArray();
 
-        //When the user enters a string into the Search bar
-        //And hits the Search button
+        //and the user enters a string into the Search bar
+        //and hits the Search button
+
         String tagTest = "Warren";
 
         onView(withId(R.id.search_bar)).perform(typeText(tagTest), closeSoftKeyboard());
         onView(withId(R.id.search_button)).perform(click());
 
-        //Then the map will display events that match the search
-        EventArray temp = MainActivity.ea;
-        ArrayList<Event> eventList = temp.getEventArray();
+        //and the map will display events that match the search
+        ArrayList<Event> newEventList = temp.getEventArray(); // assume correct based on earlier test
 
-        for (Event e : eventList) {
-            String title = e.getTitle();
-            String tags = e.getTags();
+        //when the user hits the cancel button
+        onView(withId(R.id.search_cancel_button)).perform(click());
 
-            if (title.toLowerCase().contains(tagTest.toLowerCase()) || tags.toLowerCase().contains(tagTest.toLowerCase()))
-                continue;
+        //then the map will display all the events.
+        ArrayList<Event> finalEventList = temp.getEventArray();
 
-            Log.e("FAILURE", "Found an event from search results without a matching tag");
+        //check for same lengths
+        if (eventList.size() != finalEventList.size()) {
+            Log.e("FAILURE", "Search clearing unsuccessful");
             return;
         }
 
         Log.i("Success", "Success");
     }
-
 }
