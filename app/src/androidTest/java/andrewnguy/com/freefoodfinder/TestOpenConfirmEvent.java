@@ -32,7 +32,7 @@ public class TestOpenConfirmEvent {
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
             new ActivityTestRule<>(MainActivity.class);
-
+ 
 
     @Test
     public void makeSureConfirmWorkingDisplays(){
